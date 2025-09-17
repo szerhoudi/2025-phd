@@ -1103,6 +1103,18 @@
             { name: 'Conclusion', id: 'header-conclusion', startIndex: 32, endIndex: 35, slideCount: 4 }
         ];
 
+        function forceTotalSlideNumber() {
+            setTimeout(() => {
+                const slideNumberContainer = document.getElementById('slide-number-container');
+                if (slideNumberContainer) {
+                    const totalSlidesElement = slideNumberContainer.querySelector('.slide-number-b');
+                    if (totalSlidesElement) {
+                        totalSlidesElement.textContent = '36';
+                    }
+                }
+            }, 0);
+        }
+
         function initializeHeader() {
             sections.forEach(section => {
                 const dotsContainer = document.querySelector(`#${section.id} .section-dots`);
@@ -1173,8 +1185,10 @@
             if (slideNumberElement && slideNumberContainer) {
                 slideNumberContainer.appendChild(slideNumberElement);
             }
+            forceTotalSlideNumber();
         });
         Reveal.on('slidechanged', updateHeader);
+        Reveal.on('slidechanged', forceTotalSlideNumber);
 
         if (Reveal.isReady()) {
             updateHeader(Reveal.getState());
