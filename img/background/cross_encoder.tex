@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[
+        framedfignode,
+        minimum width=8em,
+    ] (L) at (0,0) {LLM};
+    \node[
+        fignode,
+        minimum width=3em,
+        below=1.5 of L.west,
+        anchor=west,
+    ] (Q) {$q$};
+    \node[
+        fignode,
+        minimum width=3em,
+        below=1.5 of L.east,
+        anchor=east,
+    ] (D) {$d$};
+    \node[
+        framedfignode,
+        above=1.5 of L.center,
+        anchor=center,
+    ] (C) {Classifier};
+    \node[
+        fignode,
+        above=1.5 of C.center,
+        anchor=center,
+    ] (P) {$\phi_{\text{CE}}(q, d)$};
+
+    \draw[-latex] (Q) -- (Q |- L.south);
+    \draw[-latex] (D) -- (D |- L.south);
+    \draw[latex-] (C) -- (C |- L.north);
+    \draw[-latex] (C) -- (P);
+\end{tikzpicture}
+\end{document}

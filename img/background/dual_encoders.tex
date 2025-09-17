@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[
+        framedfignode,
+    ] (Lq) at (0,0) {LLM};
+    \node[
+        framedfignode,
+        right=0.5 of Lq,
+    ] (Ld) {LLM};
+    \node[
+        framedfignode,
+        above=1 of $(Lq)!0.5!(Ld)$,
+    ] (S) {Similarity};
+
+    \node[
+        fignode,
+        below=1.5 of Lq.center,
+        anchor=center,
+    ] (Q) {$q$};
+    \node[
+        fignode,
+        below=1.5 of Ld.center,
+        anchor=center,
+    ] (D) {$d$};
+    \node[
+        fignode,
+        above=1.5 of S.center,
+        anchor=center,
+    ] (P) {$\phi_{\text{DE}}(q, d)$};
+
+    \draw[-latex] (Q) -- (Lq);
+    \draw[-latex] (D) -- (Ld);
+    \draw[-latex] (Lq) -- (S);
+    \draw[-latex] (Ld) -- (S);
+    \draw[-latex] (S) -- (P);
+\end{tikzpicture}
+\end{document}

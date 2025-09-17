@@ -1,0 +1,184 @@
+<!-- boilernet -->
+<section class="sec-title" id="boilernet">
+  <h2><b>Web content extraction</b><br />for corpus creation</h2>
+  <div class="pub">
+    <p>Jurek Leonhardt, Avishek Anand, and Megha Khosla</p>
+    <p>
+      <span class="pub-title">Boilerplate Removal Using a Neural Sequence Labeling
+        Model</span>,
+      <span class="pub-venue">WWW 2020 (demo paper)</span>
+    </p>
+  </div>
+</section>
+
+<section id="boilernet-boilerplate-removal">
+  <h2>Boilerplate removal</h2>
+  <hr class="divider" />
+
+  <div class="column-layout" style="grid-template-columns: 55% auto">
+    <div class="column-item r-stack">
+      <div>
+        <img class="fragment custom blur" data-fragment-index="1" src="img/boilernet/webpage.png"
+          style="margin: 0" />
+        <p class="caption" style="font-family: monospace">
+          https://en.wikipedia.org/wiki/The_Web_Conference
+        </p>
+      </div>
+      <div class="fragment fade-in" data-fragment-index="1" style="
+            border: 0.05em solid gray;
+            border-radius: 0.5em;
+            background-color: #d3d3d388;
+            padding: 0.75em;
+            max-width: 75%;
+            text-align: left;
+          ">
+        <p style="font-size: x-large">The Web Conference</p>
+        <p style="font-size: medium">
+          The Web Conference (formerly known as International World
+          Wide Web Conference, abbreviated as WWW) is a yearly
+          international academic conference on the topic of the future
+          direction of the World Wide Web. The first conference of
+          many was held and organized by Robert Cailliau in 1994 at
+          CERN in Geneva, Switzerland. The conference has been
+          organized by the International World Wide Web Conference
+          Committee (IW3C2), also founded by Robert Cailliau and
+          colleague Joseph Hardin, every year since. The conference's
+          location rotates among North America, Europe, and Asia and
+          its events usually span a period of five days. [...]
+        </p>
+      </div>
+    </div>
+    <div class="column-item c-wide">
+      <p>
+        <i>Boilerplate removal</i> is the process of extracting
+        <b>content in plain text</b> from a <b>web page</b>.
+      </p>
+      <p class="fragment" data-fragment-index="2">
+        Example use cases:
+      </p>
+      <ul class="fragment" data-fragment-index="2">
+        <li><i>Reader view</i> functions of web browsers.</li>
+        <li>The creation of <b>corpora from the web.</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="boilernet-locality">
+  <h2><i>Locality of authoring</i></h2>
+  <hr class="divider" />
+  <div class="column-layout" style="grid-template-columns: 55% auto">
+    <div class="column-item">
+      <img class="fig" src="img/boilernet/locality_out.svg" />
+      <p class="caption">An example web page and its elements.</p>
+    </div>
+    <div class="column-item c-wide">
+      <p>
+        <b>Task</b>: Classify each <b>leaf node</b> in the HTML tree
+        as <b>content</b> or <b>not content</b>.
+      </p>
+      <p class="fragment">
+        <b>Assumption</b>: The <b>position of a leaf node</b> within
+        the HTML tree is important for classification.
+      </p>
+      <p class="fragment">
+        We therefore feed the <b>sequence</b> of leaf representations
+        into the model and <b>classify each element</b>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="boilernet-page-representation">
+  <h2>Page representation</h2>
+  <hr class="divider" />
+  <p>
+    A web page is represented as a
+    <b>sequence of its leaf nodes</b> ($\texttt{\#text}$) in the HTML
+    tree.
+  </p>
+  <img class="fig" src="img/boilernet/page_rep_out.svg" />
+  <p class="caption">Example web page and its representations.</p>
+</section>
+
+<section id="boilernet-architecture">
+  <h2 class="textsc">BoilerNet</h2>
+  <hr class="divider" />
+  <div class="column-layout">
+    <div class="column-item">
+      <img class="fig" src="img/boilernet/architecture_out.svg" />
+      <p class="caption">
+        The <span class="textsc">BoilerNet</span> architecture.
+      </p>
+    </div>
+    <div class="column-item">
+      <p>
+        The <span class="textsc">BoilerNet</span> model consists of
+      </p>
+      <ul>
+        <li>an <b>embedding layer</b>,</li>
+        <li>a <b>bidirectional LSTM</b>, and</li>
+        <li>a <b>binary classification layer</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="boilernet-results">
+  <h2>Results</h2>
+  <hr class="divider" />
+  <div class="column-layout" style="grid-template-columns: auto 50%">
+    <div class="column-item c-wide">
+      <p>
+        On <span class="textsc">CleanEval</span>,
+        <span class="textsc">BoilerNet</span> performs similarly to
+        <span class="textsc">Web2Text</span>, whose features were
+        manually optimized for this dataset.
+      </p>
+    </div>
+    <div class="column-item">
+      <img class="tab" src="img/boilernet/results/cleaneval_out.svg" />
+      <p class="caption">
+        Performance on <span class="textsc">CleanEval</span>.
+      </p>
+    </div>
+  </div>
+  <hr class="divider" />
+  <div class="column-layout fragment" style="grid-template-columns: auto 50%">
+    <div class="column-item c-wide">
+      <p>
+        On <span class="textsc">GoogleTrends-2017</span> (our
+        dataset), <span class="textsc">BoilerNet</span> outperforms
+        competitors.
+      </p>
+    </div>
+    <div class="column-item">
+      <img class="tab" src="img/boilernet/results/googletrends_out.svg" />
+      <p class="caption">
+        Performance on <span class="textsc">GoogleTrends-2017</span>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="boilernet-summary">
+  <h2>Summary</h2>
+  <hr class="divider" />
+  <ul>
+    <li>
+      We proposed <span class="textsc">BoilerNet</span>, a neural
+      boilerplate removal technique that does not require feature
+      engineering.
+    </li>
+    <li>
+      We created <span class="textsc">GoogleTrends-2017</span>, a
+      recent and diverse web content extraction dataset.
+    </li>
+  </ul>
+  <hr class="divider" />
+  <div class="github-container">
+    <img class="github-qr" src="img/boilernet/qr_github.svg" />
+    <a class="github-url" href="https://github.com/mrjleo/boilernet">mrjleo/boilernet</a>
+  </div>
+</section>
+<!-- end: boilernet --> 

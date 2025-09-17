@@ -1,0 +1,67 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{chains}
+
+\begin{document}
+\begin{tikzpicture}[
+    start chain=A going right,
+    start chain=B going right,
+    node distance=0.75cm,
+    auto,
+    >=stealth,
+    block/.style={
+        rectangle,
+        draw,
+        thick,
+        rounded corners=3pt,
+        font=\sffamily\small,
+        minimum height=5em,
+        text width=3.75cm,
+        align=center,
+        on chain
+    },
+    query/.style={block, fill=gray!10},
+    serp/.style={block, fill=blue!5, font=\sffamily\footnotesize},
+    outcome/.style={block, font=\sffamily\bfseries\small, draw=none, fill=none, text width=5cm},
+    pathlabel/.style={font=\Large\bfseries, text width=2cm, align=right}
+]
+    % --- PATH A: UNREALISTIC SIMULATOR (Top Row) ---
+    \node[pathlabel, text=plotColor1] (label_a) at (0, 2.5) {Path A};
+    
+    \begin{scope}[every node/.style={on chain=A}]
+        \node[query, right=of label_a] {Query: \\ "easy pasta recipe"};
+        \node[serp] {Results: \\ 1. Tomato Pasta \\ 2. Pesto Pasta \\ \textbf{Click:} Pesto Pasta};
+        \node[query] {Query: \\ "easy cheese pasta"};
+        \node[serp] {Results: \\ 1. Mac \& Cheese \\ 2. Fettuccine Alfredo \\ \textbf{Click:} Mac \& Cheese};
+        \node[query] {Query: \\ "cacio e pepe recipe"};
+        \node[serp, fill=plotColor3!10] {Results: \\ 1. \textbf{Official Cacio e Pepe} \\ \textbf{Click:} Result 1};
+        \node[outcome, node distance=1cm] (o_a) {Effectiveness (Success): \textGreen{Good} \\ Realism (Behavior): \textRed{Poor}};
+    \end{scope}
+
+    % --- PATH B: REALISTIC SIMULATOR (Bottom Row) ---
+    \node[pathlabel, text=plotColor3] (label_b) at (0, -0.5) {Path B};
+
+    \begin{scope}[every node/.style={on chain=B}]
+        \node[query, right=of label_b] {Query: \\ "classic roman pasta"};
+        \node[serp, node distance=5.25cm] {Results: \\ 1. Carbonara \\ 2. \textbf{Cacio e Pepe} \\ 3. Amatriciana};
+        \node[query, node distance=5.25cm] {Query: \\ "cacio e pepe recipe"};
+        \node[serp, fill=plotColor3!10] {Results: \\ 1. \textbf{Official Cacio e Pepe} \\ \textbf{Click:} Result 1};
+        % Align outcome box with the one from Path A
+        \node[outcome, node distance=1cm] at (o_a |- 0, -0.5) {Effectiveness (Success): \textGreen{Good} \\ Realism (Behavior): \textGreen{Good}};
+    \end{scope}
+
+    % --- ARROWS ---
+    \draw[->, thick, plotColor1] (A-1) -- (A-2);
+    \draw[->, thick, plotColor1, dashed] (A-2) -- (A-3);
+    \draw[->, thick, plotColor1] (A-3) -- (A-4);
+    \draw[->, thick, plotColor1, dashed] (A-4) -- (A-5);
+    \draw[->, thick, plotColor1] (A-5) -- (A-6);
+    \draw[->, thick, plotColor1, line width=1pt] (A-6) -- (A-7);
+
+    \draw[->, thick, plotColor3] (B-1) -- (B-2);
+    \draw[->, thick, plotColor3, dashed] (B-2) -- (B-3);
+    \draw[->, thick, plotColor3] (B-3) -- (B-4);
+    \draw[->, thick, plotColor3, line width=1pt] (B-4) -- (B-5);
+    
+\end{tikzpicture}
+\end{document}

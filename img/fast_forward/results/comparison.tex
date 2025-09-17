@@ -1,0 +1,117 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            axis y line*=left,
+            width=12cm,
+            height=7cm,
+            bar width=0.75cm,
+            every axis plot/.append style={fill},
+            grid=major,
+            xtick={1,2},
+            xticklabels={Performance, Query latency},
+            xmin=0.5,
+            xmax=2.5,
+            ymin=0.55,
+            ymax=0.725,
+            ylabel={\ndcg@\num{10}},
+            area legend,
+            legend entries={
+                    Dense retrieval (brute-force),
+                    Retrieve-and-re-rank,
+                    Retrieve-and-re-rank (\fastforward{}),
+                },
+            legend cell align={left},
+            legend style={
+                    at={(0.5, 1.05)},
+                    anchor=south,
+                },
+        ]
+        \addplot[
+            ybar,
+            plotColor1*,
+            draw=black,
+            thick,
+            postaction={
+                    pattern=north west lines
+                },
+        ] plot coordinates {
+                (1,0.612)
+            };
+        \addplot[
+            ybar,
+            plotColor2*,
+            draw=black,
+            thick,
+            postaction={
+                    pattern=north east lines
+                },
+        ] plot coordinates {
+                (1,0.685)
+            };
+        \addplot[
+            ybar,
+            plotColor3*,
+            draw=black,
+            thick,
+        ] plot coordinates {
+                (1,0.696)
+            };
+    \end{axis}
+
+    \begin{axis}[
+            ybar,
+            axis y line*=right,
+            width=12cm,
+            height=7cm,
+            bar width=0.75cm,
+            every axis plot/.append style={fill},
+            xtick={1,2},
+            xticklabels={},
+            xmin=0.5,
+            xmax=2.5,
+            ymin=0,
+            ymax=700,
+            ylabel={Latency [ms]},
+            nodes near coords,
+            nodes near coords style={
+                    anchor=south,
+                },
+            point meta=explicit symbolic,
+        ]
+        \addplot[
+            ybar,
+            plotColor1*,
+            draw=black,
+            thick,
+            postaction={
+                    pattern=north west lines
+                },
+        ] plot coordinates {
+                (2,563) [\rotatebox{45}{\small \textcolor{hlColorGreen}{\textbf{\texttt{CPU}}}}]
+            };
+        \addplot[
+            ybar,
+            plotColor2*,
+            draw=black,
+            thick,
+            postaction={
+                    pattern=north east lines
+                },
+        ] plot coordinates {
+                (2,240) [\rotatebox{45}{\small \textcolor{hlColorRed}{\textbf{\texttt{GPU}}}}]
+            };
+        \addplot[
+            ybar,
+            plotColor3*,
+            draw=black,
+            thick,
+        ] plot coordinates {
+                (2,43) [\rotatebox{45}{\small \textcolor{hlColorGreen}{\textbf{\texttt{CPU}}}}]
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

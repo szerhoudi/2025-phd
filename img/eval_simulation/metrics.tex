@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=15cm,
+            height=8cm,
+            nodes near coords,
+            xmin=0,
+            xmax=10,
+            ymin=0,
+            ymax=10,
+            xlabel={System-centric vs. User-centric Evaluation},
+            xtick={0.5, 9.5},
+            xticklabels={System-centric, User-centric},
+            ytick=\empty,
+            yticklabels={},
+            axis lines=left,
+            tick label style={align=center},
+            every axis plot/.append style={very thick},
+        ]
+        \addplot[
+            only marks,
+            mark=o,
+            mark size=3pt,
+            mark options={
+                    draw=red,
+                    outer sep=0.1em,
+                },
+            color=black,
+            point meta=explicit symbolic,
+            text width=4cm, 
+            align=center,
+            coordinate style/.condition={\coordindex==0}{nodes near coords align={center, above}},
+            coordinate style/.condition={\coordindex==1}{nodes near coords align={center, below}},
+            coordinate style/.condition={\coordindex==2}{nodes near coords align={center, above}},
+            coordinate style/.condition={\coordindex==3}{nodes near coords align={center, below}},
+            coordinate style/.condition={\coordindex==4}{nodes near coords align={center, above}},
+        ] coordinates {
+                (1, 4) [\textbf{IR PRP}\\(Fuhr, 2008)]
+                (3, 7) [\textbf{Doc Ranking based}\\(Kanoulas et al., 2011)]
+                (5, 3) [\textbf{Session nDCG}\\(Järvelin et al., 2008)]
+                (7, 6) [\textbf{General Formal Framework}\\(Zhang et al., 2017)]
+                (9, 2) [\textbf{Expected Global Utility}\\(Yang and Lad, 2009)]
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

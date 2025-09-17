@@ -1,0 +1,351 @@
+<section class="sec-title" id="title-slide-2">
+  <h2>
+    <b>Simulator <i>Quality</i></b><br />Validation Principles & Methods
+  </h2>
+  <div>
+    <hr class="divider" />
+    <div class="pub">
+      <p>
+        <b>Saber Zerhoudi</b>, Michael Granitzer, Christin Seifert, Jörg Schlötterer
+      </p>
+      <p>
+        <span class="pub-title">Evaluating Simulated User Interaction and Search Behaviour</span>,
+        <span class="pub-venue">ECIR 2022</span>
+      </p>
+    </div>
+    <div class="pub">
+      <p>
+        <b>Saber Zerhoudi</b>, Michael Granitzer
+      </p>
+      <p>
+        <span class="pub-title">Beyond Conventional Metrics: Assessing User Simulators in Information Retrieval</span>,
+        <span class="pub-venue">IIR 2024</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="old-guard" data-auto-animate>
+  <h2>Simulator Quality</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Traditional Session-based IR Metrics</i></h4>
+  <hr class="divider" />
+
+  <p class="fragment" data-fragment-index="1">Search sessions evaluation has relied on a set of powerful, classic
+    metrics:</p>
+  <img class="fragment" data-fragment-index="1" style="margin-bottom: 0" src="img/eval_simulation/metrics_out.svg" />
+  <hr class="divider" />
+
+  <p class="fragment">
+    But these metrics are excellent at answering one specific question: <br><b>How productive is this entire search
+      session?</b>
+  </p>
+</section>
+
+<section id="paradox" data-auto-animate>
+  <h2>Simulator Quality</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>The "Good Score, Bad System" Paradox</i></h4>
+  <hr class="divider" />
+
+  <p class="fragment" data-fragment-index="1">A system can achieve a high score on traditional metrics while providing a
+    terrible user experience.</p>
+  <img class="fragment" data-fragment-index="1" style="margin-bottom: 0" src="img/eval_simulation/ux_paradox_out.svg" />
+  <p class="caption fragment" data-fragment-index="1"><b>Figure:</b> Two simulated journeys to find a recipe. While both
+    are effective (find the goal), only Path B is realistic in its behavior.</p>
+  <hr class="divider" />
+
+  <p class="fragment" data-fragment-index="2">
+    Traditional metrics (1) <b>focus on relevance, not behavior</b>, <br> and (2) <span
+      style="font-size: small">(often)</span> <b>can't evaluate the "Journey"</b>. <span class="fragment"
+      data-fragment-index="3">Thus...</span>
+  </p>
+</section>
+
+<section id="shift-focus">
+  <h2 class="fragment" data-fragment-index="1">Simulator Quality</h2>
+  <h4 class="fragment" data-fragment-index="1" style="margin-top: -0.5em; font-family: inherit;"><i>A Fundamental Shift
+      in Focus</i></h4>
+  <hr class="divider" />
+
+  <p>
+    We need to move our evaluation from: <b>"How productive was the user's search session?"</b> to <b>"How realistic was
+      the user's simulated journey?"</b>
+  </p>
+  <hr class="divider" />
+  <blockquote class="fragment" data-fragment-index="1" style="font-size: large; margin-top: 1em;">
+    “It remains an open question as to how realistic (i.e. human-like) simulators
+    can be, or indeed should be. It is important to note that simulators do not
+    need to be perfect mirrors of human behaviour, but instead simply need to be
+    “good enough.” By this, we mean that output from simulations should correlate
+    well with human assessments on a given task with respect to some evaluation
+    metric. The main requirement is reproducibility.” <br>– Sim4IR workshop (Balog
+    et al., 2022)
+  </blockquote>
+</section>
+
+<section id="approach-1-turing-test" data-auto-animate>
+  <h2 class="fragment" data-fragment-index="2">Simulator Quality</h2>
+  <h4 class="fragment" data-fragment-index="2" style="margin-top: -0.5em; font-family: inherit;"><i>The Turing Test</i>
+  </h4>
+  <hr class="divider" />
+  <p>
+    The goal is to measure <b>authenticity</b><br><span style="font-size: large;">(i.e., can we create a simulation so
+      good that it's indistinguishable from reality?).</span><br><span class="fragment" data-fragment-index="1">We can
+      frame the evaluation as a <b>"Turing Test"</b> for user simulators.</span>
+  </p>
+  <p class="fragment" data-fragment-index="2">
+    <b>Idea:</b> Train a machine learning classifier <br>to distinguish <b>real</b> user sessions from <b>simulated</b>
+    ones.
+  </p>
+  <p class="fragment" data-fragment-index="2">
+    <b>Intuition:</b> If the simulation is highly realistic, <br>the classifier should struggle to tell them apart,
+    resulting in <b class="r-green">low accuracy</b>.
+  </p>
+  <img class="fig fragment" data-fragment-index="2" src="img/eval_simulation/classification_eval_overview_out.svg"
+    style="margin-top: 0em" />
+</section>
+
+<section id="evaluation-methods-class" data-auto-animate>
+  <h2>The Turing Test</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i><span class="textsc">Classification-KS2</span></i></h4>
+  <hr class="divider" />
+  <p>
+    We use <b>two</b> complementary methods that assess quality from different angles.
+  </p>
+  <div class="column-layout" style="margin-top: 0.5em;">
+    <div class="column-item fragment" data-fragment-index="1" style="justify-content: flex-start;">
+      <h4 style="text-align: center">
+        Classification-based Evaluation
+      </h4>
+      <p style="margin-top: -0.5em; font-size: large;">
+        Train a classifier to distinguish real vs. simulated
+        session sequences.
+      </p>
+      <img class="fig" src="img/eval_simulation/ce_paradigm_out.svg" style="max-width: 80%;" />
+      <p style="margin-top: -0.5em; font-size: large;">
+        <b>Metric:</b> Accuracy, Recall, Precision, F-Measure.<br>
+        <b>Goal:</b>
+        <span class="r-green">Low F-Measure</span> is better
+        (the classifier is confused).
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="evaluation-methods-ks2" data-auto-animate>
+  <h2>The Turing Test</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i><span class="textsc">Classification-KS2</span></i></h4>
+  <hr class="divider" />
+  <p>
+    We use <b>two</b> complementary methods that assess quality from different angles.
+  </p>
+  <div class="column-layout" style="margin-top: 0.5em;">
+    <div class="column-item" style="justify-content: flex-start;">
+      <h4 style="text-align: center">
+        Kolmogorov-Smirnov (KS-2) Test
+      </h4>
+      <p style="margin-top: -0.5em; font-size: large;">
+        A <b>non-parametric test</b> to determine if two samples come from the same distribution.
+      </p>
+      <div class="column-layout">
+        <p class="column-item" style="justify-content: flex-start;">
+          <span style="font-size: large;"><b>D-statistic:</b> Quantifies the maximum divergence between the
+            distributions of two samples.</span>
+
+
+          $$D = \sup_x \left| \underbrace{F_1(x)}_{\text{real sessions}} - \underbrace{F_2(x)}_{\text{simulated
+          sessions}}
+          \right|$$
+        </p>
+        <p class="column-item" style="justify-content: flex-start;">
+          <span style="font-size: large;"><b>D-critical:</b> A significance threshold to decide if the two distributions
+            differ.</span>
+          $$D_{\text{crit}} = \underbrace{c(\alpha)}_{\text{significance factor}} \cdot \underbrace{\sqrt{\frac{n_1 +
+          n_2}{n_1 n_2}}}_{\text{sample size correction}}$$
+        </p>
+      </div>
+      <p style="margin-top: -0.5em; font-size: large;">
+        <b>Decision rule:</b> If $D > D_{\text{crit}}$, samples differ significantly.<br>
+        <b>Goal:</b> <span class="r-green">Low D-statistic</span> means the distributions are closer.
+      </p>
+    </div>
+  </div>
+  <p class="fragment" data-fragment-index="1">
+    <b>Synergy:</b> The KS-2 test ensures <b>distributional similarity</b>, while Classification probes for <b>realistic
+      sequential patterns</b>. A robust simulator must excel at both.
+  </p>
+</section>
+
+<section id="results-combined" data-auto-animate>
+  <h2>The Turing Test</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i><span class="textsc">Classification-KS2</span></i></h4>
+  <hr class="divider" />
+  <img class="fig" style="margin-top: -0.5em;" src="img/eval_simulation/results_dual_axis_out.svg" />
+  <p class="caption">
+    Two-metric view: bars show realism error (F-Measure, left axis) and red squares mark distribution error (KS-2
+    D-statistic, right axis).
+    <b>Lower values on either axis indicate a better simulator.</b>
+  </p>
+</section>
+
+<section id="approach-2-intro" data-auto-animate data-auto-animate-id="new-approaches">
+  <h2 class="fragment" data-fragment-index="3">Simulator Quality</h2>
+  <h4 class="fragment" data-fragment-index="3" style="margin-top: -0.5em; font-family: inherit;"><i>Fréchet Distance
+      (FD)</i></h4>
+  <hr class="divider" />
+
+  <p><span class="textsc">Classification-KS2</span> evaluation is powerful but <b>indirect</b>.<span class="fragment"
+      data-fragment-index="1">
+      What if we could <b>directly</b> measure the "distance" between the entire
+      <b>distribution</b> of real sessions and the distribution of simulated
+      ones?
+    </span></p>
+
+  <!-- <p class="fragment" data-fragment-index="2">
+    This requires a metric that can compare two sets of high-dimensional
+    points.
+  </p> -->
+
+  <p class="fragment" data-fragment-index="3">
+    <b>Fréchet Distance</b> measures the similarity between two curves,
+    often explained with an analogy: <i>
+      "The minimum leash length needed for a person and their dog to walk
+      along their respective paths."
+    </i>
+  </p>
+  <hr class="divider" />
+  <div class="column-layout fragment" data-fragment-index="3" style="margin-top: -0.5em;">
+    <div class="column-item">
+      <img class="fig" src="img/eval_simulation/image_fd.png" />
+      <p class="caption">
+        Evaluation of Text-to-Image (TTI) generative models with Fréchet distance.
+      </p>
+    </div>
+    <div class="column-item">
+      <img class="fig" src="img/eval_simulation/relevance_fd.png" />
+      <p class="caption">
+        Evaluation of IR systems with Fréchet distance.
+      </p>
+    </div>
+  </div>
+  <!-- <p class="fragment" data-fragment-index="3">
+    We adapt this to evaluate simulators by measuring the distance between
+    the distribution of <b>real session embeddings</b> and
+    <b>simulated session embeddings</b>.
+  </p> -->
+  <!-- <p class="fragment highlight-green" data-fragment-index="3">
+    A smaller Fréchet Distance means the simulations are better.
+  </p> -->
+
+</section>
+
+<section id="frechet-application" data-auto-animate>
+  <h2>Fréchet Distance</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>From Trajectories to Search Sessions</i></h4>
+  <hr class="divider" />
+  <p>We can apply this concept to search sessions:</p>
+  <ol>
+    <li class="fragment" data-fragment-index="1">
+      A search session is a <b>sequence of user actions</b> (queries,
+      clicks).
+    </li>
+    <li class="fragment" data-fragment-index="2">
+      We <b>embed each action</b> into a vector space using models like BERT.
+      This transforms actions into points in a high-dimensional space.
+    </li>
+    <li class="fragment" data-fragment-index="3">
+      The session now becomes a <b>trajectory</b> that we can compare.
+    </li>
+  </ol>
+  <hr class="divider" />
+  <p class="fragment" data-fragment-index="4">
+    The <b>Sequential Fréchet Distance</b> averages this distance over many
+    sessions:
+  </p>
+  <p class="eq fragment" data-fragment-index="4">
+    $FD_{S_{\text{seq}}}^M = \frac{1}{|S|} \sum_{s_i \in S}
+    FD(
+    \underbrace{\mathbb{V}(R_{s_i})}_{\text{real session}},
+    \underbrace{\mathbb{V}(M(s_i))}_{\text{simulated session}}
+    )$
+  </p>
+  <hr class="divider" />
+  <p class="fragment" data-fragment-index="5">
+    A <b class="r-green">lower</b> Fréchet Distance score means the
+    simulated session is <b class="r-green">more similar</b> to the real
+    one.
+  </p>
+</section>
+
+<section id="eval-approach2-results" data-auto-animate>
+  <h2>Fréchet Distance</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>From Trajectories to Search Sessions</i></h4>
+  <hr class="divider" />
+  <p>
+    FD can effectively rank different simulation models based on their
+    realism.
+  </p>
+  <img class="fig" src="img/eval_simulation/frechet_distance_results_out.svg" />
+  <p class="caption">
+    Fréchet Distance @ 10 for various click models on the TREC 2014 Session
+    Track dataset. Lower is better.
+  </p>
+  <hr class="divider" />
+  <p class="fragment">
+    More sophisticated simulators like <b>SimIIR 2.0</b> achieve lower
+    (better) FD scores, confirming they produce more realistic user behavior.
+  </p>
+</section>
+
+<section id="eval-fd-validation" data-auto-animate>
+  <h2>Fréchet Distance</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Validation & Sensitivity</i></h4>
+  <hr class="divider" />
+
+  <div class="column-layout">
+    <div class="column-item">
+      <div class="c-wide">
+        <h4>Correlation with IR Metrics</h4>
+        <p>
+          FD scores show a strong negative correlation with traditional
+          session-based metrics like sDCG.
+        </p>
+        <p class="fragment" data-fragment-index="1">
+          This confirms that FD captures meaningful aspects of simulation
+          quality.
+        </p>
+      </div>
+    </div>
+    <div class="column-item fragment" data-fragment-index="1">
+      <img class="fig" src="img/eval_simulation/fd_correlation_plot_out.svg" />
+      <p class="caption">Correlation between Fréchet Distance (FD) and nDCG@10.</p>
+    </div>
+  </div>
+  <hr class="divider" />
+  <p class="fragment" data-fragment-index="2">
+    <b>Key consideration:</b> FD is sensitive to the feature extraction
+    method used to embed sessions. The choice of embedding (e.g.,
+    Action-based vs. BERT-based) can change model rankings.
+  </p>
+</section>
+
+<section id="eval-summary">
+  <h2>Summary</h2>
+  <hr class="divider" />
+
+  <ul>
+    <li>
+      <b>Classification-KS2 Evaluation:</b> A dual-method approach combining statistical distribution tests (KS-2) with
+      adversarial sequence classification.
+    </li>
+    <li class="fragment">
+      <b>Fréchet Distance:</b> A metric that directly quantifies the distributional "distance" between sets of real and
+      simulated behaviors.
+      <span>Lower distance is better.</span>
+    </li>
+  </ul>
+  <hr class="divider" />
+  <p class="fragment">
+    These metrics complement traditional approaches by shifting the evaluation focus from effectiveness to behavioral
+    realism.
+  </p>
+</section>

@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[node distance=1.5cm]
+    \node[framedfignode, fill=plotColor2!20] (s1) {$S_i$ (Query $q_i$)};
+    \node[framedfignode, right=of s1] (a) {$A_i$ (Reformulate)};
+    \node[framedfignode, fill=plotColor3!20, right=of a] (r) {$R_i$ (Info Gain)};
+    \node[framedfignode, fill=plotColor2!20, below=of a] (s2) {$S_{i+1}$ (Query $q_{i+1}$)};
+
+    \draw[-{Stealth[length=2mm, width=1.5mm]}] (s1) -- (a);
+    \draw[-{Stealth[length=2mm, width=1.5mm]}] (a) -- (r);
+    \draw[-{Stealth[length=2mm, width=1.5mm]}] (a) -- (s2);
+
+    \begin{scope}[on background layer]
+        \node[draw, dashed, gray, fit=(s1) (a) (r) (s2), inner sep=0.5cm, label={[gray]above:MDP-Inspired View}] {};
+    \end{scope}
+\end{tikzpicture}
+\end{document}

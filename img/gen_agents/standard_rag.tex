@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=3cm, auto, >=stealth,
+    block/.style={rectangle, draw, thick, text centered, rounded corners, minimum height=2.5em, text width=9em},
+    line/.style={draw, -{Stealth[length=3mm]}, thick}
+]
+
+    \node [block, fill=plotColor2!20] (query) {User Query};
+    \node [block, right of=query, fill=plotColor1!20] (retriever) {Retriever};
+    \node [block, right of=retriever, fill=plotColor4!20] (llm) {LLM};
+    \node [block, right of=llm, fill=plotColor3!20] (answer) {Generic Answer};
+
+    \draw [line] (query) -- (retriever);
+    \draw [line] (retriever) -- node [above] {\footnotesize Docs} (llm);
+    \draw [line] (llm) -- (answer);
+
+\end{tikzpicture}
+\end{document}

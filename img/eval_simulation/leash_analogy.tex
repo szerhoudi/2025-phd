@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{decorations.pathmorphing}
+
+\begin{document}
+\begin{tikzpicture}
+    % Person's Path (Curve A)
+    \draw[plotColor2, very thick, ->] plot[smooth, tension=0.7] coordinates { (0,0) (1,1.5) (2.5,1) (4,2) (5,1) };
+    \node[anchor=west, plotColor2] at (5,1) {A};
+
+    % Dog's Path (Curve B)
+    \draw[plotColor4, very thick, ->] plot[smooth, tension=0.9] coordinates { (0.5,3) (1.5,2) (2,3.5) (3.5,3) (4.5,4) };
+    \node[anchor=west, plotColor4] at (4.5,4) {B};
+
+    % Person and Dog
+    \node[font=\LARGE] (person) at (2.5,1) {\Walking};
+    \node[font=\LARGE, color=plotColor4!80!black] (dog) at (2,3.5) {\Mundus};
+
+    % Leash
+    \draw[red, thick, dashed, decoration={coil, aspect=0.5, segment length=4pt, amplitude=2pt}, decorate] (person.north) -- (dog.south);
+    \node[red, anchor=west] at (2.5, 2.5) {Leash};
+\end{tikzpicture}
+\end{document}

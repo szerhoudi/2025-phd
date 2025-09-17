@@ -1,0 +1,274 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    % embedding
+    \node[
+        framedfignode,
+        minimum width=200,
+        fill=white,
+    ] (E) at (0,0) {Embedding};
+
+    % inputs
+    \node[
+        fignode,
+        below=1.75 of E.west,
+        anchor=west,
+    ] (T1) {$t_1$};
+    \node[
+        below=-0.2 of T1,
+    ] (T1b) {\tiny \texttt{[CLS]}};
+
+    \node[
+        fignode,
+        right=0 of T1,
+        anchor=west,
+    ] (T2) {$t_2$};
+    \node[
+        below=-0.2 of T2,
+    ] (T2b) {\tiny \texttt{the}};
+
+    \node[
+        fignode,
+        right=0 of T2,
+        anchor=west,
+    ] (T3) {$t_3$};
+    \node[
+        below=-0.2 of T3,
+    ] {\tiny \texttt{meaning}};
+
+    \node[
+        fignode,
+        right=0 of T3,
+        anchor=west,
+    ] (T4) {$t_4$};
+    \node[
+        below=-0.2 of T4,
+    ] (T4b) {\tiny \texttt{of}};
+
+    \node[
+        fignode,
+        anchor=north east,
+    ] (Td) at (T4.north -| E.east) {$t_{|d|}$};
+    \node (Tdb) at (Td |- T4b) {\tiny \texttt{[SEP]}};
+
+    \node[
+        fignode,
+    ] at ($(T4.north)!0.5!(Tdb.south)$) {\dots};
+
+    % scoring network
+    \node[
+        framedfignode,
+        minimum width=200,
+        above=1.75 of E.west,
+        anchor=west,
+        fill=white,
+    ] (S) {Scoring network};
+    \node[
+        left=0.5 of S,
+    ] (P) {$p$};
+    \draw[-latex] (P) -- (S);
+
+    % intermediate representations
+    \node[
+        fignode,
+        above=2 of S.west,
+        anchor=west,
+    ] (Ts1) {$\hat{t}_1$};
+    \node[
+        below=-0.2 of Ts1,
+    ] (Ts1b) {\tiny \texttt{[CLS]}};
+
+    \node[
+        fignode,
+        right=0 of Ts1,
+        anchor=west,
+    ] (Ts2) {$\hat{t}_2$};
+    \node[
+        below=-0.2 of Ts2,
+    ] (Ts2b) {\tiny \texttt{meaning}};
+
+    \node[
+        fignode,
+        right=0 of Ts2,
+        anchor=west,
+    ] (Ts3) {$\hat{t}_3$};
+    \node[
+        below=-0.2 of Ts3,
+    ] (Ts3b) {\tiny \texttt{life}};
+
+    \node[
+        fignode,
+        right=0 of Ts3,
+        anchor=west,
+    ] (Ts4) {$\hat{t}_4$};
+    \node[
+        below=-0.2 of Ts4,
+    ] (Ts4b) {\tiny \texttt{[SEP]}};
+
+    % encoder
+    \node[
+        framedfignode,
+        minimum width=200,
+        above=1.75 of Ts1.west,
+        anchor=west,
+        fill=white,
+    ] (L) {Transformer encoder layer};
+
+    % output
+    \node[
+        fignode,
+        above=1.75 of L -| T1,
+        anchor=center,
+    ] (O) {$\hat{\eta}(d)$};
+
+    % batch visualization
+    \begin{scope}[on background layer]
+        \node[
+            xshift=4,
+            yshift=-4,
+            fit=(T1b.south west |- T1.north west)(Tdb.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            draw=gray,
+            fill=white,
+        ] (Tr) {};
+        \node[
+            xshift=2,
+            yshift=-2,
+            fit=(T1b.south west |- T1.north west)(Tdb.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw=gray,
+        ] {};
+        \node[
+            fit=(T1b.south west |- T1.north west)(Tdb.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw,
+        ] {};
+
+        \node[
+            xshift=4,
+            yshift=-4,
+            fit=(Ts1b.south west |- Ts1.north west)(Ts4b.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            draw=gray,
+            fill=white,
+        ] (Tsr) {};
+        \node[
+            xshift=2,
+            yshift=-2,
+            fit=(Ts1b.south west |- Ts1.north west)(Ts4b.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw=gray,
+        ] (Tsm) {};
+        \node[
+            fit=(Ts1b.south west |- Ts1.north west)(Ts4b.south east),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw,
+        ] {};
+
+        \node[
+            xshift=4,
+            yshift=-4,
+            fit=(O),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            draw=gray,
+            fill=white,
+        ] {};
+        \node[
+            xshift=2,
+            yshift=-2,
+            fit=(O),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw=gray,
+            fill=white,
+        ] (Om) {};
+        \node[
+            fit=(O),
+            inner sep=0,
+            dashed,
+            rounded corners,
+            fill=white,
+            draw,
+        ] {};
+    \end{scope}
+
+    % inputs -> embedding
+    \draw[-latex] (T1) -- (T1 |- E.south);
+    \draw[-latex] (T2) -- (T2 |- E.south);
+    \draw[-latex] (T3) -- (T3 |- E.south);
+    \draw[-latex] (T4) -- (T4 |- E.south);
+    \draw[-latex] (Td) -- (Td |- E.south);
+
+    % embedding -> scoring network
+    \draw[-latex] (E.north -| T1) -- (S.south -| T1);
+    \draw[-latex] (E.north -| T2) -- (S.south -| T2);
+    \draw[-latex] (E.north -| T3) -- (S.south -| T3);
+    \draw[-latex] (E.north -| T4) -- (S.south -| T4);
+    \draw[-latex] (E.north -| Td) -- (S.south -| Td);
+
+    % scoring network -> intermediate representations
+    \draw[-latex] (S.north -| Ts1) -- (Ts1b |- Tsm.south);
+    \draw[-latex] (S.north -| Ts2) -- (Ts2b |- Tsm.south);
+    \draw[-latex] (S.north -| Ts3) -- (Ts3b |- Tsm.south);
+    \draw[-latex] (S.north -| Ts4) -- (Ts4b |- Tsm.south);
+
+    % intermediate representations -> encoder
+    \draw[-latex] (Ts1) -- (L.south -| Ts1);
+    \draw[-latex] (Ts2) -- (L.south -| Ts2);
+    \draw[-latex] (Ts3) -- (L.south -| Ts3);
+    \draw[-latex] (Ts4) -- (L.south -| Ts4);
+
+    % encoder -> output
+    \draw[-latex] (L.north -| T1) -- (Om.south -| T1);
+
+    % annotations
+    \draw [
+        decorate,
+        decoration={
+                brace,
+                raise=10,
+                amplitude=5,
+            },
+    ] (T1b.south west |- Tr.south) -- (T1.north west -| T1b.south west) node[left=0.75,midway] {Input batch};
+
+    \draw [
+        decorate,
+        decoration={
+                brace,
+                raise=10,
+                amplitude=5,
+            },
+    ] (Ts1b.south west |- Tsr.south) -- (Ts1.north west -| Ts1b.south west) node[left=0.75,midway] {Shortened batch};
+
+    \draw [
+        decorate,
+        decoration={
+                brace,
+                raise=10,
+                amplitude=5,
+            },
+    ] (L.south west) -- (L.north west) node[left=0.75,midway] {$L \times$};
+\end{tikzpicture}
+\end{document}

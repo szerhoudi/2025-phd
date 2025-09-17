@@ -1,0 +1,78 @@
+\documentclass{standalone}
+\input{_common.tex} 
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{groupplot}[
+            width=15cm,
+            nodes near coords,
+            group style={
+                    group size=1 by 2,
+                    vertical sep=0pt,
+                },
+            xmin=-20,
+            xmax=150,
+        ]
+        \nextgroupplot[
+            height=8cm,
+            ymin=0.31,
+            ymax=0.37,
+            axis x line=none,
+            axis y line=left,
+            axis y discontinuity=parallel,
+            ytick={0.32,0.34,0.36},
+            very thick,
+        ]
+        \addplot[
+            only marks,
+            mark=o,
+            mark options={
+                    draw=red,
+                    outer sep=0.1em,
+                },
+            color=black,
+            point meta=explicit symbolic,
+            coordinate style/.condition={\coordindex==0}{align=center,below},
+            coordinate style/.condition={\coordindex==1}{align=right,left},
+            coordinate style/.condition={\coordindex==2}{align=left,right},
+            coordinate style/.condition={\coordindex==3}{align=right,left},
+            coordinate style/.condition={\coordindex==4}{align=center,above},
+            coordinate style/.condition={\coordindex==5}{align=right,left},
+        ] coordinates {
+                (52.65,0.362) [\textbf{\monobert{}}\\(2019)]
+                (5.96,0.325) [\textbf{\dpr{}}\\(2020)]
+                (9.72,0.33) [\textbf{\tildetwo{}}\\\tildemodel{} expansion\\(2021)]
+                (138.41,0.333) [\textbf{\tildetwo{}}\\\doctquery{} expansion\\(2021)]
+                (7.85,0.349) [\textbf{\unicoil{}}\\\tildemodel{} expansion\\(2021)]
+                (136.54,0.352) [\textbf{\unicoil{}}\\\doctquery{} expansion\\(2021)]
+            };
+        \nextgroupplot[
+            height=3.5cm,
+            ymin=0.18,
+            ymax=0.195,
+            axis x line=bottom,
+            axis y line=left,
+            y axis line style=-,
+            xlabel={Emissions [$\text{kgCO}_2\text{e}$]},
+            ylabel={Performance [\rr{}@\num{10}]},
+            every axis y label/.append style={at=(ticklabel cs:2.25)},
+            xtick={0, 20, ..., 140},
+            ytick={0.19},
+            very thick,
+        ]
+        \addplot[
+            only marks,
+            mark=o,
+            mark options={
+                    draw=red,
+                    outer sep=0.1em,
+                },
+            color=black,
+            point meta=explicit symbolic,
+            coordinate style/.condition={\coordindex==0}{align=left,right},
+        ] coordinates {
+                (0.0017,0.187) [\textbf{\bm{}}\\(1995)]
+            };
+    \end{groupplot}
+\end{tikzpicture}
+\end{document}

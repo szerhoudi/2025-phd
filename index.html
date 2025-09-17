@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>User Simulation in Interactive Information Retrieval</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/serif.css" />
+    <link rel="stylesheet" href="https://unpkg.com/reveal.js/plugin/highlight/monokai.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./common.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #F5F6F2 !important;
+            color: #333;
+            padding: 12px 24px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Product Sans';
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .header-left {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            align-items: center;
+        }
+
+        .header-right {
+            width: 10%;
+            text-align: left;
+            margin-right: -70px;
+        }
+
+        .header-right a {
+            text-decoration: none !important;
+            color: inherit !important;
+            font-size: large;
+        }
+
+        .header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .reveal.with-header {
+            padding-top: 80px;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .header-section .section-title {
+            font-size: .9em;
+            color: #888;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .header-section .section-title.visible {
+            opacity: 1;
+        }
+
+        .header-section.active .section-title {
+            font-weight: 700;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .section-dots {
+            margin-top: 6px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .section-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Flat Colors for Dots */
+        #header-intro .dot.filled {
+            background-color: #3498db;
+        }
+
+        /* Blue */
+        #header-rq1 .dot.filled {
+            background-color: #2ecc71;
+        }
+
+        /* Green */
+        #header-rq2 .dot.filled {
+            background-color: #f1c40f;
+        }
+
+        /* Yellow */
+        #header-rq3 .dot.filled {
+            background-color: #9b59b6;
+        }
+
+        /* Purple */
+        #header-conclusion .dot.filled {
+            background-color: #e74c3c;
+        }
+
+        /* Red */
+        .reveal .slide-number {
+            font-size: .9em;
+            color: #333;
+            font-family: 'Product Sans';
+            font-weight: 700;
+        }
+
+        .model-badge {
+            display: inline-block;
+            padding: 0.4em 0.7em;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            text-transform: none;
+            font-family: 'Product Sans';
+        }
+    </style>
+
+    <!-- External Libraries -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="header-section" id="header-intro">
+                <div class="section-title">Introduction</div>
+                <div class="section-dots"></div>
+            </div>
+            <div class="header-section" id="header-rq1">
+                <div class="section-title">RQ1: Modeling</div>
+                <div class="section-dots"></div>
+            </div>
+            <div class="header-section" id="header-rq2">
+                <div class="section-title">RQ2: Evaluation</div>
+                <div class="section-dots"></div>
+            </div>
+            <div class="header-section" id="header-rq3">
+                <div class="section-title">RQ3: Framework</div>
+                <div class="section-dots"></div>
+            </div>
+            <div class="header-section" id="header-conclusion">
+                <div class="section-title">Conclusion</div>
+                <div class="section-dots"></div>
+            </div>
+        </div>
+        <div class="header-right" id="slide-number-container"></div>
+    </div>
+    <div class="reveal">
+        <div class="slides">
+
+            <section id="title">
+                <div style="display: flex; align-items: center; justify-content: center; height: 2em">
+                    <img src="../logos/uni-passau.png" />
+                </div>
+                <hr class="hide" style="height: 0.5em" />
+                <h1>User Simulation in Interactive<br /> Information Retrieval</h1>
+                <hr class="hide" style="height: 0.5em" />
+                <p style="font-size: large">
+                    <b><u>Saber Zerhoudi</u></b>
+                </p>
+                <p style="font-size: large">
+                    <b>PhD thesis defense</b>, September 19th, 2025
+                </p>
+                <div style="font-size: medium; margin-top: 1em; line-height: 1.6">
+                    <p style="margin: 0.5em 0">
+                        <b>Advisor:</b> Prof. Dr. Michael Granitzer
+                    </p>
+                    <p style="margin: 0.5em 0">
+                        <b>Examiners:</b><br />
+                        Prof. Dr. Michael Granitzer<br />
+                        Prof. Dr. Gabriella Pasi
+                    </p>
+                </div>
+            </section>
+
+            <section id="web-search" data-auto-animate data-auto-animate-id="web-search">
+                <h2>
+                    <span>Search is </span>
+                    <span id="ranking-text" class="slide-up-fade-in-initial"
+                        style="display: inline-block; vertical-align: top;"><i>rapidly</i></span>
+                    <span> changing</span>
+                </h2>
+            </section>
+
+            <section id="ranking-websearch" data-auto-animate data-auto-animate-id="web-search">
+                <h2 style="margin-top: 1em;">Search is <i>rapidly</i> changing</h2>
+                <div class="column-layout r-stretch">
+                    <div class="column-item">
+                        <div class="se-logo">
+                            <span class="r-blue">W</span><span class="r-red">e</span><span class="r-yellow">b</span>
+                            <span class="r-blue">S</span><span class="r-red">e</span><span
+                                class="r-yellow">a</span><span class="r-green">r</span><span class="r-red">c</span><span
+                                class="r-yellow">h</span>
+                        </div>
+                        <div class="search-bar">
+                            <img src="img/search/search.svg" style="height: 0.4em; margin: 0; padding-right: 0.5em" />
+                            <div class="search-query fragment" id="query-anim-fragment">
+                                <p id="query-anim" style="margin: 0; margin-right: 0.1em"></p>
+                            </div>
+                        </div>
+                        <div class="fragment search-results" id="search-results-fragment">
+                            <div class="search-result">
+                                <div class="search-result-header">
+                                    <div class="search-result-icon r-stack">
+                                        <div class="search-result-icon-background"></div>
+                                        <img src="img/search/opentable.ico" />
+                                    </div>
+                                    <div>
+                                        <p class="search-title">OpenTable</p>
+                                        <p class="search-url">www.opentable.com › passau-restaurants</p>
+                                    </div>
+                                </div>
+                                <p class="search-link">Best Restaurants in Passau - OpenTable</p>
+                                <p class="search-desc">
+                                    Book <b>restaurants in Passau</b>. Find WEINGUT essen.trinken.erleben., AVLI Das
+                                    isst Griechenland,
+                                    and more top-rated dining spots with free reservations.
+                                </p>
+                            </div>
+
+                            <div class="search-result">
+                                <div class="search-result-header">
+                                    <div class="search-result-icon r-stack">
+                                        <div class="search-result-icon-background"></div>
+                                        <img src="img/search/tripadvisor.ico" />
+                                    </div>
+                                    <div>
+                                        <p class="search-title">TripAdvisor</p>
+                                        <p class="search-url">www.tripadvisor.com › restaurants › passau</p>
+                                    </div>
+                                </div>
+                                <p class="search-link">THE 10 BEST Restaurants in Passau</p>
+                                <p class="search-desc">
+                                    Discover the <b>best restaurants in Passau</b> including Goldenes Schiff, Ristorante
+                                    Bireria
+                                    Ventitre, and Gasthof Aschenberger. Read traveler reviews and see photos.
+                                </p>
+                            </div>
+                        </div>
+                        <p class="fragment">From lists of <span style="color: blue;">links</span>...</p>
+                    </div>
+                    <div class="column-item fragment">
+                        <div class="se-logo">
+                            <span style="color: #10a37f;">Search</span><span style="color: #6ea194;">GPT</span>
+                        </div>
+                        <div class="search-bar chatgpt-search-bar">
+                            <div class="search-query fragment" id="chat-query-fragment">
+                                <p id="chat-query-anim" style="margin: 0; margin-right: 0.1em"></p>
+                            </div>
+                            <div class="chatgpt-send-button">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="fragment search-results" id="chat-response-fragment">
+                            <div class="chatgpt-response">
+                                <p>Here are some of the top-rated restaurants in Passau—covering traditional
+                                    Bavarian cuisine,
+                                    international flavours, and scenic views:</p>
+
+                                <h3>🍽️ Highlights & Recommendations</h3>
+
+                                <div class="restaurant-rec">
+                                    <p><strong>Ratskeller Passau: </strong>
+                                        A historic cellar with hearty Bavarian classics—sauces, schnitzel, dumplings—and
+                                        a warm atmosphere. Holds
+                                        a solid 4.1/5 rating on TripAdvisor, ranking it among the town's favorites (<a
+                                            href="#" class="chatgpt-link">tripadvisor.com</a>).</p>
+                                </div>
+
+                                <div class="restaurant-rec">
+                                    <p><strong>Weingut: </strong>
+                                        Featured in the MICHELIN Guide, this stylish spot serves modern international
+                                        dishes and steaks, with a
+                                        rotating weekly menu. Great for wine afternoons or a refined dinner (<a href="#"
+                                            class="chatgpt-link">guide.michelin.com</a>).[..]</p>
+                                </div>
+
+                                <p class="chatgpt-followup">Excerpt from gpt-4o search done using the query
+                                    "best restaurants in Passau" on the 24 June 2025.</p>
+                            </div>
+                        </div>
+                        <p class="fragment">...to synthesized answers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="evaluation-challenge" data-auto-animate data-auto-animate-id="web-search">
+                <h2 style="margin-top: 1em;">Search is <i>rapidly</i> changing</h2>
+                <h3 class="sub-title">How do we know if a search system is <u>good</u>?</h3>
+                <hr class="divider" />
+                <p class="fragment" data-fragment-index="1">The <strong style="color: #DAA520;">"gold standard"</strong>
+                    is a large-scale A/B test.</p>
+                <div class="fragment column-desc-layout" data-fragment-index="1"
+                    style="gap: 2em; display: flex; align-items: center; justify-content: center;">
+                    <div class="column-item">
+                        <img class="fig" src="img/intro/ab-testing-image.png" alt="AB Test"
+                            style="max-width: 70%; height: auto; border-radius: 8px;" />
+                        <p class="caption">Users are split into two groups to compare system A vs. system B.</p>
+                    </div>
+                </div>
+                <p class="fragment" data-fragment-index="2">
+                    But these are <b class="r-red">expensive</b>, <b class="r-red">time-consuming</b>, and <b
+                        class="r-red">hard
+                        to reproduce</b>.
+                </p>
+            </section>
+
+            <section id="user-simulation" data-auto-animate data-auto-animate-id="web-search">
+                <h2 style="margin-top: 1em;">We can <i>simulate</i> the user</h2>
+                <h3 class="sub-title">What if we could replace real users with <u>realistic simulated users</u>?</h3>
+                <hr class="divider" />
+                <div class="column-layout query-section"
+                    style="align-items: left; margin-top: 1em; position: relative;">
+                    <div class="column-item" style="text-align: left; margin-left: -5em; margin-bottom: -2em;">
+                        <div style="display: inline-flex; align-items: right;">
+                            <div style="position: relative; display: inline-block;">
+                                <lottie-player id="user-lottie-sim" src="lottiefiles/user.json" background="transparent"
+                                    speed=".9"
+                                    style="width: 200px; height: 200px; transition: transform 1s ease-in-out, opacity 1s ease-in-out;"
+                                    data-id="user-animation">
+                                </lottie-player>
+                                <lottie-player id="simulator-lottie" src="lottiefiles/simulator.json"
+                                    background="transparent" speed=".9"
+                                    style="width: 150px; height: 150px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; transition: opacity 1s ease-in-out;"
+                                    class="fragment" data-fragment-index="1" data-id="simulator-animation">
+                                </lottie-player>
+                            </div>
+                            <div style="position: relative; display: inline-block; margin: 0 -0.5em 0 -1.1em;">
+                                <lottie-player id="loading-lottie-sim" src="lottiefiles/loading.json"
+                                    background="transparent" speed=".4" style="width: 250px; height: 250px;" autoplay
+                                    loop data-id="query-loading">
+                                </lottie-player>
+                                <span
+                                    style="position: absolute; top: 40%; left: 30%; transform: translate(-50%, -50%); font-size: 22px; font-weight: normal; z-index: 10; pointer-events: none; font-family: Product Sans; transition: opacity 1s ease-in-out;"
+                                    data-id="query-label">Query</span>
+                            </div>
+                            <img src="img/intro/information-retrieval.png" alt="Information Retrieval"
+                                style="width: 100px; height: 100px; z-index: 2; padding-top: 1.1em;" data-id="ir-icon">
+                            <div style="position: relative; display: inline-block; margin: 0 -1.1em 0 -0.5em;">
+                                <lottie-player id="loading-lottie-2-sim" src="lottiefiles/loading.json"
+                                    background="transparent" speed=".4" style="width: 250px; height: 250px;" loop
+                                    data-id="result-loading">
+                                </lottie-player>
+                                <span
+                                    style="position: absolute; top: 40%; left: 70%; transform: translate(-50%, -50%); font-size: 22px; font-weight: normal; z-index: 10; pointer-events: none; font-family: Product Sans; transition: opacity 1s ease-in-out;"
+                                    data-id="result-label">Result</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="position: absolute; right: -45px; top: 50%; transform: translateY(-50%); transition: opacity 1s ease-in-out; width: 220px; height: 300px;">
+                            <img id="serp-google-sim" src="img/intro/google_serp.png" alt="Google Search Results"
+                                style="position: absolute; top: 0; left: 0; width: 200px; height: auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(104, 104, 104, 0.05); transition: opacity 1s ease-in-out;">
+                            <img id="serp-chatgpt-sim" src="img/intro/chatgpt-results.png" alt="ChatGPT Results"
+                                style="position: absolute; top: 0; left: 0; width: 200px; height: auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(104, 104, 104, 0.05); transition: opacity 1s ease-in-out;">
+                            <img id="serp-perplexity-sim" src="img/intro/perplexity-results.png"
+                                alt="Perplexity Results"
+                                style="position: absolute; top: 0; left: 0; width: 200px; height: auto; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(104, 104, 104, 0.05); transition: opacity 1s ease-in-out;">
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: -1em; position: relative;" class="fragment" data-fragment-index="1">This would
+                    make the evaluation <b class="r-green">cheaper</b>, <b class="r-green">faster</b>, and <b
+                        class="r-green">reproducible</b>.</p>
+            </section>
+
+            <section id="research-questions" data-auto-animate data-auto-animate-id="web-search">
+                <h2>Research <i>Questions</i></h2>
+                <img class="fig" src="img/intro/simulator_equals_user.png" style="max-width: 30%; margin: 0em auto;" />
+                <hr class="divider" />
+                <div class="c-wide" style="margin: 0 auto; width: 80%; text-align: left;">
+                    <p class="fragment" style="margin-bottom: 1.5em;">
+                        <span
+                            style="display: inline-block; background-color: #27ae60; color: #ffffff; font-weight: bold; padding: 0.2em 0.6em; border-radius: 6px; font-family: 'Product Sans'; font-size: 0.8em; margin-right: 0.5em;">RQ1</span>
+                        <span style="font-family: 'Product Sans'; font-size: 1.2em; font-weight: bold;">Modeling User
+                            Behavior</span>
+                        <br>
+                        <span style="padding-left: 4.5em;">How to model sequential user behavior realistically?</span>
+                    </p>
+                    <p class="fragment" style="margin-bottom: 1.5em;">
+                        <span
+                            style="display: inline-block; background-color: #f1c40f; color: #000000; font-weight: bold; padding: 0.2em 0.6em; border-radius: 6px; font-family: 'Product Sans'; font-size: 0.8em; margin-right: 0.5em;">RQ2</span>
+                        <span style="font-family: 'Product Sans'; font-size: 1.2em; font-weight: bold;">Evaluating
+                            Realism</span>
+                        <br>
+                        <span style="padding-left: 4.5em;">How to validate simulator realism?</span>
+                    </p>
+                    <p class="fragment" style="margin-bottom: 1.5em;">
+                        <span
+                            style="display: inline-block; background-color: #9b59b6; color: #ffffff; font-weight: bold; padding: 0.2em 0.6em; border-radius: 6px; font-family: 'Product Sans'; font-size: 0.8em; margin-right: 0.5em;">RQ3</span>
+                        <span style="font-family: 'Product Sans'; font-size: 1.2em; font-weight: bold;">Building a
+                            Framework</span>
+                        <br>
+                        <span style="padding-left: 4.5em;">How to build usable frameworks for the community?</span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="sec-title" id="rq1-modeling" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <div style="position: relative; text-align: center; padding-top: 2.5em; margin-bottom: 1em;">
+                    <p
+                        style="position: absolute; top: 0; left: 18%; transform: translateX(-50%); background-color: #27ae60; color: #ffffff; font-weight: bold; padding: 0.05em 0.6em; border-radius: 8px; font-family: 'Product Sans'; font-size: 0.6em; line-height: 1.5;">
+                        RQ1
+                    </p>
+                    <h2 style="margin-top: -30px; font-size: 1.5em !important;"><b>Modeling <i>User Behavior</i> </b>
+                    </h2>
+                </div>
+                <!-- <div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer
+                            <span class="pub-title">Simulating User Querying Behavior using Embedding Space
+                                Alignment</span>,
+                            <span class="pub-venue">TPDL 2022</span>
+                        </p>
+                    </div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer, Jörg Schlötterer, Christin Seifert
+                            <span class="pub-title">Query Change as a Contextual Model for Simulating User Search
+                                Behaviour</span>,
+                            <span class="pub-venue">FIRE 2021</span>
+                        </p>
+                    </div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer, Christin Seifert, Jörg Schlötterer
+                            <span class="pub-title">Simulating User Search Behaviour in Digital Libraries</span>,
+                            <span class="pub-venue">IRCDL 2022</span>
+                        </p>
+                    </div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer
+                            <span class="pub-title">Cognitive-Aware User Search Behavior Simulation</span>,
+                            <span class="pub-venue">JCDL 2024</span>
+                        </p>
+                    </div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer
+                            <span class="pub-title">Generative Agents Navigating Digital Libraries</span>,
+                            <span class="pub-venue">ICADL 2024</span>
+                        </p>
+                    </div>
+                    <div class="pub">
+                        <p>
+                            <b>Saber Zerhoudi</b>, Michael Granitzer
+                            <span class="pub-title">PersonaRAG: Enhancing Retrieval-Augmented Generation Systems with
+                                User-Centric Agents</span>,
+                            <span class="pub-venue">IR-RAG, SIGIR 2024</span>
+                        </p>
+                    </div>
+                </div> -->
+            </section>
+
+            <section id="searcher-model" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Modeling <i>User Behavior</i></h2>
+                <hr class="divider" />
+                <img class="fig" style="width: 80%; margin-top: -10px; margin-bottom: -10px;"
+                    src="img/behavior_models/searcher.png" />
+                <p class="caption">Searcher model framework proposed by Baskaya et al. (2013).</p>
+                <!-- <p class="caption">Searcher model framework proposed by Baskaya et al. (2013).<sup>1</sup></p> -->
+
+                <!-- <hr class="divider" />
+                <p class="footnote">
+                    <sup>1</sup>Feza Baskaya et al. "Modeling behavioral factors ininteractive information retrieval".
+                    CIKM 2013.
+                </p> -->
+            </section>
+
+            <section id="mdp-intro" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Modeling search <i>as a sequence</i></h2>
+                <hr class="divider" />
+                <p style="margin-top: -10px;">User search is a sequence of actions.<br> This can be modeled using a
+                    <b>Markov Chain</b>.
+                </p>
+                <p style="text-align: center;margin: -10px 0 15px;">
+                    <span style="margin: 0 1em;"><b>State:</b> \(s_t\)</span>
+                    <span style="margin: 0 1em;"><b>Action:</b> \(a_t\)</span>
+                    <span style="margin: 0 1em;"><b>Transition:</b> <span class="fragment highlight-red"
+                            data-fragment-index="0">\(P(s_{t+1} | s_t)\)</span></span>
+                </p>
+                <img class="fig" src="img/user_simulation/baskaya-2013-cikm.png" style="max-width: 70%;" />
+                <p class="caption" style="margin-top: -10px;">Abstraction of transition probabilities between user
+                    search actions. Baskaya et al.
+                    (2013).</p>
+                <p class="fragment r-red" data-fragment-index="0" style="padding-top: 10px;"><b>Problem.</b> Real
+                    user behavior depends
+                    on more than just the last
+                    action.
+                </p>
+            </section>
+
+            <section id="mdp-solution" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Basic models lack <i>context</i></h2>
+                <hr class="divider" />
+                <p><b>Intuition.</b> Bundle <i>historical context</i> into the state.</p>
+
+                <div style="border-radius: 8px; margin-top: 0em; text-align: center;">
+                    <p style="font-size: xx-large; margin: 0.2em 0;">
+                        \(s_t = (\textcolor{#3498db}{q_t}, \textcolor{#2ecc71}{a_{t-1}}, \textcolor{#f39c12}{q_0},
+                        \dots)\)
+                    </p>
+                    <div style="text-align: center; margin-top: -0.2em; width: 100%;">
+                        <p style="font-size: large; display: inline-block; margin: 0 0.5em;">
+                            <b style="color: #3498db;">\(q_t\)</b>: current query
+                        </p>
+                        <p style="font-size: large; display: inline-block; margin: 0 0.5em;">
+                            <b style="color: #2ecc71;">\(a_{t-1}\)</b>: previous action
+                        </p>
+                        <p style="font-size: large; display: inline-block; margin: 0 0.5em;">
+                            <b style="color: #f39c12;">\(q_0\)</b>: session's initial query
+                        </p>
+                    </div>
+                </div>
+                <hr class="divider" />
+                <p class="fragment" data-fragment-index="0">We can now assign probabilities
+                    <b>conditioned</b> on <i>context</i> from \(s_t\)<sup>1</sup>.
+                </p>
+                <p class="fragment" data-fragment-index="0"
+                    style="text-align: center; margin: 1.5em 0 0.75em; font-size: xx-large;">
+                    <!-- \( P(\textcolor{#3498db}{q_t} \mid q_{t-1}, \textcolor{#2ecc71}{a_{t-1}}) = \frac{N(q_{t-1},
+                    \textcolor{#2ecc71}{a_{t-1}}, \textcolor{#3498db}{q_t})}{N(q_{t-1}, \textcolor{#2ecc71}{a_{t-1}})}
+                    \)
+                    <span style="display:inline-block; width: 1.5em;"></span> -->
+                    \( P(a_t \mid \textcolor{#3498db}{q_t}, \textcolor{#2ecc71}{a_{t-1}}, \textcolor{#f39c12}{q_0}) =
+                    \frac{N(\textcolor{#3498db}{q_t}, \textcolor{#2ecc71}{a_{t-1}}, \textcolor{#f39c12}{q_0},
+                    a_t)}{N(\textcolor{#3498db}{q_t}, \textcolor{#2ecc71}{a_{t-1}}, \textcolor{#f39c12}{q_0})} \)
+                </p>
+                <p class="fragment caption" data-fragment-index="0" style="margin-top: 0.5em;">
+                    Where \(N(...)\) is the frequency of observation in user logs.
+                </p>
+                <hr class="divider" />
+                <p class="footnote fragment" data-fragment-index="0">
+                    <sup>1</sup><b>Saber Zerhoudi</b> et al. <b>"Simulating User Search Behaviour in Digital
+                        Libraries"</b>.
+                    IRCDL 2022.
+                </p>
+            </section>
+
+            <section id="mdp-solution" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Adding <i>context</i></h2>
+                <hr class="divider" />
+
+                <div class="column-layout" style="text-align: left; font-size: 0.9em;">
+                    <div class="column-item" style="justify-content: flex-start;">
+                        <div class="model-badge fragment" data-fragment-index="0">Query-change Model</div>
+                        <p style="text-align: center;">The <b>way</b> a user changes their query reveals <i>their
+                                intent</i>.</p>
+                        <img class="fig" src="img/user_simulation/query_change_model.png"
+                            style="max-width: 90%; margin-top: -5px;" />
+                        <p style="text-align: center;" class="fragment" data-fragment-index="0">We track <b>query
+                                edits</b>— <i>adding, removing, or keeping </i>terms<sup>2, 3</sup>.</p>
+                    </div>
+                    <div class="column-item" style="justify-content: flex-start;">
+                        <div class="model-badge fragment" data-fragment-index="0">Contextual Model</div>
+                        <p style="text-align: center;">Users have different <b>goals</b>.</p>
+                        <img class="fig" src="img/user_simulation/contextual_model.png"
+                            style="max-width: 100%; margin: 35px 0;" />
+                        <p style="text-align: center;" class="fragment" data-fragment-index="0">We build separate models
+                            for each context<sup>2</sup>.</p>
+                    </div>
+                </div>
+                <hr class="divider" />
+                <p class="footnote fragment" data-fragment-index="0">
+                    <sup>2</sup><b>Saber Zerhoudi</b> et al. <b>"Query Change as a Contextual Model for Simulating User
+                        Search
+                        Behaviour"</b>.
+                    FIRE 2021.<br>
+                    <sup>3</sup><b>Saber Zerhoudi</b> et al. <b>"Simulating User Querying Behavior using Embedding Space
+                        Alignment"</b>.
+                    TPDL 2022.
+                </p>
+            </section>
+
+            <section id="models-results" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Are models <i>more realistic?</i></h2>
+                <p>We test whether <b>simulations</b> rank IR systems <i>like real users</i>—<br>measured by
+                    <b>session-nDCG@10</b> from logs.
+                </p>
+                <img class="fig" src="img/evaluation_simulation/sndcg_table_out.svg" style="max-width: 90%;" />
+                <p class="caption" style="margin-top: -15px;">Results on Sowiport (academic search logs).
+                    $\Delta$ = absolute gap vs. Ground Truth.</p>
+                <p class="fragment"><b>Takeaway.</b> Adding context (<b class="r-green">contextual</b>, <b
+                        class="r-green">query-change</b>) creates
+                    <i>more realistic</i> simulations.
+                </p>
+            </section>
+
+            <section id="cognitive-models" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Is <i>context</i> enough?</h2>
+                <p>Context tells us <i>what</i> happened.<br>But behavior depends also on the <b>Cognitive State</b>—the
+                    <i>why</i> behind each action.
+                </p>
+                <div class="r-stack">
+                    <div class="fragment fade-out" data-fragment-index="1">
+                        <img class="fig" src="img/user_simulation/csm.png" style="max-width: 90%; margin-top: -10px;" />
+                        <p class="caption" style="margin-top: -20px;">Complex Searcher Model. Maxwell et al. (2015;
+                            2018).</p>
+                    </div>
+                    <div class="fragment fade-out" data-fragment-index="2">
+                        <div class="fragment" data-fragment-index="1">
+                            <img class="fig" src="img/user_simulation/cacsm_01.png"
+                                style="max-width: 90%; margin-top: -10px;" />
+                            <p class="caption" style="margin-top: -20px;">Context-Aware Complex Searcher
+                                Model (CACSM).<sup>4</sup>
+                                <span style="color: #d95f02">Orange elements</span> are new cognitive
+                                components.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="fragment" data-fragment-index="2">
+                        <img class="fig" data-id="cacsm-image" src="img/user_simulation/cacsm.png"
+                            style="max-width: 90%; margin-top: -10px;" />
+                        <p class="caption" data-id="cacsm-caption" style="margin-top: -20px;">Context-Aware Complex
+                            Searcher Model (CACSM).<sup>4</sup>
+                            <span style="color: #d95f02">Orange elements</span> are new cognitive
+                            components.
+                        </p>
+                    </div>
+                </div>
+                <p class="footnote fragment" data-fragment-index="1">
+                    <sup>4</sup><b>Saber Zerhoudi</b>, Michael Granitzer <b>"Cognitive-Aware User Search Behavior Simulation"</b>.
+                    JCDL 2024.
+                </p>
+            </section>
+
+            <section id="cacsm-update" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Simulating the <i>"Why"</i></h2>
+                <p>After each user action, <b>CACSM updates its cognitive state</b>—simulating learning.
+                </p>
+                <div class="fragment" data-fragment-index="0" style="float: right; width: 40%; margin-left: 20px;margin-top: -30px;">
+                    <img class="fig" src="img/user_simulation/cacsm_focus.png" style="max-width: 100%;" />
+                </div>
+                <p class="fragment" data-fragment-index="0" style="text-align: left; padding-top: 10px;"><b>Update.</b>
+                    Examining snippets updates short-term knowledge:</p>
+                <div class="r-stack fragment" data-fragment-index="0">
+                    <p class="eq fragment fade-out" data-fragment-index="1">
+                        \[ \underbrace{P_{\text{new}}(K_2)}_{\substack{\text{Updated Short-Term} \\ \text{Knowledge}}} =
+                        \underbrace{P_{\text{old}}(K_2)}_{\substack{\text{Existing Short-Term} \\ \text{Knowledge}}} +
+                        \underbrace{\beta_{K2}}_{\substack{\text{Learning} \\ \text{Rate}}} \times
+                        \underbrace{P_{\text{interaction}}(K_2)}_{\substack{\text{Knowledge from} \\ \text{Recent Interaction}}} \]
+                    </p>
+                    <p class="eq fragment" data-fragment-index="1">
+                        \[ \underbrace{P_{\text{new}}(K_2)}_{\substack{\text{Updated Short-Term} \\ \text{Knowledge}}} =
+                        \underbrace{\textcolor{#3498db}{P_{\text{old}}(K_2)}}_{\substack{\text{Existing Short-Term} \\ \text{Knowledge}}} +
+                        \underbrace{\beta_{K2}}_{\substack{\text{Learning} \\ \text{Rate}}} \times
+                        \underbrace{P_{\text{interaction}}(K_2)}_{\substack{\text{Knowledge from} \\ \text{Recent Interaction}}} \]
+                    </p>
+                    <p class="eq fragment" data-fragment-index="2">
+                        \[ \underbrace{P_{\text{new}}(K_2)}_{\substack{\text{Updated Short-Term} \\ \text{Knowledge}}} =
+                        \underbrace{\textcolor{#3498db}{P_{\text{old}}(K_2)}}_{\substack{\text{Existing Short-Term} \\ \text{Knowledge}}} +
+                        \underbrace{\textcolor{#2ecc71}{\beta_{K2}}}_{\substack{\text{Learning} \\ \text{Rate}}} \times
+                        \underbrace{P_{\text{interaction}}(K_2)}_{\substack{\text{Knowledge from} \\ \text{Recent Interaction}}} \]
+                    </p>
+                    <p class="eq fragment" data-fragment-index="3">
+                        \[ \underbrace{P_{\text{new}}(K_2)}_{\substack{\text{Updated Short-Term} \\ \text{Knowledge}}} =
+                        \underbrace{\textcolor{#3498db}{P_{\text{old}}(K_2)}}_{\substack{\text{Existing Short-Term} \\ \text{Knowledge}}} +
+                        \underbrace{\textcolor{#2ecc71}{\beta_{K2}}}_{\substack{\text{Learning} \\ \text{Rate}}} \times
+                        \underbrace{\textcolor{#f39c12}{P_{\text{interaction}}(K_2)}}_{\substack{\text{Knowledge from} \\ \text{Recent Interaction}}} \]
+                    </p>
+                </div>
+                <div class="fragment" data-fragment-index="3">
+                    <p class="eq caption">
+                        \[ P_{\text{interaction}}(K_2) = \frac{\text{Impact(action)}}{\text{Impact(all)}} \text{ ; } \qquad \text{Impact}(\text{doc}) = w_{\text{click}} \times
+                        \frac{1}{\text{rank}} \]
+                    </p>
+                </div>
+
+                <div class="fragment" data-fragment-index="1">
+                    <p>
+                        A click on a <i>low-ranked </i>document signals a
+                        <b>stronger</b> learning moment.
+                    </p>
+                </div>
+                <hr class="divider">
+                <p class="fragment" data-fragment-index="4"><b>Integration.</b>
+                    Distilled <b>cognitive state embeddings</b> are injected into T5 via <b>cross-attention</b> (CACSM$_{\texttt{LLM}}$).</p>
+            </section>
+
+            <section id="models-results-two" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Are models <i>more realistic?</i></h2>
+                <p>We test whether <b>simulations</b> rank IR systems <i>like real users</i>.
+                </p>
+                <img class="fig" src="img/evaluation_simulation/sndcg_table_two_out.svg" style="max-width: 90%;" />
+                <p class="caption" style="margin-top: -15px;">Results on Sowiport (academic search logs).
+                    $\Delta$ = absolute gap vs. Ground Truth.</p>
+                <p class="fragment"><b>Takeaway.</b> Adding cognition (<b class="r-green">CACSM</b>) creates
+                    <b>even</b> <i>more realistic</i> simulations.
+                </p>
+            </section>
+
+            <section id="agent4dl-intro" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Can LLMs <i>simulate</i> search?</h2>
+                <hr class="divider" />
+                <p>We introduce <b>Agent4DL</b><sup>5</sup>, An agent framework for simulating academic search.</p>
+                <img class="fig" src="img/agent4dl/agent4dl.png" style="max-width: 90%;" />
+                <p class="caption" style="margin-top: -10px;">The agent uses a <b>Reason &rarr; Act</b> loop to reason about its next action.</p>
+                <hr class="divider">
+                <p class="footnote">
+                    <sup>5</sup><b>Saber Zerhoudi</b>, Michael Granitzer <b>"Generative Agents Navigating Digital Libraries"</b>.
+                    ICADL 2024.<br>
+                    <span style="color: #DAA520; font-weight: bold; margin-left: 0em; font-family: 'Product Sans';">
+                        <i class="fa-solid fa-trophy"></i> Best Paper Award
+                    </span>
+                </p>
+            </section>
+
+            <section id="agent4dl-example" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Can LLMs <i>simulate</i> search?</h2>
+                <p>We introduce <b>Agent4DL</b><sup>5</sup>, An agent framework for simulating academic search.</p>
+                <img class="fig" src="img/agent4dl/agent4dl-example-2.png" style="max-width: 55%; margin-top: -5px;" />
+                <p class="caption" style="margin-top: -45px;">A visual example of the <b>Reason &rarr; Act</b> thought process.</p>
+                <p class="footnote">
+                    <sup>5</sup><b>Saber Zerhoudi</b>, Michael Granitzer <b>"Generative Agents Navigating Digital Libraries"</b>.
+                    ICADL 2024.<br>
+                    <span style="color: #DAA520; font-weight: bold; margin-left: 0em; font-family: 'Product Sans';">
+                        <i class="fa-solid fa-trophy"></i> Best Paper Award
+                    </span>
+                </p>
+            </section>
+
+            <section id="agent-results" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Do <i>agents</i> behave like <i>humans?</i></h2>
+                <p>We measure how well the <i>agent's </i>queries <b>match</b> <i>real user </i>queries.</p>
+                <img class="fig" src="img/gen_agents/agent4dl_consistency_results_out.svg" />
+                <p class="caption">
+                    Similarity scores on <i>Sowiport</i> search logs. Higher means closer match.
+                </p>
+                <hr class="divider" />
+                <p class="fragment"><b>Takeaway.</b> <b>Agent4DL</b> shows strong <b class="r-green">semantic</b> and <b
+                    class="r-green">lexical overlap</b> with human queries.
+                </p>
+            </section>
+
+            <section id="personalization" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>From <i>simulation</i> to <i>personalization</i></h2>
+                <p><b>Idea.</b> If we can <b>simulate a user</b>, we can also <b>adapt to them</b>—<i>in real time</i>.</p>
+                <img class="fig" src="img/agent4dl/personarag_3.png" />
+                <p class="caption">
+                    <b>PersonaRAG</b><sup>6</sup>. A <b>team of specialized agents</b> collaborates &rarr; builds a <b>dynamic profile</b> &rarr; delivers a <b>personalized response</b>.
+                </p>
+                <hr class="divider">
+                <p class="footnote">
+                    <sup>6</sup><b>Saber Zerhoudi</b> et al. <b>"PersonaRAG: Enhancing Retrieval-Augmented Generation Systems with
+                        User-Centric Agents"</b>.
+                    SIGIR 2024.
+                </p>
+            </section>
+
+            <section id="personarag-example" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>From <i>simulation</i> to <i>personalization</i></h2>
+                <p><b>Idea.</b> If we can <b>simulate a user</b>, we can also <b>adapt to them</b>—<i>in real time</i>.</p>
+                <div class="r-stack">
+                    <!-- Image 1: Visible on load, fades out on step 1 -->
+                    <div class="fragment fade-in-then-out" data-fragment-index="0">
+                        <img class="fig" src="img/agent4dl/persona_rag_example.png" style="max-width: 100%; margin-top: -5px;" />
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                    </div>
+                    <!-- Image 2: Fades in on step 1, out on step 2 -->
+                    <div class="fragment fade-in-then-out" data-fragment-index="1">
+                        <img class="fig" src="img/agent4dl/persona_rag_example_2.png" style="max-width: 100%; margin-top: -5px;" />
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                    </div>
+                    <!-- Image 3: Fades in on step 2, out on step 3 -->
+                    <div class="fragment fade-in-then-out" data-fragment-index="2">
+                        <img class="fig" src="img/agent4dl/persona_rag_example_3.png" style="max-width: 100%; margin-top: -5px;" />
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                    </div>
+                    <!-- Image 4: Fades in on step 3, out on step 4 -->
+                    <div class="fragment fade-in-then-out" data-fragment-index="3">
+                        <img class="fig" src="img/agent4dl/persona_rag_example_4.png" style="max-width: 100%; margin-top: -5px;" />
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                    </div>
+                    <!-- Image 5: Fades in on step 4 and stays -->
+                    <div class="fragment" data-fragment-index="4">
+                        <img class="fig" src="img/agent4dl/persona_rag_example_5.png" style="max-width: 100%; margin-top: -5px;" />
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>6</sup> context.</p>
+                    </div>
+                </div>
+                <p class="footnote">
+                    <sup>6</sup><b>Saber Zerhoudi</b> et al. <b>"PersonaRAG: Enhancing Retrieval-Augmented Generation Systems with
+                        User-Centric Agents"</b>.
+                    SIGIR 2024.
+                </p>
+            </section>
+
+            <section id="agent4dl-summary" data-auto-animate data-auto-animate-id="rq1-modeling">
+                <h2>Summary</h2>
+                <hr class="divider" />
+                <ul>
+                    <li>We showed that <b>context</b> and <b>cognitive state</b> makes models <i>more realistic</i>.</li>
+                    <li>We introduced <b>Agent4DL</b>—a generative agent that simulates academic search using LLMs.</li>
+                    <li>We proposed using <b>Agent4dl simulators</b> for <i>personalized</i> retrieval via user-context modeling.</li>
+                </ul>
+                <hr class="divider" />
+                <div class="github-container">
+                  <img class="github-qr" src="img/agent4dl/agent4dl_github.png" />
+                  <a class="github-url" href="https://github.com/padas-lab-de/icadl24-agent4dl">padas-lab-de/icadl24-agent4dl</a>
+                </div>
+            </section>
+
+            <section class="sec-title" id="rq2-evaluating" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <div style="position: relative; text-align: center; padding-top: 2.5em; margin-bottom: 1em;">
+                    <p
+                        style="position: absolute; top: 0; left: 24%; transform: translateX(-50%); background-color: #f1c40f; color: #ffffff; font-weight: bold; padding: 0.05em 0.6em; border-radius: 8px; font-family: 'Product Sans'; font-size: 0.6em; line-height: 1.5;">
+                        RQ2
+                    </p>
+                    <h2 style="margin-top: -30px; font-size: 1.5em !important;"><b>Evaluating <i>Realism</i> </b>
+                    </h2>
+                </div>
+            </section>
+
+            <section id="eval-problem" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <h2>Evaluating <i>Realism</i></h2>
+                <p><b class="r-red">Problem.</b> <span class="r-red">Traditional metrics track <b>effectiveness</b>—not behavioral <b>realism</b>.</span> <br>
+                    A simulator may <i>score high</i>... while acting in a completely <i>unrealistic way</i>.</p>
+                <img style="margin-bottom: 0" src="img/eval_simulation/metrics_out.svg" />
+                <p class="fragment" data-fragment-index="1" ><b>Shift in focus.</b> Not <i>"Was the session productive?"</i>—but <b>"Was the search pattern realistic?"</b></p>
+            </section>
+
+            <section id="eval-solution-turing" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <h2>Can a <i>classifier</i> tell the difference?</h2>
+                <h4 style="margin-top: -10px;"><span class="model-badge">Approach 1</span> <i>The Turing Test</i></h4>
+                <hr class="divider" />
+                <p><b>Idea:</b> Train a classifier to distinguish <b>real</b> user sessions from <b>simulated</b> ones.</p>
+                <img class="fig" src="img/eval_simulation/classification_eval_overview_out.svg"
+                    style="max-width: 90%; margin: -10px 0;" />
+                <p><b>Hypothesis.</b> A <i>realistic</i> <b>simulation</b> should <b class="r-green">confuse the classifier</b>, leading to <b>low accuracy</b>.</p>
+                <p class="fragment"><b>Verification.</b> We apply the <b>KS-2 test</b>: checks whether distributions of key features <i>(session length, click positions)</i> are statistically <i>indistinguishable</i>.</p>
+            </section>
+
+            <section id="eval-solution-frechet" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <h2 style="padding-top: 10px;"><i>Distance</i> between behaviors</h2>
+                <h4 style="margin-top: -10px; margin-bottom: -5px;"><span class="model-badge">Approach 2</span> <i>Fréchet Distance</i></h4>
+                <p><b>Fréchet Distance<sup>8</sup></b> quantifies how similar two <b>curves</b> are.</p>
+                <div class="r-stack">
+                    <div class="fragment fade-out" data-fragment-index="1">
+                        <img class="fig" src="img/eval_simulation/frechet_distance_analogy_out.svg" style="max-width: 60%; margin-top: -5px;" />
+                        <p class="caption">Fréchet Distance measures the similarity between two curves.</p>
+                    </div>
+                    <div class="fragment fade-in-then-out" data-fragment-index="1">
+                        <img class="fig" src="img/eval_simulation/image_fd.png" style="max-width: 60%; margin-top: -5px;" />
+                        <p class="caption">Evaluation of Text-to-Image (TTI) generative models with Fréchet distance.</p>
+                    </div>
+                    <div class="fragment" data-fragment-index="2">
+                        <img class="fig" src="img/eval_simulation/relevance_fd.png" style="max-width: 60%; margin-top: -5px;" />
+                        <p class="caption">Evaluation of IR systems with Fréchet distance.</p>
+                    </div>
+                </div>
+                
+                <div class="fragment" data-fragment-index="3" style="margin-top: -30px;">
+                    <p>We treat <b>real vs. simulated sessions</b> as <b>trajectories</b> in a high-dimensional space.</p>
+                    <p><b>Goal.</b> A <b class="r-green">lower Fréchet Distance</b> &rarr; <i>simulated</i> behavior is closer to the <i>real</i> behavior.</p>
+                </div>
+                <hr class="divider">
+                <p class="footnote">
+                    <sup>8</sup><b>Saber Zerhoudi</b>, Michael Granitzer <b>"Beyond Conventional Metrics: Assessing User Simulators in Information Retrieval"</b>.
+                    IIR 2024.
+                </p>
+            </section>
+
+            <section id="eval-results" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <h2>Ranking <i>simulators</i></h2>
+                <p><b>New metrics.</b> They rank simulators by <i>realism</i>—consistently and reliably.</p>
+                <img class="fig" src="img/eval_simulation/results_dual_axis_out.svg" style="max-width: 40%;" />
+                <p class="caption">Lower bars (F-Measure) and lower red squares (KS-2 D-statistic) &rarr; <i>better realism</i>.</p>
+                <p class="fragment"><b>Takeaway.</b> Advanced models—<b class="r-green">contextual</b>, <b
+                        class="r-green">query-change</b>, <b class="r-green">CACSM</b>—are <i>demonstrably</i> more realistic.
+                </p>
+            </section>
+
+            <section id="eval-summary" data-auto-animate data-auto-animate-id="rq2-evaluating">
+                <h2>Summary</h2>
+                <hr class="divider" />
+                <ul>
+                    <li>Traditional metrics are insufficient for evaluating simulator realism. We proposed two new approaches:</li>
+                    <ul>
+                        <li>A <b>Turing Test-style classification</b> method to assess <i>authenticity</i>.</li>
+                        <li><b>Fréchet Distance</b> to quantify the <i>distributional distance</i> between real and simulated behaviors.</li>
+                    </ul> 
+                    <!-- <li>These methods provide the community with tools to answer: "Is my simulator good enough?"</li> -->
+                </ul>
+            </section>
+
+            <section class="sec-title" id="rq3-framework" data-auto-animate data-auto-animate-id="rq3-framework">
+                <div style="position: relative; text-align: center; padding-top: 2.5em; margin-bottom: 1em;">
+                    <p
+                        style="position: absolute; top: 0; left: 20%; transform: translateX(-50%); background-color: #9b59b6; color: #ffffff; font-weight: bold; padding: 0.05em 0.6em; border-radius: 8px; font-family: 'Product Sans'; font-size: 0.6em; line-height: 1.5;">
+                        RQ3
+                    </p>
+                    <h2 style="margin-top: -30px; font-size: 1.5em !important;"><b>Building a <i>Framework</i> </b>
+                    </h2>
+                </div>
+            </section>
+
+            <section id="simiir-intro" data-auto-animate data-auto-animate-id="rq3-framework">
+                <h2>Building a <i>Framework</i></h2>
+                <p style="padding-bottom: 20px;">Our work on <b>modeling</b> and <b>evaluation</b> led to major contributions to <b>SimIIR</b>—a <i>community-driven</i>,
+                    <i>open-source</i> simulation framework proposed by Maxwell et al. (2016).</p>
+                <div style="position: relative; height: 450px; margin: 0 auto;">
+                    <h3 style="position: absolute; top: -0.5em; left: 1em; z-index: 10; color: black; background-color: white; padding: 0.5em 1em; font-weight: bold;">
+                          Collab-a-thon ECIR 2024
+                    </h3>
+                    <img class="fig" src="img/simiir/collab_02.jpg" style="position: absolute; width: 50%; left: 0; top: 0; z-index: 1; height: auto;" />
+                    <img class="fig" src="img/simiir/collab_01.png" style="position: absolute; width: 55%; right: 0; top: 0; z-index: 2; height: auto;" />
+                </div>
+            </section>
+
+            <section id="simiir-impact" data-auto-animate data-auto-animate-id="rq3-framework">
+                <h2>Building a <i>Framework</i></h2>
+                <hr class="divider">
+                <div class="column-layout" style="text-align: left; font-size: 0.9em;">
+                    <div class="column-item" style="justify-content: flex-start;">
+                        <div class="model-badge">SimIIR 2.0<sup>†</sup></div>
+                        <p style="text-align: center;">We revived the unmaintained project, introducing <b>dynamic, history-aware</b> behaviors and
+                                our new evaluation models.</p>
+                    </div>
+                    <div class="column-item" style="justify-content: flex-start;">
+                        <div class="model-badge">SimIIR 3<sup>‡</sup></div>
+                        <p style="text-align: center;">We helped lead the unification of community efforts, modernizing the framework for <b>LLMs
+                            and Conversational AI</b>.</p>
+                    </div>
+                 </div>
+                <hr class="divider" />
+                <p class="footnote">
+                    <sup>‡</sup>Leif Azzopardi et al. <b>"SimIIR 3: A Framework for the Simulation of Interactive and
+                            Conversational Information Retrieval"</b>. <br>SIGIR-AP 2024.<br>
+                            <sup>†</sup><b>Saber Zerhoudi</b> et al. <b>"SimIIR 2.0: User Types, Markov Model-Based
+                            Interaction Simulation, and Advanced Query Generation"</b>.
+                        <br>
+                        CIKM 2022. <span style="color: #DAA520; font-weight: bold; margin-left: 0em; font-family: 'Product Sans';">
+                            <i class="fa-solid fa-trophy"></i> Best Paper Award
+                    </span>
+                    
+                </p>
+            </section>
+
+            <section id="simiir-ready" data-auto-animate data-auto-animate-id="rq3-framework">
+                <h2>SimIIR 3: ready for <i>modern IR</i></h2>
+                <div style="width: 100%; margin: 0 auto;" data-id="simiir-img-full">
+                    <img class="fig" src="img/simiir/simiir_v3.png" style="width: 100%; margin-top: 0em" />
+                    <p class="caption">
+                        Overview of the <b>SimIIR 3 framework</b>. <b class="r-green">Green</b> marks <b>new additions</b>. <b class="r-yellow" style="font-size: 1.5em;">★</b> highlights our <b>contributions</b>.
+                    </p>
+                </div>
+            </section>
+
+            <section id="simiir-conclusion" data-auto-animate data-auto-animate-id="rq3-framework">
+                <h2>Summary</h2>
+                <hr class="divider" />
+                <ul>
+                    <li>We revived and extended <b>SimIIR</b>—now supporting <i>dynamic</i>, <i>history-aware</i> simulations.</li>
+                    <li>Our work sparked renewed community interest, leading to the unified <b>SimIIR 3</b>.</li>
+                </ul>
+                <hr class="divider" />
+                <div class="github-container">
+                    <img class="github-qr" src="img/simiir/qr-code-simiir.png" />
+                    <a class="github-url" href="https://github.com/simint-ai/simiir-3">simint-ai/simiir-3</a>
+                </div>
+            </section>
+
+            <section id="sec-conclusion" data-auto-animate data-auto-animate-id="sec-conclusion">
+                <h2>Conclusion</h2>
+                <hr class="divider" />
+                <p>In this thesis, we advanced <b>user simulation</b> for IR evaluation—across four dimensions:</p>
+                <ul>
+                    <li><b>Complex Behavior Models.</b> More realistic <i> mathematical </i>(Contextual Markov) and <i>cognitive</i> (CACSM) models.</li>
+                    <li><b>Generative AI Simulators.</b> An autonomous agent (Agent4DL) that can <b>reason, learn, and generate</b> behavioral data.</li>
+                    <li><b>Novel Validation Methods.</b> New measures of <b>behavioral realism</b> (Classification-KS2, Fréchet Distance).</li>
+                    <li><b>A Unified Simulation Framework.</b> A modernized, open-source tool for the community (SimIIR 3).</li>
+                </ul>
+            </section>
+
+            <section id="forseen-search-timeline" data-auto-animate data-auto-animate-id="sec-conclusion">
+                <h2 style="padding-top: 60px;">Future <i>Outlook</i></h2>
+                <p> The <b>models</b> and <b>frameworks</b> developed in this thesis provide a foundation for building the next generation of <i>intelligent</i>, <i>user-centric</i> search experiences.
+                </p>
+                <div class="r-stretch timeline-container" style="margin-top: -20px;">
+        
+                  <!-- Timeline Axis -->
+                  <div class="timeline-axis">
+                    <div class="timeline-dash"></div>
+                  </div>
+              
+                  <!-- Timeline Ticks -->
+                  <div class="timeline-tick-line" style="left: 10%;"></div>
+                  <div class="timeline-tick-line" style="left: 25%;"></div>
+                  <div class="timeline-tick-line" style="left: 40%;"></div>
+                  <div class="timeline-tick-line" style="left: 55%;"></div>
+                  <div class="timeline-tick-line" style="left: 85%;"></div>
+              
+              
+                  <!-- Ticks & Labels on X-Axis -->
+                  <div class="timeline-tick" style="left: 10%;">
+                    <p class="timeline-years">2000–2007</p>
+                    <p class="timeline-title">Algorithmic<br>Ranking</p>
+                  </div>
+                  <div class="timeline-tick" style="left: 25%;">
+                    <p class="timeline-years">2007–2015</p>
+                    <p class="timeline-title">Multimedia<br>Integration</p>
+                  </div>
+                  <div class="timeline-tick" style="left: 40%;">
+                    <p class="timeline-years">2015–2022</p>
+                    <p class="timeline-title">Conversational<br>Search</p>
+                  </div>
+                  <div class="timeline-tick" style="left: 55%;">
+                    <p class="timeline-years">2023–Present</p>
+                    <p class="timeline-title">AI-Powered<br>Search</p>
+                  </div>
+                  <div class="timeline-tick" style="left: 85%;">
+                    <p class="timeline-years">Present and Beyond?</p>
+                    <p class="timeline-title">User-Centric, Predictive<br>Search Experiences</p>
+                  </div>
+              
+                  <!-- Data Points -->
+                  <div class="timeline-point timeline-question" style="left: 50%; bottom: 70%; transform: translate(-50%, 50%);">
+                    <div>
+                      <div class="timeline-point-content" style="border: none; background: none; box-shadow: none;">
+                        <span class="timeline-point-text" style="font-family: 'Product Sans'; font-size: 0.9em !important;"><i>When does</i> <b class="r-green">Simulated Users</b><br><i>become</i> <b class="r-blue">Information Agents</b><i>?</i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+            </section>
+
+            <section id="final-slide" data-auto-animate data-auto-animate-id="sec-conclusion">
+                <h2 style="padding-top: 20px;"><i>Contributions</i></h2>
+                <div style="width: 80%; margin: 0 auto;" data-id="contributions-full">
+                    <img class="fig" src="img/thesis_overview_01.png" style="width: 100%; margin-top: 0em" />
+                </div>
+            </section>
+
+            <section id="final-slide" data-auto-animate data-auto-animate-id="sec-conclusion">
+                <h2>Thank you.</h2>
+            </section>
+
+            <section class="sec-title" id="backup-slides" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2>Backup <i>slides</i></h2>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/math/math.min.js"></script>
+    <!-- Custom Presentation Logic -->
+    <script src="./js/presentation.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            plugins: [RevealMath.MathJax3] // Add any plugins you need here
+        });
+
+        const sections = [
+            { name: 'Introduction', id: 'header-intro', startIndex: 1, endIndex: 5, slideCount: 5 },
+            { name: 'RQ1: Modeling', id: 'header-rq1', startIndex: 6, endIndex: 20, slideCount: 15 },
+            { name: 'RQ2: Evaluation', id: 'header-rq2', startIndex: 21, endIndex: 26, slideCount: 6 },
+            { name: 'RQ3: Framework', id: 'header-rq3', startIndex: 27, endIndex: 31, slideCount: 5 },
+            { name: 'Conclusion', id: 'header-conclusion', startIndex: 32, endIndex: 35, slideCount: 4 }
+        ];
+
+        function initializeHeader() {
+            sections.forEach(section => {
+                const dotsContainer = document.querySelector(`#${section.id} .section-dots`);
+                if (dotsContainer) {
+                    let dotsHTML = '';
+                    for (let i = 0; i < section.slideCount; i++) {
+                        dotsHTML += `<span class="dot"></span>`;
+                    }
+                    dotsContainer.innerHTML = dotsHTML;
+                }
+            });
+        }
+
+        function updateHeader(event) {
+            const slideIndex = event.indexh;
+            const header = document.querySelector('.header');
+            const reveal = document.querySelector('.reveal');
+
+            // Hide header on the first slide (index 0)
+            if (slideIndex === 0) {
+                header.classList.add('hidden');
+                reveal.classList.remove('with-header');
+            } else {
+                header.classList.remove('hidden');
+                reveal.classList.add('with-header');
+            }
+
+            sections.forEach(section => {
+                const sectionElement = document.getElementById(section.id);
+                if (!sectionElement) return;
+
+                const titleElement = sectionElement.querySelector('.section-title');
+                const dots = sectionElement.querySelectorAll('.dot');
+                sectionElement.classList.remove('active');
+
+                if (slideIndex >= section.startIndex) {
+                    titleElement.classList.add('visible'); // Show title if section is reached
+                } else {
+                    titleElement.classList.remove('visible'); // Hide for future sections
+                }
+
+                if (slideIndex >= section.startIndex && slideIndex <= section.endIndex) {
+                    // Current section
+                    sectionElement.classList.add('active');
+                    const slideInSectionIndex = slideIndex - section.startIndex;
+                    dots.forEach((dot, index) => {
+                        if (index <= slideInSectionIndex) {
+                            dot.classList.add('filled');
+                        } else {
+                            dot.classList.remove('filled');
+                        }
+                    });
+                } else if (slideIndex > section.endIndex) {
+                    // Past section
+                    dots.forEach(dot => dot.classList.add('filled'));
+                } else {
+                    // Future section
+                    dots.forEach(dot => dot.classList.remove('filled'));
+                }
+            });
+        }
+
+        initializeHeader();
+        Reveal.on('ready', (event) => {
+            updateHeader(event);
+            const slideNumberElement = document.querySelector('.reveal .slide-number');
+            const slideNumberContainer = document.getElementById('slide-number-container');
+            if (slideNumberElement && slideNumberContainer) {
+                slideNumberContainer.appendChild(slideNumberElement);
+            }
+        });
+        Reveal.on('slidechanged', updateHeader);
+
+        if (Reveal.isReady()) {
+            updateHeader(Reveal.getState());
+        }
+
+        // --- Auto-advance fragments on a specific slide ---
+        let fragmentInterval;
+
+        const startFragmentTimer = () => {
+            clearInterval(fragmentInterval); // Clear any existing timer
+            fragmentInterval = setInterval(() => {
+                if (!Reveal.nextFragment()) {
+                    clearInterval(fragmentInterval); // No more fragments, stop the timer
+                }
+            }, 2000);
+        };
+
+        const stopFragmentTimer = () => {
+            clearInterval(fragmentInterval);
+        };
+
+        Reveal.on('slidechanged', event => {
+            if (event.currentSlide.id === 'ranking-websearch') {
+                startFragmentTimer();
+            } else {
+                stopFragmentTimer();
+            }
+        });
+
+        Reveal.on('ready', event => {
+            if (event.currentSlide.id === 'ranking-websearch') {
+                startFragmentTimer();
+            }
+        });
+    </script>
+</body>
+
+</html>

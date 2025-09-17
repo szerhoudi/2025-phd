@@ -1,0 +1,8 @@
+id,label,abbr,f_measure,ks_d_statistic,ks_d_critical
+0,Baseline,Baseline,0.750,0.00417,0.00421
+1,Exploratory,Exploratory,0.568,0.00381,0.00389
+2,Lookup,Lookup,0.509,0.00302,0.00356
+3,Specification,Specification,0.453,0.00298,0.00314
+4,Generalisation,Generalisation,0.562,0.00387,0.00391
+5,Substitution,Substitution,0.502,0.00335,0.00341
+6,New Topic,New Topic,0.475,0.00326,0.00333

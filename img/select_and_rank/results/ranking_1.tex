@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tabular}{llllllllll}
+    \toprule
+                                           & \multicolumn{3}{c}{\trecdldocn}
+                                           & \multicolumn{3}{c}{\core}
+                                           & \multicolumn{3}{c}{\clueweb}                                                                                                                                                        \\
+    \cmidrule(lr){2-4}
+    \cmidrule(lr){5-7}
+    \cmidrule(lr){8-10}
+                                           & \ap{}                           & \ndcg{}@\num{20}        & \rr{}       & \ap{}       & \ndcg{}@\num{20}        & \rr{}       & \ap{}       & \ndcg{}@\num{20}        & \rr{}       \\
+    \midrule
+    \plrnd                                 & \num{0.231}                     & \num{0.492}\sigimpr{ab} & \num{0.754} & \num{0.173} & \num{0.345}\sigimpr{ab} & \num{0.649} & \num{0.138} & \num{0.236}\sigimpr{ab} & \num{0.495} \\
+    \plbert                                & \num{0.237}                     & \num{0.501}\sigimpr{ab} & \num{0.822} & \num{0.200} & \num{0.399}             & \num{0.759} & \num{0.169} & \num{0.294}             & \num{0.529} \\
+    \pllstm                                & \num{0.257}                     & \num{0.558}\sigimpr{a}  & \num{0.827} & \num{0.194} & \num{0.399}             & \num{0.788} & \num{0.166} & \num{0.289}             & \num{0.552} \\
+    \plbm                                  & \num{0.264}                     & \num{0.568}             & \num{0.893} & \num{0.196} & \num{0.412}             & \num{0.727} & \num{0.171} & \num{0.297}             & \num{0.555} \\
+    \plsem                                 & \num{0.265}                     & \num{0.571}             & \num{0.920} & \num{0.207} & \num{0.414}             & \num{0.768} & \num{0.167} & \num{0.286}             & \num{0.534} \\
+    \midrule
+    \rowcolor{lightgray} \sigdef{a} \srlin & \num{0.269}                     & \num{0.597}             & \num{0.946} & \num{0.203} & \num{0.411}             & \num{0.710} & \num{0.174} & \num{0.303}             & \num{0.535} \\
+    \rowcolor{lightgray} \sigdef{b} \sratt & \num{0.271}                     & \num{0.590}             & \num{0.924} & \num{0.205} & \num{0.403}             & \num{0.714} & \num{0.168} & \num{0.292}             & \num{0.518} \\
+    \bottomrule
+\end{tabular}
+\end{document}

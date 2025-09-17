@@ -1,0 +1,184 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}
+        [
+            width=12cm,
+            height=8cm,
+            boxplot/draw direction=y,
+            boxplot={box extend=0.5, whisker extend=0.2},
+            xtick={1, 5, 9},
+            xticklabels={\texttt{CLS}-Query, \texttt{CLS}-Passage, Inner-passage},
+            xticklabel style={align=center, text height=1em},
+            ylabel={Cosine similarity},
+            grid=major,
+            area legend,
+            legend entries={\blite{}, \bert{}, \bdmn{}},
+            legend cell align={left},
+            legend pos=south east,
+            legend columns=-1,
+            legend style={/tikz/every even column/.append style={column sep=0.5cm}},
+            cycle list={
+                    {draw=black, fill=plotColor1*, solid, postaction={pattern=none}},
+                    {draw=black, fill=plotColor2*, solid, postaction={pattern=north east lines}},
+                    {draw=black, fill=plotColor3*, solid, postaction={pattern=north west lines}}
+                },
+        ]
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=0,
+                    median=0.18597335368394852,
+                    upper quartile=0.26966992020606995,
+                    lower quartile=0.11921804212033749,
+                    upper whisker=0.4953002333641052,
+                    lower whisker=-0.10645180940628052,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=none
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=1,
+                    median=0.7895860970020294,
+                    upper quartile=0.9906190931797028,
+                    lower quartile=0.5857878923416138,
+                    upper whisker=0.999538242816925,
+                    lower whisker=-0.02004959248006344,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north east lines
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=2,
+                    median=0.140863835811615,
+                    upper quartile=0.3358786553144455,
+                    lower quartile=-0.027269615791738033,
+                    upper whisker=0.8716316223144531,
+                    lower whisker=-0.2800021171569824,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north west lines
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=4,
+                    median=0.14231391996145248,
+                    upper quartile=0.20295143499970436,
+                    lower quartile=0.08384480327367783,
+                    upper whisker=0.3815584182739258,
+                    lower whisker=-0.0947745218873024,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=none
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=5,
+                    median=0.8948861956596375,
+                    upper quartile=0.9862102568149567,
+                    lower quartile=0.6025812029838562,
+                    upper whisker=0.9998213052749634,
+                    lower whisker=0.027192462235689163,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north east lines
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=6,
+                    median=0.3001773804426193,
+                    upper quartile=0.35955479741096497,
+                    lower quartile=0.22468115016818047,
+                    upper whisker=0.5618327260017395,
+                    lower whisker=0.022379683330655098,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north west lines
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=8,
+                    median=0.3231561928987503,
+                    upper quartile=0.4185978174209595,
+                    lower quartile=0.2373707890510559,
+                    upper whisker=0.6904376745223999,
+                    lower whisker=-0.034466452896595,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=none
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=9,
+                    median=0.9886133670806885,
+                    upper quartile=0.994112491607666,
+                    lower quartile=0.9756795167922974,
+                    upper whisker=1.0000008344650269,
+                    lower whisker=0.9480301141738892,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north east lines
+                        },
+                },
+        ] coordinates {};
+        \addplot+[
+            thick,
+            boxplot prepared={
+                    draw position=10,
+                    median=0.7319371104240417,
+                    upper quartile=0.8012576103210449,
+                    lower quartile=0.6476161479949951,
+                    upper whisker=1.0000009536743164,
+                    lower whisker=0.41715407371520996,
+                },
+            every path/.style={
+                    postaction={
+                            nomorepostaction,
+                            pattern=north west lines
+                        },
+                },
+        ] coordinates {};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

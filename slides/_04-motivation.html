@@ -1,0 +1,100 @@
+<!-- Motivation Section -->
+  <section id="motivation-examples">
+    <h2>Ranking is everywhere</h2>
+
+    <hr class="divider" />
+
+    <div class="mr-grid">
+      <p>
+        <span class="r-blue">W</span><span class="r-red">e</span><span class="r-yellow">b</span> <span
+          class="r-blue">S</span><span class="r-red">e</span><span class="r-yellow">a</span><span
+          class="r-green">r</span><span class="r-red">c</span><span class="r-yellow">h</span>
+      </p>
+      <p>
+        <i>Ad-hoc retrieval</i>&nbsp;<span class="fragment" data-fragment-index="3">(this thesis)</span>
+      </p>
+      <p class="fragment" data-fragment-index="1">
+        <span class="fragment custom blur" data-fragment-index="3">Personal assistants</span>
+      </p>
+      <p class="fragment" data-fragment-index="1">
+        <span class="fragment custom blur" data-fragment-index="3"><i>Question answering</i></span>
+      </p>
+      <p class="fragment" data-fragment-index="2">
+        <span class="fragment custom blur" data-fragment-index="3">Online shopping,<br />video streaming</span>
+      </p>
+      <p class="fragment" data-fragment-index="2">
+        <span class="fragment custom blur" data-fragment-index="3"><i>Recommender systems</i></span>
+      </p>
+    </div>
+    <hr class="divider" />
+    <p class="fragment" data-fragment-index="3">thus...</p>
+  </section>
+
+  <section id="motivation-efficiency">
+    <h2>Ranking should be <i>efficient</i></h2>
+
+    <hr class="divider" />
+
+    <img class="fragment" data-fragment-index="1" style="margin-bottom: 0" src="img/emissions_out.svg" />
+    <p class="fragment" data-fragment-index="1" style="font-size: x-small; margin-top: 0">
+      Data from: Scells, Zhuang, and Zuccon. "Reduce, Reuse, Recycle:
+      Green Information Retrieval Research". SIGIR 2022.
+    </p>
+
+    <hr class="divider" />
+
+    <p class="fragment">
+      But <b>state-of-the-art neural models</b>
+      <span style="font-size: small">(often)</span> aren't.
+    </p>
+  </section>
+  
+  <section id="motivation-explainability">
+    <h2>Ranking should be <i>explainable</i></h2>
+
+    <hr class="divider" />
+
+    <p class="fragment" data-fragment-index="1" style="margin-bottom: 0">
+      <b>Neural ranking</b> in a nutshell:
+    </p>
+    <p class="fragment" data-fragment-index="1" style="font-size: x-small; margin-top: 0">
+      (of course, the following is vastly simplified)
+    </p>
+    <p class="fragment" data-fragment-index="1">
+      $ \underbrace{\phi(q, d)}_{\text{relevance}} = \operatorname{BERT}
+      \underbrace{ (\texttt{[CLS]}\ q\ \texttt{[SEP]}\ d\
+      \texttt{[SEP]}) }_{\text{LLM inputs}} $
+    </p>
+
+    <hr class="divider" />
+
+    <p class="fragment">
+      LLMs (i.e., Transformers or BERT) are <b>complex</b> and
+      <b>hard to interpret/explain</b>.
+    </p>
+    <p class="fragment">
+      What if the trained model is biased?&nbsp;<span class="fragment">Racist?</span>&nbsp;<span
+        class="fragment">Sexist?</span>
+    </p>
+  </section>
+
+  <section id="contributions">
+    <h2>Contributions</h2>
+    <hr class="divider" />
+    <div class="column-layout" style="grid-template-columns: max-content auto; column-gap: 0">
+      <img class="column-item" src="img/contributions_out.svg" />
+      <div class="column-item">
+        <div class="c-wide">
+          <p>
+            <b><i>The big picture</i></b>
+          </p>
+          <ul>
+            <li>
+              <span class="textsc">BoilerNet</span><br />(web content
+              extraction)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section> 

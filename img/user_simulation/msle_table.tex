@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node {
+    \begin{tabular}{l c c c} 
+        \toprule 
+        \textbf{nDCG} & \textbf{0.3} & \textbf{0.4} & \textbf{0.5} \\ \midrule 
+        \textsc{B\_S1}    & 0.0059 & 0.0323 &  0.0444        \\  
+        \textsc{B\_S2}    & 0.0713 & 0.0807 &  0.0791        \\  
+        \textsc{ST\_s2v}  & 0.1254 & 0.2368 &  0.2934        \\  
+        \textbf{\textsc{ST\_EA}}   & \textbf{0.0622} & \textbf{0.0695} &  \textbf{0.0646}       \\  \bottomrule 
+    \end{tabular}
+    };
+\end{tikzpicture}
+\end{document}

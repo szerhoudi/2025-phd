@@ -1,0 +1,79 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[fignode] (Q) at (0,0) {$q$};
+    \node[
+        fignode,
+        right=2 of Q.center,
+        anchor=center,
+    ] (Qrep) {$
+            \begin{bmatrix}
+                \vdots     \\
+                0          \\
+                \mathbf{1} \\
+                \mathbf{1} \\
+                0          \\
+                \vdots     \\
+            \end{bmatrix}
+        $};
+    \node[
+        fignode,
+        right=-0.5 of Qrep.east,
+        anchor=west,
+    ] (Qdesc) {$
+            \begin{matrix*}[l]
+                \vdots               \\
+                \hide{\text{lake}}   \\
+                \textbf{life}        \\
+                \textbf{meaning}     \\
+                \hide{\text{member}} \\
+                \vdots               \\
+            \end{matrix*}
+        $};
+
+    \node[
+        framedfignode,
+        right=1 of Qdesc,
+    ] (Op) {$\phi_\bm{}(q, d)$};
+
+    \node[
+        fignode,
+        right=1 of Op,
+    ] (Ddesc) {$
+            \begin{matrix*}[r]
+                \vdots               \\
+                \hide{\text{lake}}   \\
+                \textbf{life}        \\
+                \textbf{meaning}     \\
+                \hide{\text{member}} \\
+                \vdots               \\
+            \end{matrix*}
+        $};
+    \node[
+        fignode,
+        right=-0.5 of Ddesc.east,
+        anchor=west,
+    ] (Drep) {$
+            \begin{bmatrix}
+                \vdots     \\
+                1          \\
+                \mathbf{3} \\
+                \mathbf{2} \\
+                11         \\
+                \vdots     \\
+            \end{bmatrix}
+        $};
+    \node[
+        fignode,
+        right=2 of Drep.center,
+        anchor=center,
+    ] (D) {$d$};
+
+    \draw[-latex] (Q) -- (Qrep) node[midway,above] {$\operatorname{tf}$};
+    \draw[-latex] (D) -- (Drep) node[midway,above] {$\operatorname{tf}$};
+    \draw[-latex] (Qdesc) -- (Op);
+    \draw[-latex] (Ddesc) -- (Op);
+\end{tikzpicture}
+\end{document}

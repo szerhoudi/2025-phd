@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=14cm,
+    height=8cm,
+    bar width=30pt,
+    xlabel={Training Data Composition},
+    ylabel={MRR},
+    xtick=data,
+    xticklabels={Baseline (500), Baseline + Interests, Baseline + Traits, Baseline + Both},
+    xticklabel style={align=center, text width=3cm},
+    enlarge x limits=0.2,
+    ymin=55,
+    ymax=66,
+    grid=major,
+    nodes near coords,
+    nodes near coords align={above},
+]
+\addplot[fill=plotColorNeutral*, draw=black, thick] coordinates {
+    (0, 59.12)
+    (1, 62.47)
+    (2, 64.01)
+    (3, 64.37)
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}

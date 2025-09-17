@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=12cm,
+    height=7cm,
+    bar width=35pt,
+    ylabel={MRR},
+    xtick=data,
+    xticklabels={Baseline (500 sessions), Baseline + Agent4DL (1000 total)},
+    xticklabel style={align=center, text width=4cm},
+    enlarge x limits=0.3,
+    ymin=50,
+    ymax=70,
+    grid=major,
+    nodes near coords,
+    nodes near coords align={above},
+    point meta=explicit symbolic,
+]
+\addplot[fill=plotColor2*, draw=black, thick] coordinates {
+    (0, 59.12) [59.12]
+};
+\addplot[fill=plotColor3*, draw=black, thick] coordinates {
+    (1, 64.37) [\textbf{64.37}]
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}

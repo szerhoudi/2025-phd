@@ -1,0 +1,57 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{shapes.geometric, arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=1cm,
+    box/.style={rectangle, draw, thick, minimum height=1cm, minimum width=2.5cm, align=center},
+    decision/.style={diamond, draw, thick, aspect=2, minimum size=1.5cm, align=center},
+    orangebox/.style={box, fill=orange!20, draw=orange!80!black},
+    orangedec/.style={decision, fill=orange!20, draw=orange!80!black},
+    arrow/.style={-Latex, thick}
+]
+
+% Define nodes
+\node[box] (topic) at (0,8) {Evaluate \\ Topic};
+\node[orangedec] (know) at (0,6) {Background \\ Knowledge? \\ (K1)};
+\node[orangebox] (in) at (3,8) {Information \\ Need (IN)};
+\node[box] (query) at (0,4) {Formulate \\ Query};
+\node[orangedec] (select) at (0,2) {Select \\ Query?};
+\node[box] (serp) at (3,0) {Get SERP \\ Overview};
+\node[orangedec] (engage) at (3,-2) {Engage \\ w/ SERP?};
+\node[box] (snippet) at (0,-2) {Evaluate \\ Snippet};
+\node[orangedec] (click) at (0,-4) {Click \\ Link?};
+\node[box] (doc) at (0,-6) {Evaluate \\ Document};
+\node[orangedec] (continue) at (3,-4) {Continue \\ Session?};
+\node[box] (end) at (6,-4) {END};
+
+% Connect nodes
+\draw[arrow] (topic) -- (know);
+\draw[arrow] (in) -- (topic);
+\draw[arrow] (know) -- (query);
+\draw[arrow] (query) -- (select);
+\draw[arrow] (select) -- node[right, midway] {Update K2} (serp);
+\draw[arrow] (serp) -- (engage);
+\draw[arrow] (engage) -- node[above, midway] {Yes} (snippet);
+\draw[arrow, dashed] (engage) -| (continue);
+\draw[arrow] (snippet) -- node[left, midway] {Update K3} (click);
+\draw[arrow] (click) -- node[left, midway] {Yes} (doc);
+\draw[arrow, dashed] (click) -| (continue);
+\draw[arrow] (doc) -- (continue);
+\draw[arrow] (continue) -- node[above, midway] {Yes} (snippet);
+\draw[arrow] (continue) -- node[above, midway] {No} (end);
+
+% Loop back
+\draw[arrow, dashed] (continue.west) .. controls (-3,-4) and (-3,3) .. (query.west);
+\node at (-2,0) [rotate=90, anchor=center] {Reformulate};
+
+% Knowledge boxes
+\node[orangebox, right=2cm of query] (k4) {Linguistic \\ (K4)};
+\node[orangebox, right=2cm of know] (k1_box) {Background \\ (K1)};
+\draw[arrow, dashed] (k4) -- (query);
+\draw[arrow, dashed] (k1_box) -- (know);
+
+
+\end{tikzpicture}
+\end{document}

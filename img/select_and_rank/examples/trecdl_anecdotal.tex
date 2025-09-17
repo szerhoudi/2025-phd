@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tabularx}{27cm}{rll}
+    \toprule
+    \textbf{Rank} & \textbf{Document}                & \textbf{Most relevant sentence}                                                                              \\
+    \midrule
+    \multicolumn{3}{l}{\textbf{\sratt{}}}                                                                                                                           \\
+    \num{1}       & \textcolor{blue}{D970461$^{+}$}  & How long do I hold yoga poses?                                                                               \\
+    \num{2}       & \textcolor{blue}{D3378721$^{+}$} & How Long to Hold Bikram Yoga Poses.                                                                          \\
+    \num{3}       & \textcolor{blue}{D970460$^{+}$}  & How Long You Should Hold A Yoga Posture?                                                                     \\
+    \num{4}       & \textcolor{blue}{D1211050$^{+}$} & How Long To Hold Yoga Pose To Gain All The Benefits?                                                         \\
+    \num{5}       & \textcolor{red}{D337672$^{-}$}   & One way to build strength and endurance is to pull your hunting bow [...] before releasing the arrow [...]   \\
+    \num{6}       & \textcolor{red}{D2587656$^{-}$}  & Traditional Closing of a Yoga Practice [...] the teacher will say ``namaste'' \& bow to students.            \\
+    \num{7}       & \textcolor{red}{D1125612$^{-}$}  & Consult your doctor before beginning these new flexibility exercises [...]                                   \\
+    \num{8}       & \textcolor{red}{D520508$^{-}$}   & Yoga should be done with an open, gentle, and non-critical mind [...] working on one's limits                \\
+    \midrule
+    \multicolumn{3}{l}{\textbf{\plsem{}}}                                                                                                                           \\
+    \num{1}       & \textcolor{red}{D3378723$^{-}$}  & [...] Bow Pose is an intermediate yoga backbend that deeply opens the chest and the front of the body.       \\
+    \num{2}       & \textcolor{blue}{D970458$^{+}$}  & In the style of hatha yoga I teach there are longer holds in the poses.                                      \\
+    \num{3}       & \textcolor{red}{D3378725$^{-}$}  & [...] After a brief break, you move into the last eight standing exercises [...] of the Bikram yoga sequence \\
+    \num{4}       & \textcolor{blue}{D970461$^{+}$}  & How long do I hold yoga poses?                                                                               \\
+    \num{5}       & \textcolor{blue}{D337672$^{+}$}  & [...] isolate the muscles needed to pull the bow back and hold the bow up [...]                              \\
+    \num{6}       & \textcolor{blue}{D2285733$^{+}$} & Straighten your legs, so that your body makes a ‘V’ shape and hold this position for 2 to 5 breaths.         \\
+    \num{7}       & \textcolor{red}{D1930297$^{-}$}  & IF YOU ARE A BEGINNER, YOU OUGHT TO BEND YOUR KNEES SLIGHTLY TO ACCOMPLISH THIS.                             \\
+    \num{8}       & \textcolor{red}{D520508$^{-}$}   & Iyengar yoga can be good for physical therapy [...] easier for some people to get into the yoga postures.    \\
+    \midrule
+    \multicolumn{3}{l}{\textbf{Query}: ``\textit{how long to hold bow in yoga}'' (query ID 1132213)}                                                                \\
+    \bottomrule
+\end{tabularx}
+\end{document}

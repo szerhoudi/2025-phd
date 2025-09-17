@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=16cm,
+    height=8cm,
+    bar width=15pt,
+    xlabel={Model Architecture},
+    ylabel={Accuracy@5 (Higher is Better)},
+    xtick=data,
+    xticklabels={CACSM$_{\text{UM}}$, CSM, CACSM$_{\text{LLM}}$, TextPrompt},
+    enlarge x limits=0.2,
+    ymin=0,
+    ymax=0.7,
+    grid=major,
+    legend style={at={(0.5,1.05)}, anchor=south, legend columns=-1},
+    nodes near coords,
+    nodes near coords style={
+        /pgf/number format/fixed,
+        /pgf/number format/precision=3,
+        rotate=45,
+        anchor=west,
+        font=\tiny
+    },
+    ybar legend
+]
+
+\addplot[fill=plotColor2, draw=black, thick] coordinates {
+    (0, 0.5724) % CACSM_UM SUSS
+    (1, 0.2502) % CSM SUSS
+    (2, 0.5760) % CACSM_LLM_full SUSS
+    (3, 0.5135) % TextPrompt SUSS
+};
+\addlegendentry{SUSS (Academic)}
+
+\addplot[fill=plotColor5, draw=black, thick] coordinates {
+    (0, 0.5356) % CACSM_UM AOL
+    (1, 0.2207) % CSM AOL
+    (2, 0.5704) % CACSM_LLM_full AOL
+    (3, 0.4787) % TextPrompt AOL
+};
+\addlegendentry{AOL4US (Web)}
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    module/.style={
+        rectangle,
+        rounded corners,
+        draw,
+        thick,
+        fill=white,
+        minimum width=3.5cm,
+        minimum height=2cm,
+        align=center
+    },
+    arrow/.style={-latex, very thick}
+]
+
+% Modules
+\node[module, fill=plotColor2!20] (profile) at (0, 3) {\textbf{Profile Module} \\ \small Academic Traits \\ \small Research Interests};
+\node[module, fill=plotColor3!20] (memory) at (-4, 0) {\textbf{Memory Module} \\ \small Factual \& Emotional \\ \small Recall, Store, Reflect};
+\node[module, fill=plotColor5!20] (interaction) at (4, 0) {\textbf{Interaction Module} \\ \small Search-driven Actions \\ \small Emotion-driven Actions};
+
+% Central Agent
+\node[circle, draw, thick, fill=plotColor1!60, minimum size=2.5cm, align=center] (agent) at (0,0) {\textbf{Generative} \\ \textbf{Agent}};
+
+% Arrows
+\draw[arrow] (profile) -- (agent);
+\draw[arrow] (memory) to[bend left=20] (agent);
+\draw[arrow] (agent) to[bend left=20] (memory);
+\draw[arrow] (agent) to[bend left=20] (interaction);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,103 @@
+\documentclass{standalone}
+\input{../../../img/_common.tex}
+
+\begin{document}
+\begin{tabular}{lr@{\hspace{\tabcolsep}}c@{\hspace{\tabcolsep}}llllllllllllll}
+    \toprule
+     &
+     &
+     &
+     & \multicolumn{6}{c}{\trecdldocn}
+     & \multicolumn{6}{c}{\trecdldoct}
+    \\
+    \cmidrule(lr){5-10}
+    \cmidrule(lr){11-16}
+     & \gpu{GPU}                              & +                                    & \cpu{CPU}
+     & \multicolumn{3}{c}{$k_S = 1000$}
+     & \multicolumn{3}{c}{$k_S = 5000$}
+     & \multicolumn{3}{c}{$k_S = 1000$}
+     & \multicolumn{3}{c}{$k_S = 5000$}
+    \\
+    \cmidrule(lr){2-4}
+    \cmidrule(lr){5-7}
+    \cmidrule(lr){8-10}
+    \cmidrule(lr){11-13}
+    \cmidrule(lr){14-16}
+     & \multicolumn{3}{c}{\rotatebox{90}{ms}}
+     & \rotatebox{90}{\ap{}@\num{1000}}       & \rotatebox{90}{\recall{}@\num{1000}} & \rotatebox{90}{\ndcg{}@\num{20}}
+     & \rotatebox{90}{\ap{}@\num{1000}}       & \rotatebox{90}{\recall{}@\num{1000}} & \rotatebox{90}{\ndcg{}@\num{20}}
+     & \rotatebox{90}{\ap{}@\num{1000}}       & \rotatebox{90}{\recall{}@\num{1000}} & \rotatebox{90}{\ndcg{}@\num{20}}
+     & \rotatebox{90}{\ap{}@\num{1000}}       & \rotatebox{90}{\recall{}@\num{1000}} & \rotatebox{90}{\ndcg{}@\num{20}}
+    \\
+    \midrule
+    \multicolumn{16}{l}{\bfseries \hybrid}                                                                                                                                                     \\
+    \bm, \tct
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{582}}
+     & \num{0.394}                            & \num{0.697}                          & \num{0.655}                      & \num{0.385}        & \num{0.729}        & \num{0.645}
+     & \num{0.463}                            & \num{0.809}                          & \num{0.615}                      & \num{0.469}        & \num{0.852}        & \num{0.621}
+    \\
+    \bm, \ance
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{582}}
+     & \num{0.379}                            & \num{0.697}                          & \num{0.633}                      & \num{0.373}        & \num{0.727}        & \num{0.628}
+     & \num{0.479}                            & \num{0.809}                          & \num{0.624}                      & \num{0.488}        & \num{0.846}        & \num{0.632}
+    \\
+    \midrule
+    \multicolumn{16}{l}{\bfseries \reranking}                                                                                                                                                  \\
+    \tct
+     & \gpu{\num{1189}}                       & +                                    & \cpu{2}
+     & \num{0.370}                            & \num{0.697}                          & \num{0.632}                      & \num{0.334}        & \num{0.703}        & \num{0.609}\sigimpr{a}
+     & \num{0.414}                            & \num{0.809}                          & \num{0.587}\sigimpr{a}           & \num{0.405}        & \num{0.794}        & \num{0.585}\sigimpr{acd}
+    \\
+    \ance
+     & \gpu{\num{1189}}                       & +                                    & \cpu{\num{2}}
+     & \num{0.336}                            & \num{0.697}                          & \num{0.614}                      & \num{0.304}        & \num{0.647}        & \num{0.607}
+     & \num{0.426}                            & \num{0.809}                          & \num{0.595}\sigimpr{c}           & \num{0.422}        & \num{0.761}        & \num{0.604}
+    \\
+    \bertcls
+     & \gpu{\num{185}}                        & +                                    & \cpu{\num{2}}
+     & \num{0.283}                            & \num{0.697}                          & \num{0.494}\sigimpr{abcde}       & \num{0.159}        & \num{0.559}        & \num{0.289}
+     & \num{0.329}                            & \num{0.809}                          & \num{0.512}\sigimpr{abcde}       & \num{0.221}        & \num{0.727}        & \num{0.375}\sigimpr{abcde}
+    \\
+    \midrule
+    \multicolumn{16}{l}{\bfseries \interpolatedreranking}                                                                                                                                      \\
+    \midrulesep
+    \hide{\sigdef{a}} \tct
+     & \gpu{\num{1189}}                       & +                                    & \cpu{\num{14}}
+     & \hide{\num{0.406}}                     & \hide{\num{0.697}}                   & \hide{\num{0.655}}               & \hide{\num{0.411}} & \hide{\num{0.745}} & \hide{\num{0.653}}
+     & \hide{\num{0.469}}                     & \hide{\num{0.809}}                   & \hide{\num{0.621}}               & \hide{\num{0.478}} & \hide{\num{0.838}} & \hide{\num{0.626}}
+    \\
+    \rowcolor{lightgray} \sigdef{a} \tablearrow \fastforward
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{253}}
+     & \num{0.406}                            & \num{0.697}                          & \num{0.655}                      & \num{0.411}        & \num{0.745}        & \num{0.653}
+     & \num{0.469}                            & \num{0.809}                          & \num{0.621}                      & \num{0.478}        & \num{0.838}        & \num{0.626}
+    \\
+    \rowcolor{lightgray} \sigdef{b} \quad \tablearrow coalesced
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{109}}
+     & \num{0.379}                            & \num{0.697}                          & \num{0.630}                      & \num{0.379}        & \num{0.732}        & \num{0.625}
+     & \num{0.440}                            & \num{0.809}                          & \num{0.59}4\sigimpr{a}           & \num{0.447}        & \num{0.837}        & \num{0.607}
+    \\
+    \midrulesep
+    \hide{\sigdef{c}} \ance
+     & \gpu{\num{1189}}                       & +                                    & \cpu{\num{14}}
+     & \hide{\num{0.387}}                     & \hide{\num{0.697}}                   & \hide{\num{0.638}}               & \hide{\num{0.393}} & \hide{\num{0.732}} & \hide{\num{0.639}}
+     & \hide{\num{0.490}}                     & \hide{\num{0.809}}                   & \hide{\num{0.630}}               & \hide{\num{0.502}} & \hide{\num{0.828}} & \hide{\num{0.640}}
+    \\
+    \rowcolor{lightgray} \sigdef{c} \tablearrow \fastforward
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{253}}
+     & \num{0.387}                            & \num{0.697}                          & \num{0.638}                      & \num{0.393}        & \num{0.732}        & \num{0.639}
+     & \num{0.490}                            & \num{0.809}                          & \num{0.630}                      & \num{0.502}        & \num{0.828}        & \num{0.640}
+    \\
+    \rowcolor{lightgray} \sigdef{d} \quad \tablearrow coalesced
+     & \gpu{\num{0}}                          & +                                    & \cpu{\num{121}}
+     & \num{0.372}                            & \num{0.697}                          & \num{0.625}                      & \num{0.375}        & \num{0.723}        & \num{0.628}
+     & \num{0.471}                            & \num{0.809}                          & \num{0.622}                      & \num{0.479}        & \num{0.823}        & \num{0.629}
+    \\
+    \midrulesep
+    \sigdef{e} \bertcls
+     & \gpu{\num{185}}                        & +                                    & \cpu{\num{14}}
+     & \num{0.365}                            & \num{0.697}                          & \num{0.585}                      & \num{0.357}        & \num{0.708}        & \num{0.562}
+     & \num{0.460}                            & \num{0.809}                          & \num{0.602}                      & \num{0.459}        & \num{0.839}        & \num{0.601}
+    \\
+    \bottomrule
+\end{tabular}
+\end{document}

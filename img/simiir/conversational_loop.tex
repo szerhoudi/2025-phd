@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=1.5cm,
+    actor/.style={circle, draw, thick, fill=plotColor1!20, minimum size=1.5cm},
+    action/.style={rectangle, draw, thick, fill=plotColor2!20, rounded corners, text centered, minimum width=6em},
+    arrow/.style={thick,->,>=stealth}
+]
+    % Left side: Standard Search
+    \node (title1) at (0, 2) {\textbf{Standard Search}};
+    \node[actor] (user1) at (0,0) {User};
+    \node[action, right=of user1, xshift=1cm] (query) {Query};
+    \node[action, below=of query] (serp) {SERP};
+    
+    \draw[arrow] (user1) -- (query);
+    \draw[arrow, bend left=30] (query) to (serp);
+    \draw[arrow, bend left=30] (serp) to (user1);
+    
+    % Right side: Conversational Search
+    \node (title2) at (7, 2) {\textbf{Conversational Search}};
+    \node[actor] (user2) at (7,0) {User};
+    \node[action, right=of user2, xshift=1cm, fill=plotColor3!20] (utterance) {Utterance};
+    \node[action, below=of utterance, fill=plotColor3!20] (csrp) {CSRP / Response};
+    
+    \draw[arrow] (user2) -- (utterance);
+    \draw[arrow, bend left=30] (utterance) to (csrp);
+    \draw[arrow, bend left=30] (csrp) to (user2);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=1cm and 1.5cm,
+    fignode/.style={draw, rounded corners, minimum height=1cm, minimum width=2.5cm, align=center},
+    layer/.style={fignode, fill=plotColor2!20, minimum height=0.7cm, minimum width=5cm},
+    arr/.style={-latex, thick},
+]
+
+% Left side - User State Encoder
+\node[fignode, fill=plotColor3!20] (interactions) {User Interactions \\ (actions, responses)};
+\node[fignode, fill=plotColor3!20, below=of interactions] (user_encoder) {User State \\ Encoder \\ (Transformer)};
+\node[below=0.5cm of user_encoder, align=center, text width=3cm] (state_emb) {User State \\ Embedding $s_t$};
+
+\draw[arr] (interactions) -- (user_encoder);
+\draw[arr] (user_encoder) -- (state_emb);
+
+% Right side - LLM
+\node[layer] (llm1) at (6, 2) {LLM Layer $i$};
+\node[layer] (llm2) at (6, 0) {LLM Layer $i+1$};
+\node (dots_llm) at (6, -1.2) {\vdots};
+\node[layer] (llm_n) at (6, -2.5) {LLM Layer $N$};
+
+\draw[arr] (llm1) -- (llm2);
+\draw[arr] (llm2) -- (dots_llm);
+\draw[arr] (dots_llm) -- (llm_n);
+
+% Cross-attention arrows
+\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca1) at (4.5, 2) {CA};
+\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca2) at (4.5, 0) {CA};
+\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca_n) at (4.5, -2.5) {CA};
+
+\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca1);
+\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca2);
+\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca_n);
+
+\end{tikzpicture}
+\end{document}

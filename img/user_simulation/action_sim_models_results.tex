@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            xbar,
+            width=12cm,
+            height=7cm,
+            bar width=0.5cm,
+            xlabel={Classifier F-measure (lower is better)},
+            ytick=data,
+            yticklabels={Basic, Conditional, Time-aware, Query-change, Contextual},
+            y dir=reverse,
+            enlarge y limits={0.15},
+            xmin=0,
+            xmax=0.8,
+            nodes near coords,
+            nodes near coords align={horizontal},
+            grid=major,
+        ]
+        \addplot[
+            fill=plotColor2!60,
+            draw=black,
+            thick,
+        ] coordinates {
+                (0.750, 1) % Basic
+                (0.583, 2) % Conditional
+                (0.748, 3) % Time-aware
+                (0.562, 4) % Query-change
+                (0.532, 5) % Contextual
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

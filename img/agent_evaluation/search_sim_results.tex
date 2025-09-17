@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=16cm,
+    height=8cm,
+    bar width=20pt,
+    xlabel={Training Data Source},
+    ylabel={nDCG@3},
+    xtick=data,
+    xticklabels={BM25 (baseline), RoBERTa (SUSS), RoBERTa (EconBiz), RoBERTa (Agent4DL 1k), RoBERTa (Agent4DL 3k)},
+    xticklabel style={rotate=15, anchor=east},
+    enlarge x limits=0.15,
+    ymin=0,
+    ymax=40,
+    grid=major,
+    nodes near coords,
+    nodes near coords align={above},
+    legend pos=north west,
+]
+\addplot[fill=plotColorNeutral*, draw=black, thick] coordinates {(0, 26.03)};
+\addplot[fill=plotColor1*, draw=black, thick] coordinates {(1, 26.45)};
+\addplot[fill=plotColor2*, draw=black, thick] coordinates {(2, 28.57)};
+\addplot[fill=plotColor3!60, draw=black, thick] coordinates {(3, 33.09)};
+\addplot[fill=plotColor3*, draw=black, thick] coordinates {(4, 35.19)};
+
+\legend{BM25, Real Data (SUSS), Real Data (EconBiz), Agent4DL (1k), Agent4DL (3k)}
+\end{axis}
+\end{tikzpicture}
+\end{document}

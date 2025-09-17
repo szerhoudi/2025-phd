@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=2.5cm, auto, >=stealth,
+    agent/.style={rectangle, draw, thick, text centered, rounded corners, minimum height=2em, text width=9em},
+    pool/.style={cylinder, shape border rotate=90, draw, thick, minimum height=3cm, minimum width=2.5cm, text width=6em, text centered},
+    line/.style={draw, -{Stealth[length=3mm]}, thick, <->}
+]
+    \node[pool, fill=gray!20] (pool) {Global Message Pool};
+
+    \node[agent, above left of=pool, xshift=-1.5cm, fill=plotColor1!20] (profile) {User Profile Agent};
+    \node[agent, above right of=pool, xshift=1.5cm, fill=plotColor2!20] (context) {Contextual Retrieval Agent};
+    \node[agent, below left of=pool, xshift=-1.5cm, fill=plotColor3!20] (session) {Live Session Agent};
+    \node[agent, below right of=pool, xshift=1.5cm, fill=plotColor4!20] (ranking) {Document Ranking Agent};
+    \node[agent, below of=pool, yshift=-1.5cm, fill=plotColorNeutral!20] (feedback) {Feedback Agent};
+
+    \draw [line] (profile) -- (pool);
+    \draw [line] (context) -- (pool);
+    \draw [line] (session) -- (pool);
+    \draw [line] (ranking) -- (pool);
+    \draw [line] (feedback) -- (pool);
+
+\end{tikzpicture}
+\end{document}

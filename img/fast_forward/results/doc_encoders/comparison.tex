@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\input{../../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=18cm,
+            height=7cm,
+            xlabel={Document encoding latency (GPU) [ms]},
+            ylabel={\ndcg{}@\num{10}},
+            xtick={0, 100, ..., 1000},
+            grid=major,
+            legend entries={
+                    \selbert,
+                    \bertbase,
+                },
+            legend cell align={left},
+            legend pos=south east,
+        ]
+        \addplot[
+            very thick,
+            mark=o,
+            plotColor2,
+        ] table[
+                col sep=comma,
+                x expr=\thisrowno{1} * 1000, % convert seconds to milliseconds
+                y index=3,
+            ] {selbert.csv};
+        \addplot[
+            very thick,
+            mark=square,
+            only marks,
+            plotColor1,
+        ] coordinates {
+                (897.9388236, 0.3885345674)
+            };
+
+        \node[
+            draw,
+            fill=white,
+        ] (P) at (500, 0.325) {$p = 0.5$};
+        \draw[
+            -latex,
+            thick,
+            shorten >= 5,
+        ] (P) -- (453.7414567, 0.3615901607);
+    \end{axis}
+\end{tikzpicture}
+\end{document}

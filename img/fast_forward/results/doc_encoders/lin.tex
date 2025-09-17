@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\input{../../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=7cm,
+            grid=major,
+            ytick={0.25,0.3,0.35},
+            ymin={0.22},
+            xlabel={$p$},
+            ylabel={\ndcg{}@\num{10}},
+            legend entries={\bertbase{},\selbert{}},
+            legend cell align={left},
+            legend pos=south east,
+            legend style={font=\small},
+        ]
+        \addplot[
+            domain=0.1:0.9,
+            samples=2,
+            dashed,
+            mark=none,
+            very thick,
+            plotColor1,
+        ] {0.3885345674};
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=square,
+            plotColor2,
+        ] table[
+                col sep=comma,
+                y index=2,
+            ] {selbert.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

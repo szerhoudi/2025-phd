@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\begin{document}
+\begin{tikzpicture}[node distance=2cm,
+    activity/.style={rectangle, draw, thick, fill=plotColor2!20, text width=6em, text centered, rounded corners, minimum height=2.5em},
+    decision/.style={diamond, draw, thick, fill=plotColor4!20, text width=5.5em, text centered, aspect=2, inner sep=0pt},
+    arrow/.style={thick,->,>=stealth}]
+
+    \node (start) [activity] {1. Generate Queries};
+    \node (select) [activity, right of=start, xshift=1.5cm] {2. Select Query};
+    \node (issue) [activity, right of=select, xshift=1.5cm] {3. Issue Query};
+    \node (serp) [activity, below of=issue] {4. View SERP};
+    \node (serp_dec) [decision, below of=serp] {5. Examine SERP?};
+    \node (snippet) [activity, below of=serp_dec] {6. Examine Snippet};
+    \node (snip_dec) [decision, below of=snippet] {7. Attractive Snippet?};
+    \node (doc) [activity, right of=snip_dec, xshift=1.5cm] {8. Examine Document};
+    \node (stop_dec) [decision, below of=snip_dec] {9. Continue Session?};
+    \node (stop) [activity, below of=stop_dec] {Stop};
+
+    \draw [arrow] (start) -- (select);
+    \draw [arrow] (select) -- (issue);
+    \draw [arrow] (issue) -- (serp);
+    \draw [arrow] (serp) -- (serp_dec);
+    \draw [arrow] (serp_dec) -- node[anchor=west, pos=0.4] {yes} (snippet);
+    \draw [arrow] (snippet) -- (snip_dec);
+    \draw [arrow] (snip_dec) -- node[anchor=south, pos=0.4] {yes} (doc);
+    \draw [arrow] (doc) -| (stop_dec);
+    \draw [arrow] (snip_dec) -- node[anchor=west, pos=0.4] {no} (stop_dec);
+    \draw [arrow] (stop_dec) -- node[anchor=west, pos=0.4] {no} (stop);
+    \draw [arrow] (serp_dec.west) -| node[anchor=south, pos=0.25] {no} ++(-2.5,0) |- (stop);
+    \draw [arrow] (stop_dec.west) -- node[anchor=south, pos=0.8] {yes} ++(-3.0,0) |- (select);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}
+    \node (table) {
+    \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Model} & \textbf{nDCG@10} & \textbf{ERR@10} & \textbf{FD@1} & \textbf{FD@10} \\
+    \midrule
+    PBM & 0.342 & 0.289 & 6.823 & 4.156 \\
+    UBM & 0.368 & 0.311 & 5.967 & 3.845 \\
+    DCM & 0.381 & 0.325 & 5.412 & 3.621 \\
+    DBN & 0.395 & 0.339 & 4.876 & 3.302 \\
+    NCM & 0.423 & 0.361 & 3.945 & 2.687 \\
+    \textbf{SimIIR 2.0} & \textbf{0.451} & \textbf{0.389} & \textbf{3.124} & \textbf{2.103} \\
+    \bottomrule
+    \end{tabular}
+    };
+    % Arrows
+    \draw[-{Stealth[length=3mm, width=3mm]}, very thick, plotColor3] ([yshift=-0.4cm]table.north east) ++(-5,0) -- ++(0,-2.2) node[midway, right=2pt, align=left] {Performance\\Improves};
+    \draw[-{Stealth[length=3mm, width=3mm]}, very thick, plotColor1] ([yshift=-0.4cm]table.north east) ++(-1.5,0) -- ++(0,-2.2) node[midway, right=2pt, align=left] {Similarity\\Improves};
+\end{tikzpicture}
+\end{document}

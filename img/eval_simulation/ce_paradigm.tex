@@ -1,0 +1,100 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    % Input data sources
+    \node[
+        framedfignode,
+        minimum width=100,
+        text width=90,
+        align=center,
+    ] (RealSessions) {Real\\Sessions};
+    
+    \node[
+        framedfignode,
+        minimum width=100,
+        text width=90,
+        align=center,
+        below=2 of RealSessions,
+    ] (SimSessions) {Simulated\\Sessions};
+    
+    % Feature extraction (single box for both)
+    \node[
+        framedfignode,
+        minimum width=120,
+        text width=110,
+        align=center,
+        right=3 of $(RealSessions)!0.5!(SimSessions)$,
+    ] (FeatureExtract) {Feature\\Extraction\\{\small 170-dim vectors}};
+    
+    % Classifier
+    \node[
+        framedfignode,
+        minimum width=120,
+        text width=110,
+        align=center,
+        right=3.5 of FeatureExtract,
+    ] (Classifier) {Binary\\Classifier\\{\small 6 algorithms}};
+    
+    % Evaluation metrics
+    \node[
+        framedfignode,
+        minimum width=110,
+        text width=100,
+        align=center,
+        right=3.5 of Classifier,
+    ] (Metrics) {Evaluation\\{\small P, R, F1, Acc}};
+    
+    % Goal
+    \node[
+        fignode,
+        above=1 of Metrics,
+        font=\small,
+        text width=100,
+        align=center,
+        fill=plotColor3!20,
+        rounded corners,
+        inner sep=8pt,
+    ] (Goal) {\textbf{Goal:} Low scores\\≈ indistinguishable};
+    
+    % Cross-validation
+    \node[
+        fignode,
+        above=1 of Classifier,
+        font=\small,
+        text width=110,
+        align=center,
+        fill=plotColor2!20,
+        rounded corners,
+        inner sep=6pt,
+    ] (CrossVal) {10-fold CV};
+    
+    % Example vector (smaller, positioned better)
+    \node[
+        fignode,
+        below=1 of FeatureExtract,
+        text width=120,
+        align=center,
+        font=\scriptsize,
+        fill=plotColor1!10,
+        rounded corners,
+        inner sep=4pt,
+    ] (ExampleVector) {[1\_search, 1\_view,\\2\_search, ...]};
+    
+    % Main flow arrows
+    \draw[-latex, thick] (RealSessions) -- (FeatureExtract.west |- RealSessions) 
+          node[midway,above,fill=background,font=\small] {label: real};
+    
+    \draw[-latex, thick] (SimSessions) -- (FeatureExtract.west |- SimSessions)
+          node[midway,below,fill=background,font=\small] {label: sim};
+    
+    \draw[-latex, thick] (FeatureExtract) -- (Classifier);
+    
+    \draw[-latex, thick] (Classifier) -- (Metrics);
+    
+    % Dashed connection to goal
+    \draw[-latex, dashed] (Metrics) -- (Goal);
+    
+\end{tikzpicture}
+\end{document>

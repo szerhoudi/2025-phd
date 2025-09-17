@@ -1,0 +1,17 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[node distance=3cm, auto, >=stealth]
+    \node[framedfignode, fill=plotColor2!20, minimum height=2em] (v_i) {$v_{q_{i}}$};
+    \node[fignode, right=of v_i] (W) {$W$};
+    \node[framedfignode, fill=plotColor3!20, minimum height=2em, right=of W] (v_i1) {$v_{q_{i+1}}$};
+    \node[fignode, above=0.25 of W] (title) {\textbf{Linear Transformation}};
+
+    \draw[->, very thick] (v_i) -- node[midway, above] {} (W);
+    \draw[->, very thick] (W) -- node[midway, above] {} (v_i1);
+
+    \node[fignode, below=2 of W, text width=9cm, align=center] (formula)
+    {$v_{q_{i+1}} \approx W v_{q_{i}}$};
+\end{tikzpicture}
+\end{document}

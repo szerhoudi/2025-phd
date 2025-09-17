@@ -1,0 +1,167 @@
+/* slide layouts */
+
+.column-desc-layout {
+  display: grid;
+  gap: 0.75em;
+  grid-auto-flow: column;
+  grid-template-rows: auto min-content;
+}
+
+.column-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+p.column-label {
+  font-size: x-large;
+  margin: 0.5em 0;
+}
+
+.column-layout {
+  display: grid;
+  gap: 0.75em;
+  grid-auto-flow: column;
+  grid-template-rows: auto;
+}
+
+.c-wide > * {
+  width: 100%;
+  text-align: left;
+}
+
+.h-center {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+hr.divider {
+  margin: 0.5em;
+  border: none;
+}
+
+p.caption {
+  font-size: medium;
+  margin-top: 0;
+}
+
+p.caption .katex {
+  font-size: 100%;
+}
+
+p.eq {
+  text-align: center;
+}
+
+.fig + p.caption::before {
+  content: "Figure: ";
+  font-weight: bold;
+}
+
+.tab + p.caption::before {
+  content: "Table: ";
+  font-weight: bold;
+}
+
+p.footnote {
+  font-size: small;
+  text-align: right;
+}
+
+/* section titles with publications */
+
+.sec-title {
+  display: grid !important;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr auto 1fr;
+  height: 100%;
+}
+
+.sec-title > *:nth-child(1) {
+  grid-row-start: 2;
+}
+
+.sec-title > *:nth-child(2) {
+  margin-top: auto;
+}
+
+div.pub {
+  text-align: right;
+  margin: 0.75em 0;
+}
+
+div.pub p {
+  font-size: medium;
+  margin: 0.5em;
+}
+
+.pub-title {
+  font-weight: bold;
+}
+
+.pub-title::before {
+  content: "“";
+}
+
+.pub-title::after {
+  content: "”";
+}
+
+/* result table */
+
+table.result-tab {
+  font-size: medium;
+  margin: 0;
+}
+
+table.result-tab thead tr th,
+table.result-tab tbody tr td {
+  border: none;
+}
+
+table.result-tab th.result-tab-head-section {
+  text-align: center;
+  border-bottom: solid;
+}
+
+table.result-tab tr.result-tab-section {
+  font-size: 0.75rem;
+  border-top: solid;
+  font-weight: bold;
+}
+
+table.result-tab tr td:nth-child(n + 2),
+table.result-tab tr th:nth-child(n + 2) {
+  text-align: center;
+}
+
+/* fragments */
+
+.fragment.blur {
+  filter: none;
+}
+
+.fragment.blur.visible {
+  filter: blur(5px);
+}
+
+.fragment.grow-active.visible.current-fragment {
+  transform: scale(1.5);
+  background-color: white;
+  border: 0.025em solid gray;
+  border-radius: 0.25em;
+}
+
+/* misc */
+
+.hide {
+  opacity: 0;
+}
+
+.textsc {
+  font-variant-caps: small-caps;
+}

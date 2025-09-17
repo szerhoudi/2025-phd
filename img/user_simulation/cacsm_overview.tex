@@ -1,0 +1,21 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=2cm, auto, >=stealth,
+    block/.style={rectangle, draw, thick, text width=9em, text centered, rounded corners, minimum height=3em},
+    line/.style={draw, -{Stealth[length=3mm]}, thick},
+    cloud/.style={draw, thick, ellipse, node distance=2.5cm, minimum height=2.5em, text width=10em, text centered}
+]
+    \node [cloud, fill=plotColor1!20] (state) {User Cognitive State \\ \footnotesize(Knowledge, Info Need)};
+    \node [block, fill=plotColor2!20, below of=state, yshift=-1cm] (action) {User Action \\ \footnotesize(Query / Click)};
+    \node [block, fill=plotColor3!20, right of=action, xshift=3cm] (results) {Search Results};
+    \node [block, fill=plotColor4!20, above of=results] (update) {Update State};
+
+    \path [line] (state) -- node[midway, left] {drives} (action);
+    \path [line] (action) -- (results);
+    \path [line] (results) -- node[midway, right] {informs} (update);
+    \path [line] (update) -- (state);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=2.5cm, auto, >=stealth,
+    module/.style={rectangle, draw, thick, text centered, rounded corners, minimum height=4em, text width=10em},
+    env/.style={rectangle, draw, thick, dashed, text centered, rounded corners, minimum height=4em, text width=12em},
+    line/.style={draw, -{Stealth[length=3mm]}, thick}
+]
+
+    \node[module, fill=plotColor1!20] (profile) {Profile Module \\ \footnotesize(Academic Traits, Research Interests)};
+    \node[module, below of=profile, fill=plotColor2!20] (memory) {Memory Module \\ \footnotesize(Factual, Emotional)};
+    \node[module, below of=memory, fill=plotColor3!20] (interact) {Interaction Module \\ \footnotesize(Search, Emotion)};
+
+    \node[env, right of=memory, xshift=3cm, fill=gray!10] (dl) {Digital Library Environment};
+
+    \path [line, <->] (interact) -- node[midway, above] {Actions/Results} (dl);
+    \path [line, ->] (profile) -- (interact);
+    \path [line, ->] (memory) -- (interact);
+    \path [line, ->] (interact.west) .. controls +(west:1) and +(west:1) .. node[midway, left] {Update} (memory.west);
+
+\end{tikzpicture}
+\end{document}

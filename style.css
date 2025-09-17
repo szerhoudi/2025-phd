@@ -1,0 +1,978 @@
+/* Load Product Sans locally */
+@font-face {
+  font-family: 'Product Sans';
+  src: url('fonts/ProductSans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('fonts/ProductSans-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('fonts/ProductSans-Italic.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Global font and background overrides */
+:root {
+  --r-background-color: #F5F6F2 !important;
+  /* Lighter version of #F0F1EB */
+  /* --r-main-font: "Product Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important; */
+  --r-heading-font: "Product Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.reveal-viewport {
+  background: #F5F6F2 !important;
+  background-color: var(--r-background-color) !important;
+}
+
+.reveal {
+  font-family: var(--r-main-font) !important;
+}
+
+/* Title slide specific styling */
+#title p {
+  font-size: large !important;
+}
+
+#title div p {
+  font-size: medium !important;
+}
+
+/* headings */
+
+h1 {
+  font-size: 1.5em !important;
+}
+
+h2 {
+  font-size: 1.25em !important;
+}
+
+h3 {
+  font-size: 1em !important;
+}
+
+h4 {
+  font-size: 0.75em !important;
+}
+
+p,
+li,
+p span.katex {
+  font-size: x-large;
+}
+
+li:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+/* layout */
+
+.column-desc-layout,
+.column-layout {
+  column-gap: 1.5em;
+}
+
+h3.sub-title {
+  font-size: xx-large !important;
+  font-style: italic;
+}
+
+div.github-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+a.github-url {
+  font-size: x-large;
+  font-family: monospace;
+}
+
+img.github-qr {
+  max-width: 3em;
+  max-height: 3em;
+}
+
+/* misc */
+
+div.vector-space {
+  position: relative;
+  height: 7em;
+  width: 7em;
+  margin: 0.5em;
+  border: 0.01em solid black;
+  border-radius: 100%;
+}
+
+.fragment.highlight-red.visible {
+  color: #db4437 !important;
+}
+
+.fragment.highlight-green.visible {
+  color: #0f9d58 !important;
+}
+
+.fragment.highlight-blue.visible {
+  color: #4285f4 !important;
+}
+
+ul.legend li {
+  font-size: medium;
+}
+
+p.footnote {
+  font-size: medium;
+}
+
+p.axislabel,
+p.axislabel * {
+  font-size: medium;
+  margin-top: 0.25em;
+  font-weight: bold;
+}
+
+/* ranking: search */
+
+.se-logo {
+  font-weight: bold;
+  font-size: 1.1em;
+  font-family: 'Product Sans', sans-serif;
+}
+
+.r-blue {
+  color: #4285f4;
+}
+
+.r-red {
+  color: #db4437;
+}
+
+.r-yellow {
+  color: #f4b400;
+}
+
+.r-green {
+  color: #0f9d58;
+}
+
+div.search-bar {
+  border: 0.025em solid gray;
+  border-radius: 2em;
+  width: 80%;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  height: 0.5em;
+}
+
+div.search-query {
+  display: flex;
+  flex-direction: row;
+}
+
+div.search-query>* {
+  font-family: sans-serif;
+  font-size: medium;
+  text-align: left;
+}
+
+div.search-query span.typed-cursor {
+  font-weight: lighter;
+}
+
+div.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  width: 100%;
+  margin: 0.5em 0.5em 0;
+  padding: 0.5em;
+  border: 0.01em solid gray;
+  border-radius: 0.25em;
+  background-color: white;
+  font-family: sans-serif;
+}
+
+div.search-result {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+}
+
+div.search-result p {
+  margin: 0.1em;
+}
+
+div.search-result-header {
+  font-family: sans-serif;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+div.search-result-icon {
+  margin-right: 0.5em;
+}
+
+div.search-result-icon-background {
+  height: 1.5em;
+  width: 1.5em;
+}
+
+div.search-result-icon>img {
+  height: 1em;
+  width: 1em;
+}
+
+div.search-result-icon-background {
+  background-color: lightgray;
+  border-radius: 100%;
+}
+
+div.search-result-icon>img {
+  padding: 0;
+  margin: 0;
+}
+
+p.search-url,
+p.search-title {
+  margin: 0.25em;
+  color: gray;
+  font-size: x-small;
+}
+
+p.search-link {
+  font-size: medium;
+  color: blue;
+  margin-top: 0.25em !important;
+}
+
+p.search-desc {
+  font-size: small;
+  text-align: justify;
+}
+
+/* ranking qd */
+
+div.rqd-ranking {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 1.5em;
+  border: 0.025em solid gray;
+  border-radius: 0.25em;
+  padding: 0 0.5em;
+  background-color: white;
+  width: max-content;
+  margin-bottom: 0.25em;
+}
+
+.rqd-ranking * {
+  font-size: medium;
+}
+
+.rqd-ranking .katex {
+  font-size: small;
+}
+
+p.rqd-docid {
+  margin-right: 0.5em;
+}
+
+/* motivation ranking */
+
+.mr-grid {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  column-gap: 5%;
+  justify-content: space-evenly;
+}
+
+.mr-grid>*:nth-child(odd) {
+  text-align: right;
+}
+
+.mr-grid>*:nth-child(even) {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.mr-grid-wide {
+  display: grid;
+  grid-template-columns: 30% 65%;
+  column-gap: 5%;
+  width: 100%;
+}
+
+.mr-grid-wide>*:nth-child(odd) {
+  text-align: right;
+}
+
+.mr-grid-wide>*:nth-child(even) {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+/* dense retrieval */
+
+#dr-query-radius {
+  position: absolute;
+  top: 2rem;
+  left: 7rem;
+  height: 7rem;
+  width: 7rem;
+  border: 0.01em solid gray;
+  border-radius: 100%;
+  background-color: #ff000040;
+}
+
+.dr-icon {
+  position: absolute;
+  font-size: large;
+  text-shadow: 0.1px 0.1px 0 black;
+}
+
+/* retrieve-and-re-rank */
+
+#rr-layout p.column-label {
+  margin: 0;
+}
+
+p.rr-arrow {
+  margin: 0;
+}
+
+div.rr-stage {
+  display: grid;
+  grid-template-rows: 1.5em min-content 1.5em;
+}
+
+p.rr-stage-num {
+  font-weight: bold;
+  font-size: xx-large;
+  margin: 0;
+}
+
+p.rr-operation {
+  font-size: medium;
+  background-color: white;
+  border: 0.01em solid gray;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 0;
+  max-width: 5em;
+}
+
+div#rr-candidate-docs {
+  font-size: 0.5em;
+  text-shadow: 0.1px 0.1px 0 black;
+}
+
+p.rr-ranking-doc {
+  font-family: monospace;
+  font-size: x-small;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25em;
+}
+
+span.rr-ranking-doc-icon {
+  font-size: large;
+  margin: 0 0.25em;
+  text-shadow: 0.1px 0.1px 0 black;
+}
+
+/* ff indexes */
+
+#ff-efficiency-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  margin-bottom: 1em;
+}
+
+#ff-efficiency-chart ul {
+  border: none;
+  width: auto;
+}
+
+#ff-efficiency-chart table {
+  margin: 0;
+  height: 10em;
+  width: 20em;
+}
+
+#ff-efficiency-chart table tbody td {
+  margin: 0.2em;
+}
+
+#ff-efficiency-chart table tbody td span.vertical {
+  writing-mode: vertical-lr;
+  padding-top: 0.5em;
+}
+
+/* sequential coalescing */
+
+div.sc-psg-container {
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+p.sc-psg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  height: 0.2em;
+  width: 0.2em;
+  border: 0.075em solid;
+  border-radius: 100%;
+  font-size: xx-large;
+}
+
+p.sc-psg.before {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+p.sc-psg.after {
+  background-color: rgba(0, 255, 0, 0.5);
+}
+
+p.sc-psg-label {
+  margin-top: -0.25em;
+}
+
+p.sc-psg-label span.katex {
+  font-size: large;
+}
+
+#sc-effects-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+
+#sc-effects-chart ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: none;
+}
+
+#sc-effects-chart ul li {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#sc-effects-chart table {
+  height: 15em;
+  width: 40em;
+}
+
+#sc-effects-chart table tbody td {
+  margin: 0.05em;
+  writing-mode: vertical-lr;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#sc-effects-chart table tbody td span.data {
+  padding-top: 0.5em;
+}
+
+/* early stopping */
+
+#es-tab {
+  font-size: x-large;
+}
+
+#es-tab li {
+  margin: 0.25em 0.5em;
+}
+
+#es-tab th {
+  text-align: center;
+}
+
+#es-tab tr td:nth-child(2),
+#es-tab tr td:nth-child(3),
+#es-tab tr td:nth-child(4) {
+  text-align: center;
+}
+
+#es-tab tr td:nth-child(1) {
+  font-weight: bold;
+}
+
+#es-tab ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#es-example-left-col {
+  text-align: left;
+}
+
+/* BERT-DMN */
+
+div#bdmn-result-table>img {
+  /* fix for Safari */
+  width: max-content;
+}
+
+
+/* Timeline animations */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.6), 0 0 0 8px rgba(236, 72, 153, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Timeline responsive adjustments */
+@media (max-width: 768px) {
+  .timeline-item {
+    width: 90% !important;
+    left: 5% !important;
+    position: relative !important;
+    margin-bottom: 2em;
+  }
+
+  .timeline-line {
+    display: none;
+  }
+
+  .timeline-container {
+    height: auto !important;
+  }
+}
+
+/* Initial state - hidden and positioned below */
+.slide-up-fade-in-initial {
+  opacity: 0 !important;
+  transform: translateY(80px) !important;
+  will-change: transform, opacity;
+}
+
+/* Active state triggers animation */
+.slide-up-fade-in-active {
+  animation: slideUpAndFadeIn 1.2s ease-out forwards !important;
+}
+
+@keyframes slideUpAndFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure lottie animation background is transparent */
+lottie-player {
+  background: transparent !important;
+}
+
+lottie-player canvas {
+  background: transparent !important;
+}
+
+/* Query section box styling - similar to search results */
+.query-section {
+  border: 0.01em solid gray;
+  border-radius: 0.25em;
+  background-color: white;
+  padding: 1.5em;
+  margin: 2em auto;
+  width: 80%;
+}
+
+
+/* ChatGPT Search Styling */
+/* ChatGPT Send Button */
+.chatgpt-send-button {
+  width: 0.8em;
+  height: 0.8em;
+  background-color: #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: -0.4em;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.chatgpt-send-button svg {
+  width: 0.45em;
+  height: 0.45em;
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.chatgpt-search-bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border: 0.025em solid gray;
+  border-radius: 2em;
+  width: 50%;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  flex-direction: row;
+  background-color: white;
+  height: 0.5em;
+}
+
+.chatgpt-search-bar .search-query {
+  font-family: sans-serif;
+  font-size: medium;
+  text-align: left;
+}
+
+.chatgpt-search-bar .search-query p {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 0.95em !important;
+  color: #2d3748 !important;
+  line-height: 1.4 !important;
+}
+
+/* ChatGPT Response Styling */
+.chatgpt-response {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  line-height: 1.6 !important;
+  text-align: left !important;
+}
+
+.chatgpt-response h3 {
+  color: #374151 !important;
+  font-size: 0.4em !important;
+  font-weight: 600 !important;
+  margin: 0.6em 0 0.1em 0 !important;
+}
+
+.chatgpt-response p {
+  color: #4a5568 !important;
+  font-size: small !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.restaurant-rec {
+  margin: 0.12em 0 !important;
+  padding: 0.1em 0 !important;
+}
+
+.restaurant-rec p {
+  margin: 0 !important;
+}
+
+.chatgpt-link {
+  color: #10a37f !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.chatgpt-link:hover {
+  text-decoration: underline !important;
+}
+
+.chatgpt-divider {
+  border: none !important;
+  border-top: 1px solid #e2e8f0 !important;
+  margin: 1.5em 0 !important;
+}
+
+.chatgpt-list {
+  color: #4a5568 !important;
+  font-size: medium !important;
+  margin: 0.5em 0 !important;
+  padding-left: 1.2em !important;
+}
+
+.chatgpt-list li {
+  margin: 0.5em 0 !important;
+  line-height: 1.5 !important;
+}
+
+p.chatgpt-followup {
+  color: #6b7280 !important;
+  font-style: italic !important;
+  font-size: xx-small !important;
+  margin-top: 1.5em !important;
+  padding-top: 1em !important;
+  border-top: 1px solid #f3f4f6 !important;
+}
+
+
+/* Timeline evolution of search */
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+}
+
+.timeline-axis {
+  position: absolute;
+  bottom: 28%;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background-color: #d1d5db;
+  z-index: 1;
+}
+
+.timeline-arrow {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #d1d5db;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.timeline-tick-line {
+  position: absolute;
+  bottom: 27.5%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 1.5%;
+  background-color: #d1d5db;
+  z-index: 1;
+}
+
+.timeline-tick {
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  bottom: 5%;
+}
+
+.timeline-title {
+  margin: 0;
+  font-weight: bold;
+  color: #374151;
+  font-size: large !important;
+}
+
+.timeline-years {
+  margin: 0;
+  font-size: medium !important;
+  color: #6b7280;
+}
+
+.timeline-point {
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.timeline-point-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  border: 1px solid #d8dadd;
+  background: #fff;
+  padding: 0.2em 0.5em;
+  border-radius: 999px;
+}
+
+.timeline-point-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.timeline-point-text {
+  font-size: medium !important;
+  white-space: nowrap;
+}
+
+img.timeline-point-image {
+  position: absolute;
+  bottom: calc(100% + 1em);
+  left: 50%;
+  bottom: 90%;
+  transform: translateX(-50%);
+  width: 280px;
+  max-width: inherit;
+  height: auto !important;
+  max-height: inherit;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+
+/* Evaluation Challenge Animation */
+.evaluation-animation-elements {
+  position: absolute;
+  top: 37.1%;
+  z-index: 5;
+  left: 3.8%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.evaluation-lottie,
+.evaluation-text,
+.evaluation-ir-icon {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 2s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.evaluation-animation-elements.animate .evaluation-lottie,
+.evaluation-animation-elements.animate .evaluation-text,
+.evaluation-animation-elements.animate .evaluation-ir-icon {
+  visibility: visible;
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+.evaluation-lottie {
+  margin: 0 -2.5em 0 0;
+}
+
+.evaluation-text {
+  font-family: 'Product Sans', sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.evaluation-ir-icon {
+  object-fit: contain;
+  z-index: 10;
+}
+
+/* Dim past fragments for the research questions section */
+#research-questions .c-wide .fragment.visible:not(.current-fragment) {
+  opacity: 0.2;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Dim the initial, non-fragment RQ when other fragments appear */
+#research-questions .c-wide .fragment.visible~div,
+#research-questions .c-wide .fragment.visible~hr {
+  opacity: 0.2;
+  transition: opacity 0.4s ease-in-out;
+}
+
+@keyframes fadeInDelayed {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in-delayed {
+  opacity: 0;
+  animation: fadeInDelayed 0.8s ease-in-out 1s forwards;
+}
+
+.fade-in-delayed.text {
+  animation-delay: 1.2s;
+}
+
+.custom-two-column {
+  display: flex !important;
+  gap: 2em !important;
+  width: 100% !important;
+  align-items: flex-start !important;
+}
+
+.custom-two-column .custom-col-40 {
+  flex: 0 0 40% !important;
+  width: 40% !important;
+}
+
+.custom-two-column .custom-col-60 {
+  flex: 0 0 60% !important;
+  width: 60% !important;
+}
+
+/* Style for shell/log code blocks */
+.reveal pre code.shell {
+  display: block;
+  background: #f0f1eb;
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  font-family: monospace;
+  font-size: 0.8em;
+  line-height: 1.6;
+  max-height: none;
+  white-space: pre;
+}
+
+.timeline-dash {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  height: 3px;
+  background: repeating-linear-gradient(to right,
+      #d1d5db 0px,
+      #d1d5db 8px,
+      transparent 8px,
+      transparent 12px);
+}
+
+.timeline-question span {
+  font-size: xx-large !important;
+}

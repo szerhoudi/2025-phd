@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    % Person's Path (Real Sessions)
+    \draw[plotColor2, very thick, rounded corners] (0,0) coordinate (p1) -- (1,1.5) coordinate (p2) -- (3,1) coordinate (p3) -- (4,2) coordinate (p4) -- (6,1.5) coordinate (p5);
+    \node[plotColor2, above] at (p5) {Person (Real)};
+    
+    % Dog's Path (Simulated Sessions)
+    \draw[plotColor3, very thick, rounded corners] (0.5,-0.5) coordinate (d1) -- (1.5,0) coordinate (d2) -- (2.5,-0.8) coordinate (d3) -- (4.5,0.5) coordinate (d4) -- (5.5,0) coordinate (d5);
+    \node[plotColor3, below] at (d5) {Dog (Simulated)};
+    
+    % Leashes
+    \draw[dashed, gray] (p2) -- (d2);
+    \draw[dashed, gray] (p4) -- (d4);
+    
+    % The Fréchet Distance (longest leash)
+    \draw[<->, red, very thick] (p3) -- (d3) node [midway, right, text=red] {$d_{Fréchet}$};
+    
+    \fill[plotColor2, circle, radius=3pt] (p1) circle (2pt) node[above left] {};
+    \fill[plotColor2, circle, radius=3pt] (p3) circle (2pt) node[above left] {};
+    \fill[plotColor3, circle, radius=3pt] (d1) circle (2pt) node[below left] {};
+    \fill[plotColor3, circle, radius=3pt] (d3) circle (2pt) node[below left] {};
+\end{tikzpicture}
+\end{document}

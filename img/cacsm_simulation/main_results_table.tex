@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+% Custom commands for this table
+\newcommand{\accOne}{\texttt{Acc@1}}
+\newcommand{\accFive}{\texttt{Acc@5}}
+\newcommand{\avgSim}{\texttt{AvgSim}}
+
+\begin{document}
+\begin{tabular}{l|ccc|ccc}
+    \toprule
+     & \multicolumn{3}{c}{\textbf{SUSS} (Academic Dataset)} & \multicolumn{3}{c}{\textbf{AOL4US} (Web Dataset)} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+    \textbf{Model} & \rotatebox{90}{\accOne} & \rotatebox{90}{\accFive} & \rotatebox{90}{\avgSim} & \rotatebox{90}{\accOne} & \rotatebox{90}{\accFive} & \rotatebox{90}{\avgSim} \\
+    \midrule
+    \multicolumn{7}{l}{\bfseries Baselines} \\
+    \quad CSM & 0.368 & 0.250 & 0.557 & 0.315 & 0.221 & 0.531 \\
+    \quad Probabilistic & 0.352 & 0.508 & 0.675 & 0.321 & 0.470 & 0.650 \\
+    \quad TextPrompt & 0.411 & 0.514 & 0.701 & 0.378 & 0.479 & 0.676 \\
+    \midrule
+    \multicolumn{7}{l}{\bfseries CACSM - RNN-based Models} \\
+    \quad \textsc{CACSM\(_{\texttt{UM}}\)} & 0.431 & 0.519 & 0.724 & 0.390 & 0.485 & 0.698 \\
+    \rowcolor{gray!15}
+    \quad \textsc{CACSM\(_{\texttt{UM\_negS}}\)} & 0.477 & 0.572 & 0.761 & 0.436 & 0.536 & 0.720 \\
+    \midrule
+    \multicolumn{7}{l}{\bfseries CACSM - LLM-based Models} \\
+    \quad \textsc{CACSM\(_{\texttt{LLM\_LoRa}}\)} & 0.471 & 0.589 & 0.755 & 0.441 & 0.557 & 0.731 \\
+    \rowcolor{gray!15}
+    \quad \textsc{CACSM\(_{\texttt{LLM\_full}}\)} & \textbf{0.475} & \textbf{0.576} & \textbf{0.762} & \textbf{0.461} & \textbf{0.570} & \textbf{0.739} \\
+    \bottomrule
+\end{tabular}
+\end{document}

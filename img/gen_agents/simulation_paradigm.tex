@@ -1,0 +1,26 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=2cm, auto, >=stealth,
+    block/.style={rectangle, draw, thick, text centered, rounded corners, minimum height=2.5em, text width=8em},
+    line/.style={draw, -{Stealth[length=3mm]}, thick}
+]
+    % Traditional
+    \node [block, fill=plotColor2!20] (human) {Human User};
+    \node [block, right=of human, xshift=4cm, fill=plotColor3!20] (log) {Log Data};
+    \draw [line] (human) -- (log);
+    \node [fignode, above=0.2 of human.north, xshift=2cm] {\textbf{Observation}};
+
+    % Simulation
+    \node [block, fill=plotColor2!20, below=of human, yshift=-1cm] (agent) {Generative Agent};
+    \node [block, right=of agent, xshift=4cm, fill=plotColor3!20] (simlog) {Simulated Data};
+    \draw [line] (agent) -- (simlog);
+    \node [fignode, above=0.2 of agent.north, xshift=2cm] {\textbf{Simulation}};
+
+    \draw [line, dashed, gray, ->] (log) to[bend right=60] (agent);
+    \node[fignode, gray, text width=4cm, align=center] at (6.5, -2) {Initialize Agent from Real Data};
+
+\end{tikzpicture}
+\end{document}

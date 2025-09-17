@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Documents Assessed (log scale)},
+    ylabel={Queries Submitted},
+    grid=major,
+    legend pos=north east,
+    legend cell align={left},
+    xmode=log,
+    ytick={1,2,3,4,5,6,7,8,9,10},
+    ymin=0, ymax=11,
+]
+
+% Emphasized lines
+\addplot[very thick, plotColor3, mark=square*] coordinates {
+    (20, 10) (25, 9) (32, 8) (40, 7) (50, 6) (65, 5) (85, 4) (110, 3) (150, 2) (200, 1)
+};
+\addlegendentry{\textbf{\textsc{UQV⁵} (Real)}}
+
+\addplot[very thick, plotColor5, mark=o*] coordinates {
+    (30, 10) (38, 9) (48, 8) (60, 7) (75, 6) (95, 5) (120, 4) (160, 3) (210, 2) (280, 1)
+};
+\addlegendentry{\textbf{\textsc{ST_EA} (Ours)}}
+
+\addplot[very thick, plotColor2, mark=triangle*] coordinates {
+    (10, 10) (12, 9) (15, 8) (20, 7) (28, 6) (38, 5) (50, 4) (65, 3) (85, 2) (110, 1)
+};
+\addlegendentry{\textsc{B\_S1} (Baseline)}
+
+\end{axis}
+\end{tikzpicture}
+\end{document}

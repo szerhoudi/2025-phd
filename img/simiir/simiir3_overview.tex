@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{positioning}
+
+\begin{document}
+\begin{tikzpicture}[
+    base/.style={rectangle, rounded corners, draw=black, thick, minimum width=4cm, minimum height=3cm, text centered, fill=plotColor2!20},
+    module/.style={rectangle, rounded corners, draw=black, thick, minimum width=3.5cm, text centered, fill=plotColor3!20},
+    line/.style={draw, thick, -stealth}
+]
+    \node[base] (base) {SimIIR Core \\ \footnotesize(CSM, User/System Loop)};
+
+    \node[module, above=0.8cm of base] (llm) {LLM Support};
+    \node[module, right=1.2cm of base] (convo) {Conversational Search};
+    \node[module, below=0.8cm of base] (markov) {Markovian User Models};
+    \node[module, left=1.2cm of base] (pyterrier) {PyTerrier Integration};
+
+    \draw[line] (llm.south) -- (base.north);
+    \draw[line] (convo.west) -- (base.east);
+    \draw[line] (markov.north) -- (base.south);
+    \draw[line] (pyterrier.east) -- (base.west);
+\end{tikzpicture}
+\end{document}

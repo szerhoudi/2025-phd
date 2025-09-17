@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8cm,
+        height=6cm,
+        xlabel={nDCG@10},
+        ylabel={Fréchet Distance (FD)},
+        grid=major,
+        legend pos=north east,
+        ]
+        
+        \addplot[
+            only marks,
+            mark=*,
+            mark size=3pt,
+            plotColor2,
+        ] table {
+            x y
+            0.356 5.9
+            0.382 5.5
+            0.397 4.7
+            0.411 4.8
+            0.439 3.6
+            0.467 2.8
+        };
+        \addlegendentry{Simulation Models}
+
+        % Regression line
+        \addplot[
+            no marks,
+            thick,
+            plotColor1,
+        ] table[y={create col/linear regression={y=y}}] {
+            x y
+            0.356 5.9
+            0.382 5.5
+            0.397 4.7
+            0.411 4.8
+            0.439 3.6
+            0.467 2.8
+        };
+        \addlegendentry{Trendline}
+
+    \end{axis}
+\end{tikzpicture}
+\end{document}

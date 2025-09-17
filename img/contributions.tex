@@ -1,0 +1,139 @@
+\documentclass{standalone}
+% We assume a file _common.tex exists for the symbols, or we define them.
+% For this example, let's define the necessary commands.
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pifont} % For symbols like \ding{}
+\newcommand{\Lightning}{\ding{208}} % Example symbol
+
+% Commands for shortened paper titles to keep the code clean
+\newcommand{\pubI}{\textbf{Contextual Markov Model}}
+\newcommand{\pubII}{\textbf{Markov-based Sim.}}
+\newcommand{\pubIII}{\textbf{Embedding Space Align.}}
+\newcommand{\pubIV}{\textbf{CACSM}}
+\newcommand{\pubV}{\textbf{SimIIR 2.0}}
+\newcommand{\pubVI}{\textbf{SimIIR 3}}
+\newcommand{\pubVII}{\textbf{SearchLab}}
+\newcommand{\pubVIII}{\textbf{Classification Eval.}}
+\newcommand{\pubIX}{\textbf{Fréchet Dist. Eval.}}
+\newcommand{\pubX}{\textbf{PersonaRAG}}
+\newcommand{\pubXI}{\textbf{Agent4DL}}
+\newcommand{\pubXII}{\textbf{Dataset Analysis}}
+
+
+\begin{document}
+\tikzset{
+    tradeoff/.style={
+            draw,
+            fill=yellow,
+            inner sep=0.15em,
+            isosceles triangle,
+            isosceles triangle apex angle=60,
+            shape border rotate=90,
+            rounded corners,
+        }
+}
+
+\tdplotsetmaincoords{60}{115}
+% drawing in axis planes:
+% https://tex.stackexchange.com/a/49851
+% https://tug.org/TUGboat/tb33-1/tb103wolcott.pdf
+\def\angPhi{30}
+\def\angTheta{-25}
+\begin{tikzpicture}[
+        tdplot_main_coords,
+        scale=1.4,
+        ffplane/.estyle={% Evaluation-User Modeling plane (Y-Z)
+                cm={
+                        cos(\angTheta), sin(\angTheta)*sin(\angPhi),
+                        0, cos(\angPhi),
+                        (0,0)
+                    }
+            },
+        fxplane/.estyle={% Framework-Evaluation plane (X-Y)
+                cm={
+                        cos(\angTheta), sin(\angTheta)*sin(\angPhi),
+                        -sin(\angTheta), cos(\angTheta)*sin(\angPhi),
+                        (0,0)
+                    },
+            },
+        xfplane/.estyle={% Framework-User Modeling plane (X-Z)
+                cm={
+                        0, cos(\angPhi),
+                        -sin(\angTheta), cos(\angTheta)*sin(\angPhi),
+                        (0,0)
+                    },
+            },
+    ]
+    \coordinate (O) at (0,0,0);
+    % --- Axis Labels ---
+    \draw[thick,->] (O) -- (7.5,0,0) node[anchor=north east]{\textbf{Framework}};
+    \draw[thick,->] (O) -- (0,7.5,0) node[anchor=north west]{\textbf{Evaluation}};
+    \draw[thick,->] (O) -- (0,0,7.5) node[anchor=south]{\textbf{User Modeling}};
+
+    \tdplotdrawarc[tdplot_main_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+    \tdplotsetrotatedcoords{0}{90}{90}
+    \tdplotdrawarc[tdplot_rotated_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+    \tdplotsetrotatedcoords{-90}{-90}{0}
+    \tdplotdrawarc[tdplot_rotated_coords,dashed,<->]{(O)}{8}{15}{75}{}{}
+
+    % drawing the nodes in \tdplotdrawarc draws them under the path
+    \node[tradeoff] at (5.65,5.65,0) {\large\Lightning};
+    \node[tradeoff] at (0,5.65,5.65) {\large\Lightning};
+    \node[tradeoff] at (5.65,0,5.65) {\large\Lightning};
+
+    % --- Grid planes (unchanged) ---
+    \begin{scope}
+        \clip (0,0,0) -- (7,0,0) -- (7,1,0) -- (1,7,0) -- (0,7,0) -- cycle;
+        \draw[fxplane, gray, thin] (0,0,0) grid (20,20,0);
+    \end{scope}
+    \begin{scope}
+        \clip (0,0,0) -- (0,7,0) -- (0,7,1) -- (0,1,7) -- (0,0,7) -- cycle;
+        \draw[ffplane, gray, thin] (0,0,0) grid (0,20,20);
+    \end{scope}
+    \begin{scope}
+        \clip (0,0,0) -- (7,0,0) -- (7,0,1) -- (1,0,7) -- (0,0,7) -- cycle;
+        \draw[xfplane, gray, thin] (0,0,0) grid (-20,0,-20);
+    \end{scope}
+
+    % --- Define node and label styles ---
+    \tikzset{
+        pub_label/.style={align=center, fill=white, draw=gray, font=\sffamily, inner sep=3pt, rounded corners=3pt}
+    }
+    
+    % --- Coordinates for each publication ---
+    \coordinate (p1) at (1.0, 4.0, 6.5);
+    \coordinate (p2) at (4.0, 4.0, 6.0);
+    \coordinate (p3) at (2.0, 6.0, 6.5);
+    \coordinate (p4) at (3.5, 4.0, 7.0);
+    \coordinate (p5) at (7.0, 2.0, 4.5);
+    \coordinate (p6) at (7.0, 1.5, 6.0);
+    \coordinate (p7) at (6.5, 6.0, 1.0); % Strong Framework/Eval -> fxplane
+    \coordinate (p8) at (1.0, 7.0, 3.0); % Strong Eval -> ffplane
+    \coordinate (p9) at (1.2, 7.0, 3.5); % Strong Eval -> ffplane
+    \coordinate (p10) at (6.0, 2.5, 6.5);
+    \coordinate (p11) at (6.0, 4.0, 7.0);
+    \coordinate (p12) at (2.0, 6.0, 6.0); % Strong Eval/Model -> ffplane
+
+    % --- Draw the publication nodes and labels on the correct planes ---
+    
+    % Points with low Z are drawn on the Framework-Evaluation (X-Y) plane
+    \draw[fxplane, very thick, draw=red] (p7) circle (0.15em) node[pub_label, below right] {\pubVII};
+
+    % Points with low X are drawn on the Evaluation-User Modeling (Y-Z) plane
+    \draw[ffplane, very thick, draw=red] (p8) circle (0.15em) node[pub_label, above] {\pubVIII};
+    \draw[ffplane, very thick, draw=red] (p9) circle (0.15em) node[pub_label, below left] {\pubIX};
+    \draw[ffplane, very thick, draw=red] (p12) circle (0.15em) node[pub_label, right] {\pubXII};
+
+    % Points with balanced focus are drawn in the main 3D space
+    \draw[very thick, draw=red] (p1) circle (0.15em) node[pub_label, right] {\pubI};
+    \draw[very thick, draw=red] (p2) circle (0.15em) node[pub_label, above] {\pubII};
+    \draw[very thick, draw=red] (p3) circle (0.15em) node[pub_label, above left] {\pubIII};
+    \draw[very thick, draw=red] (p4) circle (0.15em) node[pub_label, above right] {\pubIV};
+    \draw[very thick, draw=red] (p5) circle (0.15em) node[pub_label, below] {\pubV};
+    \draw[very thick, draw=red] (p6) circle (0.15em) node[pub_label, above right] {\pubVI};
+    \draw[very thick, draw=red] (p10) circle (0.15em) node[pub_label, left] {\pubX};
+    \draw[very thick, draw=red] (p11) circle (0.15em) node[pub_label, above] {\pubXI};
+    
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tabular}{lcccccc}
+    \toprule
+                   & \multicolumn{3}{c}{Negative class} & \multicolumn{3}{c}{Positive class}                                                                                         \\
+    \cmidrule(lr){2-4}                                  \cmidrule{5-7}
+                   & \precision                         & \recall                            & $\text{F}_1$        & \precision          & \recall             & $\text{F}_1$        \\
+    \midrule
+    \wtt           & \num{0.82}                         & \num{0.76}                         & \num{0.79}          & \num{0.84}          & \textbf{\num{0.89}} & \num{0.86}          \\
+    \wtt{} (unary) & \num{0.80}                         & \num{0.78}                         & \num{0.79}          & \num{0.85}          & \num{0.87}          & \num{0.86}          \\
+    \bp            & \num{0.58}                         & \textbf{\num{0.90}}                & \num{0.71}          & \textbf{\num{0.90}} & \num{0.58}          & \num{0.71}          \\
+    \moz           & \textbf{\num{0.85}}                & \num{0.76}                         & \num{0.81}          & \num{0.82}          & \textbf{\num{0.89}} & \num{0.85}          \\
+    \midrule
+    \boilernet     & \num{0.82}                         & \num{0.83}                         & \textbf{\num{0.82}} & \num{0.87}          & \num{0.86}          & \textbf{\num{0.87}} \\
+    \bottomrule
+\end{tabular}
+\end{document}

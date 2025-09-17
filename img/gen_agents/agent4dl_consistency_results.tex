@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            width=14cm,
+            height=7cm,
+            bar width=0.5cm,
+            enlarge x limits=0.2,
+            grid=major,
+            ylabel={Similarity Score},
+            xtick=data,
+            xticklabels={Popular Sel., Random Sel., Discrim. Sel., Agent4DL},
+            y tick label style={/pgf/number format/fixed},
+            legend style={at={(0.5,1.05)}, anchor=south, legend columns=-1, column sep=0.5em, /pgf/inner xsep=1pt},
+            legend image code/.code={
+                \draw[#1,/pgfplots/ybar legend] (0cm,-0.2cm) rectangle (0.8em,0.6em);
+            },
+            legend entries={Term Overlap ($\tau$), BLEU, BERTScore},
+            ymajorgrids=true,
+            ymin=0,
+            ymax=1.0
+        ]
+        \addplot[fill=plotColor1!60, draw=black, thick] coordinates {(1,0.63) (2,0.23) (3,0.43) (4,0.87)};
+        \addplot[fill=plotColor2!60, draw=black, thick] coordinates {(1,0.32) (2,0.11) (3,0.24) (4,0.40)};
+        \addplot[fill=plotColor3!60, draw=black, thick] coordinates {(1,0.76) (2,0.53) (3,0.68) (4,0.83)};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

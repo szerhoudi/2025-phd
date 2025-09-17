@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\input{../../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=7cm,
+            grid=major,
+            xlabel={$p$},
+            ylabel={Latency [ms]},
+            legend entries={\bertbase{},\selbert{}},
+            legend cell align={left},
+            legend pos=south east,
+            legend style={font=\small},
+        ]
+        \addplot[
+            domain=0.1:0.9,
+            samples=2,
+            dashed,
+            mark=none,
+            very thick,
+            plotColor1,
+        ] {897.9388236};
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=square,
+            plotColor2,
+        ] table[
+                col sep=comma,
+                y expr=\thisrowno{1} * 1000, % convert seconds to milliseconds
+            ] {selbert.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

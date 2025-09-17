@@ -1,0 +1,177 @@
+<!-- Background Section -->
+  <section class="sec-title" id="background">
+    <h2>
+      <b>Background</b>
+    </h2>
+  </section>
+
+  <section id="sparse-retrieval">
+    <h2>Sparse retrieval</h2>
+    <hr class="divider" />
+    <p>
+      <i>Sparse retrieval</i> (mostly) uses <b>lexical matching</b> for
+      <b>ad-hoc retrieval</b>.
+    </p>
+    <hr class="divider" />
+    <img class="fig fragment" data-fragment-index="1" style="margin: 0"
+      src="img/background/sparse_retrieval_example_out.svg" />
+    <p class="caption fragment" data-fragment-index="1">
+      Sparse retrieval example.
+    </p>
+    <hr class="divider" />
+    <p class="fragment" data-fragment-index="2">
+      Lexical matching is
+      <span class="fragment" data-fragment-index="2" style="color: green">fast and efficient,</span>
+      <span class="fragment" style="color: green">explainable by design,</span>
+      <span class="fragment" style="color: red">limited to matching terms.</span>
+    </p>
+  </section>
+
+  <section id="semantic-matching">
+    <h2>Semantic matching</h2>
+    <hr class="divider" />
+    <p>
+      <i>Semantic matching</i> employs <b>representation learning</b> in
+      order to capture the <b>semantics</b> of queries and documents.
+    </p>
+    <hr class="divider" />
+    <div class="column-layout" style="margin: 0 2em">
+      <div class="column-item fragment">
+        <img class="fig" src="img/background/cross_encoder_out.svg" />
+        <p class="caption">Cross-encoder</p>
+      </div>
+      <div class="column-item fragment">
+        <img class="fig" src="img/background/dual_encoders_out.svg" />
+        <p class="caption">Dual-encoders</p>
+      </div>
+    </div>
+    <hr class="divider" />
+    <p class="fragment">
+      Neural semantic models are often
+      <span style="color: red">computationally expensive</span>
+      and
+      <span style="color: red">not explainable</span>.
+    </p>
+  </section>
+
+  <section id="reranking">
+    <h2>Retrieve-and-re-rank</h2>
+    <hr class="divider" />
+    <p>
+      <i>Retrieve-and-re-rank</i> is a <b>telescoping</b> setting that
+      has two stages.
+    </p>
+    <hr class="divider" />
+
+    <div class="column-desc-layout" id="rr-layout" style="gap: 0">
+      <div class="column-item fragment" data-fragment-index="1">
+        <p style="font-size: 2em; margin: 0">📚</p>
+      </div>
+      <p class="column-label fragment" data-fragment-index="1">
+        Corpus
+      </p>
+
+      <p class="column-item rr-arrow fragment" data-fragment-index="2">
+        →
+      </p>
+      <p class="column-label fragment" data-fragment-index="2"></p>
+
+      <div class="column-item rr-stage fragment" data-fragment-index="2">
+        <p class="rr-stage-num">1</p>
+        <p class="rr-operation">Lexical retrieval</p>
+      </div>
+      <p class="column-label fragment" data-fragment-index="2"></p>
+
+      <p class="column-item rr-arrow fragment" data-fragment-index="2">
+        →
+      </p>
+      <p class="column-label fragment" data-fragment-index="2"></p>
+
+      <div class="column-item fragment" data-fragment-index="2" id="rr-candidate-docs">
+        📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄<br />📄📄📄📄📄
+      </div>
+      <p class="column-label fragment" data-fragment-index="2">
+        Candidates
+      </p>
+
+      <p class="column-item rr-arrow fragment" data-fragment-index="3">
+        →
+      </p>
+      <p class="column-label fragment" data-fragment-index="3"></p>
+
+      <div class="column-item rr-stage fragment" data-fragment-index="3">
+        <p class="rr-stage-num">2</p>
+        <p class="rr-operation">Semantic re-ranking</p>
+      </div>
+      <p class="column-label fragment" data-fragment-index="3"></p>
+
+      <p class="column-item rr-arrow fragment" data-fragment-index="3">
+        →
+      </p>
+      <p class="column-label fragment" data-fragment-index="3"></p>
+
+      <div class="column-item fragment" data-fragment-index="3">
+        <p class="rr-ranking-doc">
+          #1 <span class="rr-ranking-doc-icon">📄</span> D371 (0.95)
+        </p>
+        <p class="rr-ranking-doc">
+          #2 <span class="rr-ranking-doc-icon">📄</span> D222 (0.85)
+        </p>
+        <p class="rr-ranking-doc">
+          #3 <span class="rr-ranking-doc-icon">📄</span> D984 (0.71)
+        </p>
+      </div>
+      <p class="column-label fragment" data-fragment-index="3">
+        Final ranking
+      </p>
+    </div>
+  </section>
+
+  <section id="dense-retrieval">
+    <h2>Dense retrieval</h2>
+    <hr class="divider" />
+    <div class="column-layout">
+      <div class="column-item">
+        <div class="c-wide">
+          <p>
+            <i>Dense retrieval</i> uses <b>semantic models</b> directly
+            for <b>retrieval</b>.
+          </p>
+          <p class="fragment" data-fragment-index="2">
+            Documents and query are embedded in a common vector space
+            using <b>dual-encoder</b>
+            models.
+          </p>
+          <p class="fragment" data-fragment-index="2">
+            Document representations are <b>pre-computed</b> during the
+            indexing stage.
+          </p>
+          <p class="fragment" data-fragment-index="3">
+            Retrieval is performed as an (approximate)
+            <b>nearest neighbor search</b> operation.
+          </p>
+        </div>
+      </div>
+      <div class="column-item">
+        <div class="vector-space">
+          <div class="fragment" data-fragment-index="2">
+            <span class="dr-icon" style="top: 15rem; left: 4rem">📄</span>
+            <span class="dr-icon" style="top: 3rem; left: 5rem">📄</span>
+            <span class="dr-icon" style="top: 4rem; left: 7rem">📄</span>
+            <span class="dr-icon" style="top: 3rem; left: 8rem">📄</span>
+            <span class="dr-icon" style="top: 2rem; left: 6rem">📄</span>
+            <span class="dr-icon" style="top: 8rem; left: 7rem">📄</span>
+            <span class="dr-icon" style="top: 10rem; left: 9rem">📄</span>
+            <span class="dr-icon" style="top: 7rem; left: 8rem">📄</span>
+            <span class="dr-icon" style="top: 9rem; left: 11rem">📄</span>
+            <span class="dr-icon" style="top: 10rem; left: 1rem">📄</span>
+          </div>
+          <div id="dr-query-radius" class="fragment" data-fragment-index="3"></div>
+          <span class="dr-icon fragment" style="top: 5rem; left: 10rem" data-fragment-index="2">🤔</span>
+        </div>
+        <p class="caption">
+          The vector space is often $768$-dimensional.
+        </p>
+      </div>
+    </div>
+  </section> 

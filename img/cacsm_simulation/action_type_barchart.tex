@@ -1,0 +1,37 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=20pt,
+    width=16cm,
+    height=8cm,
+    enlarge x limits=0.25,
+    ylabel={Accuracy@5},
+    symbolic x coords={Query, Click, Stop},
+    xtick=data,
+    nodes near coords,
+    nodes near coords align={vertical},
+    ymin=0, ymax=1.1,
+    legend style={at={(0.5,-0.15)}, anchor=north, legend columns=-1},
+    ymajorgrids=true,
+]
+
+\addplot[fill=plotColor2!70, draw=plotColor2] coordinates {
+    (Query, 0.652)
+    (Click, 0.277)
+    (Stop, 0.889)
+};
+
+\addplot[fill=plotColor3!70, draw=plotColor3] coordinates {
+    (Query, 0.669)
+    (Click, 0.595)
+    (Stop, 0.793)
+};
+
+\legend{\textsc{CACSM\(_{\texttt{UM\_negS}}\)} (RNN), \textsc{CACSM\(_{\texttt{LLM\_full}}\)} (LLM)}
+\end{axis}
+\end{tikzpicture}
+\end{document}

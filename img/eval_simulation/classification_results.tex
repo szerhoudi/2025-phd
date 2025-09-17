@@ -1,0 +1,40 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            width=12cm,
+            height=6cm,
+            bar width=1.5cm,
+            enlarge x limits=0.3,
+            grid=major,
+            ylabel={Classifier F-score (lower is better)},
+            xtick=data,
+            xticklabels={Baseline Model, Contextual Model},
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,
+            ymax=0.8,
+            y tick label style={/pgf/number format/fixed},
+            legend style={at={(0.5,-0.25)}, anchor=north, legend columns=-1},
+            legend cell align={left},
+        ]
+        \addplot[
+            fill=plotColor1!60,
+            draw=black,
+            thick,
+        ] coordinates {
+                (1, 0.651)
+            };
+        \addplot[
+            fill=plotColor3!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (2, 0.519)
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

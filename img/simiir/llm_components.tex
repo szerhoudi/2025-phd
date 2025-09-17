@@ -1,0 +1,33 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{decorations.pathmorphing}
+
+\begin{document}
+\begin{tikzpicture}[
+    csm_box/.style={rectangle, draw, thick, rounded corners, fill=plotColor2!20, minimum width=7em, minimum height=2.5em, text centered},
+    llm_box/.style={csm_box, fill=plotColor3!20},
+    arrow/.style={thick, ->, >=stealth, decorate, decoration={snake, segment length=6mm, amplitude=0.8mm}}
+]
+    % Column 1: Standard Components
+    \node[csm_box] (q1) at (0, 3) {Query Strategy};
+    \node[csm_box] (s1) at (0, 1) {SERP Decision};
+    \node[csm_box] (r1) at (0, -1) {Result Decision};
+    \node[csm_box] (st1) at (0, -3) {Stopping Decision};
+    
+    \node[above=0.2 of q1] {\textbf{Standard CSM}};
+
+    % Column 2: LLM Components
+    \node[llm_box] (q2) at (5.5, 3) {LLM Querying};
+    \node[llm_box] (s2) at (5.5, 1) {LLM SERP Eval};
+    \node[llm_box] (r2) at (5.5, -1) {LLM Result Eval};
+    \node[llm_box] (st2) at (5.5, -3) {LLM Stopping};
+    
+    \node[above=0.2 of q2] {\textbf{LLM-Powered User}};
+    
+    % Arrows
+    \draw[arrow] (q1) -- node[above, midway, font=\small] {replaced by} (q2);
+    \draw[arrow] (s1) -- (s2);
+    \draw[arrow] (r1) -- (r2);
+    \draw[arrow] (st1) -- (st2);
+\end{tikzpicture}
+\end{document}

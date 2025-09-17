@@ -1,0 +1,295 @@
+<section class="sec-title" id="simiir-title-slide">
+  <h2>
+    <b>Simulation <i>Framework</i> </b><br />SimIIR
+  </h2>
+  <div>
+    <hr class="divider" />
+    <div class="pub">
+      <p>
+        <b>Saber Zerhoudi</b>, Sebastian Günther, Kim Plassmeier, Timo Borst,
+        Christin Seifert, Matthias Hagen, and Michael Granitzer
+      </p>
+      <p>
+        <span class="pub-title">SimIIR 2.0 Framework: User Types, Markov Model-Based
+          Interaction Simulation, and Advanced Query Generation</span>,
+        <span class="pub-venue">CIKM 2022</span>
+        <!-- <span class="pub-venue">CIKM 2022 (🏆 Best Resource Paper Award)</span> -->
+      </p>
+    </div>
+    <div class="pub">
+      <p>
+        Leif Azzopardi, Timo Breuer, Björn Engelmann, Christin Kreutz,
+        Sean MacAvaney, David Maxwell, Andrew Parry, Adam Roegiest, Xi Wang,
+        and <b>Saber Zerhoudi</b>
+      </p>
+      <p>
+        <span class="pub-title">SimIIR 3: A Framework for the Simulation of Interactive and
+          Conversational Information Retrieval</span>,
+        <span class="pub-venue">SIGIR-AP 2024</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="simiir-csm" data-auto-animate>
+  <h2>The SimIIR Framework</h2>
+  <hr class="divider" />
+  <p>
+    At the core of SimIIR<sup>4</sup> is the
+    <b>Complex Searcher Model (CSM)</b>, which defines the actions and
+    decisions a user performs in a search session.
+  </p>
+  <img class="fig" src="img/simiir/csm_maxwell_2016.png" style="width: 95%; margin-top: 1em" />
+  <p class="caption">
+    A flowchart of the user's decision-making process in the CSM presently used within SimIIR as the underlying searcher
+    model.
+  </p>
+  <hr class="divider" />
+  <p class="footnote">
+    <sup>4</sup>David Maxwell et al. "Simulating interactive information retrieval: Simiir: A framework for the
+    simulation of interaction". SIGIR
+    2016.
+  </p>
+</section>
+
+<section id="simiir-v1" data-auto-animate>
+  <h2>The SimIIR Framework</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Components</i></h4>
+  <hr class="divider" />
+
+  <div style="width: 95%; margin: 0 auto;" data-id="simiir-img-full">
+    <img class="fig" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em" />
+    <p class="caption">
+      Overview of the SimIIR framework components.
+    </p>
+  </div>
+</section>
+
+<section id="simiir-components" data-auto-animate>
+  <h2>The SimIIR Framework</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Components</i></h4>
+  <hr class="divider" />
+
+  <div style="width: 95%; margin: 0 auto; position: relative;" data-id="simiir-img-container">
+    <img class="fig" data-id="simiir-img-base" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em; filter: blur(5px);" />
+    <img class="fig" data-id="simiir-img-overlay" src="img/simiir/simiir_v1_5.png" style="width: auto; margin-top: 0em; position: absolute; top: 0; left: 0; transform: translateX(35%);" />
+    <p class="caption" data-id="simiir-img-caption" style="position: absolute; bottom: -4em; width: 100%; text-align: center;">
+      Overview of the SimIIR framework components.
+    </p>
+  </div>
+</section>
+
+<section id="simiir-user-config" data-auto-animate>
+  <h2>The SimIIR Framework</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>User Configuration</i></h4>
+  <hr class="divider" />
+
+  <div class="custom-two-column" data-id="simiir-code-img-grid">
+    <div class="custom-col-60">
+      <pre class="yaml" style="font-size: large; line-height: 1.5em">
+        <code data-trim data-noescape
+          data-line-numbers="1-7|8-12|13-20|21-26|27-30"
+          data-fragment-index="1">
+                    query_generator:
+                      - BaseGenerator
+                      - BiTermGenerator
+                      - PredeterminedQueryGenerator
+                      - SingleReversedTriInterleavedGenerator
+                      - TriTermGenerator
+                      - [...]
+                    serp_impression:
+                      - BaseSerpImpression
+                      - PerfectSerpImpression
+                      - SimpleSerpImpression
+                      - StochasticSerpImpression
+                    decision_maker:
+                      - BaseDecisionMaker
+                      - DifferenceDecisionMaker
+                      - FixedDepthDecisionMaker
+                      - IftBasedDecisionMaker
+                      - LimitedSatisfactionDecisionMaker
+                      - RandomDecisionMaker
+                      - [...]
+                    classifiers:
+                      - BaseClassifier
+                      - BaseInformedTrecClassifier
+                      - PerfectClassifier
+                      - StochasticInformedTrecClassifier
+                      - [...]
+                    search_context:
+                      - NoRelevanceRevision
+                      - RelevanceRevision
+                      - SearchContext
+        </code>
+      </pre>
+    </div>
+
+    <div class="custom-col-40" style="float: left; position: absolute; width: 95% !important; top: 25%;">
+      <img class="fig" src="img/simiir/simiir_v1_1.png"
+        style="width: 100%; margin-top: 0em; clip-path: inset(0 0 0 66.67%); max-height: none;"
+        data-id="simiir-img-full" />
+    </div>
+  </div>
+
+</section>
+
+<section id="simiir-logs" data-auto-animate>
+  <h2>The SimIIR Framework</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Output Logs</i></h4>
+  <hr class="divider" />
+
+  <div style="width: 95%; margin: 0 auto; position: relative;" data-id="simiir-img-container">
+    <img class="fig" data-id="simiir-img-base" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em; filter: blur(5px);" />
+    <img class="fig" data-id="simiir-img-overlay" src="img/simiir/simiir_v1_6.png" style="width: auto; margin-top: 0em; position: absolute; top: 0; left: 0; transform: translateX(75%);" />
+    <p class="caption" data-id="simiir-img-caption" style="position: absolute; bottom: -4em; width: 100%; text-align: center;">
+      Overview of the SimIIR framework components.
+    </p>
+  </div>
+</section>
+
+<section id="simiir-2" data-auto-animate data-auto-animate-id="simiir">
+  <h2 class="fragment" data-fragment-index="1">SimIIR 2.0</h2>
+  <h4 class="fragment" data-fragment-index="1" style="margin-top: -0.5em; font-family: inherit;"><i>Introducing Dynamics</i></h4>
+  <hr class="divider" />
+  <p>
+    The original SimIIR components were
+    <b>static</b> and the project was <b>unmaintained</b>. <br>
+    <span class="fragment" data-fragment-index="1">SimIIR 2.0<sup>5</sup> revived it by
+    introducing <b>dynamic, history-aware behaviors</b>.</span>
+  </p>
+  <img class="fig fragment" data-fragment-index="1" src="img/simiir/csm_simiir.png" style="width: 95%; margin-top: 0em" />
+  <p class="caption fragment" data-fragment-index="1">
+    A flowchart of the user's decision-making process used within SimIIR 2.0 as the underlying searcher model.
+  </p>
+  <hr class="divider" />
+  <p class="footnote fragment" data-fragment-index="1">
+    <sup>5</sup>Saber Zerhoudi et al. "SimIIR 2.0 framework: user types, Markov model-based interaction simulation, and advanced query generation". CIKM
+    2022.
+  </p>
+</section>
+
+<section id="simiir-v2" data-auto-animate>
+  <h2>SimIIR 2.0</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Components</i></h4>
+  <hr class="divider" />
+
+  <div style="width: 95%; margin: 0 auto;" data-id="simiir-img-full">
+    <img class="fig" src="img/simiir/simiir_v1_2.png" style="width: 100%; margin-top: 0em" />
+    <p class="caption">
+      Overview of SimIIR 2.0 framework components. Green are the new additions.
+    </p>
+  </div>
+</section>
+
+<section id="simiir-2-components" data-auto-animate>
+  <h2>SimIIR 2.0</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>User Configuration</i></h4>
+  <hr class="divider" />
+
+  <div class="custom-two-column" data-id="simiir-code-img-grid">
+    <div class="custom-col-60">
+      <pre class="xml" style="font-size: large; line-height: 1.5em; width: 100%;">
+        <code data-trim style="white-space: pre-wrap; word-wrap: break-word; max-height: none;"
+          data-line-numbers="2-2|3-3|4-6|7-7|8-8|9-9|10-10"
+          data-fragment-index="1">
+                    &lt;userConfiguration id="fixeddepthuser"&gt;
+                        &lt;algorithm class="MarkovChain" model_type="exploratory" /&gt;
+                        &lt;queryGenerator class="SmarterQueryGenerator" updating="true" /&gt;
+                        &lt;textClassifiers&gt;
+                            &lt;classifier class="StochasticInformedTrecTextClassifier" rprob="0.8" nprob="0.3" /&gt;
+                        &lt;/textClassifiers&gt;
+                        &lt;stoppingDecisionMaker class="FixedDepthDecisionMaker" depth="0" /&gt;
+                        &lt;logger class="FixedCostLogger" time_limit="600" /&gt;
+                        &lt;searchContext class="SearchContext" relevance_revision="1" /&gt;
+                        &lt;serpImpression class="SimpleSERPImpression" /&gt;
+                    &lt;/userConfiguration&gt;
+        </code>
+      </pre>
+    </div>
+
+    <div class="custom-col-40" style="float: left; position: absolute; width: 95% !important; top: 25%;">
+      <img class="fig" src="img/simiir/simiir_v1_2.png"
+        style="width: 100%; margin-top: 0em; clip-path: inset(0 0 0 66.67%); max-height: none;"
+        data-id="simiir-img-full" />
+    </div>
+  </div>
+
+</section>
+
+<section id="simiir-2-community" data-auto-animate>
+  <h2>SimIIR 2.0</h2>
+  <hr class="divider" />
+  <p style="margin-top: -0.5em; padding-bottom: 1em;">
+    SimIIR 2.0 sparked renewed interest in simulation experiments<i style="font-size: large;"><br>(e.g. Câmara et al. (ECIR 2022), Breuer et al. (CIKM 2023), Engelmann et al. (ECIR 2024))</i>
+  </p>
+  <div class="fragment" data-fragment-index="1" style="position: relative; height: 450px; margin: 0 auto;">
+    <h3 style="position: absolute; top: -0.5em; left: 1em; z-index: 10; color: black; background-color: white; padding: 0.5em 1em; font-weight: bold;">
+      Collab-a-thon ECIR 2024
+    </h3>
+    <img class="fig" src="img/simiir/collab_02.jpg" style="position: absolute; width: 50%; left: 0; top: 0; z-index: 1; height: auto;" />
+    <img class="fig" src="img/simiir/collab_01.png" style="position: absolute; width: 55%; right: 0; top: 0; z-index: 2; height: auto;" />
+  </div>
+  <p class="fragment" data-fragment-index="1" style="margin-top: 0em;">
+    This parallel development created a clear need for a unified framework. <span class="fragment" data-fragment-index="2">Hence...</span>
+  </p>
+</section>
+
+<section id="simiir-3" data-auto-animate>
+  <h2>SimIIR 3</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Unification & Modernization</i></h4>
+  <hr class="divider" />
+  <p>
+    SimIIR 3 unifies community efforts and brings the framework <br>into the
+    era of <b>LLMs and Conversational AI</b>.
+  </p>
+  <img class="fig" src="img/simiir/csm_conv.png" style="width: 80%" />
+  <p class="caption">
+    A flowchart of the user's interactions in a conversational search environment.
+  </p>
+</section>
+
+<section id="simiir-v3" data-auto-animate>
+  <h2>SimIIR 3</h2>
+  <h4 style="margin-top: -0.5em; font-family: inherit;"><i>Components</i></h4>
+  <hr class="divider" />
+
+  <div style="width: 95%; margin: 0 auto;" data-id="simiir-img-full">
+    <img class="fig" src="img/simiir/simiir_v3.png" style="width: 100%; margin-top: 0em" />
+    <p class="caption">
+      Overview of SimIIR 3 framework<sup>6</sup> components. Green are the new additions.
+    </p>
+  </div>
+
+  <hr class="divider" />
+  <p class="footnote">
+    <sup>6</sup>Leif Azzopardi et al. "SimIIR 3: A Framework for the Simulation of Interactive and
+    Conversational Information Retrieval". SIGIR-AP
+    2024.
+  </p>
+</section>
+
+<section id="simiir-summary">
+  <h2>Summary</h2>
+  <hr class="divider" />
+  <ul>
+    <li>
+      We extended the original <b>static</b> SimIIR framework by developing <b>SimIIR 2.0</b> to support <b>dynamic, history-aware</b> simulations.
+    </li>
+    <li>
+      This work prompted renewed community interest and several independent extensions, motivating the development of the unified <b>SimIIR 3.0</b>.
+    </li>
+    <li>
+      SimIIR 3 modernizes the framework for the era of LLMs, adding support for:
+      <ul>
+        <li><b>LLM-Powered</b> simulated users.</li>
+        <li style="margin-top: -1em;"><b>Conversational Search</b> simulations.</li>
+        <li style="margin-top: -1em;">Integration with modern backends.</li>
+      </ul>
+    </li>
+  </ul>
+  <hr class="divider" />
+  <div class="github-container">
+    <img class="github-qr" src="img/simiir/qr-code-simiir.png" />
+    <a class="github-url" href="https://github.com/simint-ai/simiir-3">simint-ai/simiir-3</a>
+  </div>
+</section>

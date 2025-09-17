@@ -1,0 +1,91 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node[
+        framedfignode,
+        minimum width=200,
+    ] (E) at (0,0) {Embedding};
+
+    \node[
+        fignode,
+        below=1.5 of E.west,
+        anchor=west,
+    ] (T1) {$t_1$};
+    \node[
+        below=-0.2 of T1,
+    ] {\tiny \texttt{[CLS]}};
+
+    \node[
+        fignode,
+        right=0 of T1,
+        anchor=west,
+    ] (T2) {$t_2$};
+    \node[
+        below=-0.2 of T2,
+    ] {\tiny \texttt{what}};
+
+    \node[
+        fignode,
+        right=0 of T2,
+        anchor=west,
+    ] (T3) {$t_3$};
+    \node[
+        below=-0.2 of T3,
+    ] {\tiny \texttt{is}};
+
+    \node[
+        fignode,
+        right=0 of T3,
+        anchor=west,
+    ] (T4) {$t_4$};
+    \node[
+        below=-0.2 of T4,
+    ] (T4b) {\tiny \texttt{the}};
+
+    \node[
+        fignode,
+        anchor=north east,
+    ] (Tq) at (T4.north -| E.east) {$t_{|q|}$};
+    \node (Tqb) at (Tq |- T4b) {\tiny \texttt{[SEP]}};
+
+    \node[
+        fignode,
+    ] at ($(T4.north)!0.5!(Tqb.south)$) {\dots};
+
+    \node[
+        framedfignode,
+        minimum width=200,
+        above=1.75 of E.west,
+        anchor=west,
+    ] (L) {Transformer encoder layer};
+
+    \node[
+        fignode,
+        above=1.75 of L -| T1,
+        anchor=center,
+    ] (O) {$\hat{\zeta}(q)$};
+
+    \draw[->] (T1) -- (T1 |- E.south);
+    \draw[->] (T2) -- (T2 |- E.south);
+    \draw[->] (T3) -- (T3 |- E.south);
+    \draw[->] (T4) -- (T4 |- E.south);
+    \draw[->] (Tq) -- (Tq |- E.south);
+    \draw[->] (E.north -| T1) -- (L.south -| T1);
+    \draw[->] (E.north -| T2) -- (L.south -| T2);
+    \draw[->] (E.north -| T3) -- (L.south -| T3);
+    \draw[->] (E.north -| T4) -- (L.south -| T4);
+    \draw[->] (E.north -| Tq) -- (L.south -| Tq);
+    \draw[->] (L.north -| T1) -- (O);
+
+    \draw [
+        decorate,
+        decoration={
+                brace,
+                raise=5,
+                amplitude=5,
+            },
+    ] (L.south west) -- (L.north west) node[left=0.5,midway] {$L \times$};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            width=12cm,
+            height=7cm,
+            bar width=1cm,
+            enlarge x limits=0.2,
+            grid=major,
+            ylabel={Accuracy (\%)},
+            xtick=data,
+            xticklabels={GPT-3.5 (no RAG), vanillaRAG, CoT-RAG, PersonaRAG},
+            y tick label style={/pgf/number format/fixed},
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,
+            ymax=75
+        ]
+        \addplot[
+            fill=plotColor1!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (1, 59.61)
+            };
+        \addplot[
+            fill=plotColor2!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (2, 38.46)
+            };
+        \addplot[
+            fill=plotColor4!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (3, 57.69)
+            };
+        \addplot[
+            fill=plotColor3!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (4, 63.46)
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,287 @@
+% includes
+\usepackage[
+    table,
+]{xcolor}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{soul}
+\usepackage{siunitx}
+\usepackage{marvosym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage[
+    most,
+]{tcolorbox}
+
+% fonts
+\usepackage{libertine}
+\usepackage{inconsolata}
+\usepackage{fontsize}
+
+\changefontsize{14pt}
+
+% layout
+\newcommand{\hide}[1]{\textcolor{gray}{#1}}
+
+% allow bolding numbers in \num{}
+\sisetup{
+    text-series-to-math=true,
+    propagate-math-font=true,
+}
+
+% reveal theme background (for transparency hack)
+\definecolor{background}{HTML}{F0F1EB}
+
+% colors
+\colorlet{plotColorNeutral}{gray}
+\definecolor{plotColor1}{HTML}{e41a1c}
+\definecolor{plotColor2}{HTML}{377eb8}
+\definecolor{plotColor3}{HTML}{4daf4a}
+\definecolor{plotColor4}{HTML}{984ea3}
+\definecolor{plotColor5}{HTML}{ff7f00} %Paired
+\colorlet{plotColorNeutral*}{plotColorNeutral!60}
+\colorlet{plotColor1*}{plotColor1!60}
+\colorlet{plotColor2*}{plotColor2!60}
+\colorlet{plotColor3*}{plotColor3!60}
+\colorlet{plotColor4*}{plotColor4!60}
+\pgfplotsset{
+    colormap={greenred}{HTML=(4daf4a) HTML=(e41a1c)},
+    colormap={redgreen}{HTML=(e41a1c) HTML=(4daf4a)}
+}
+
+\definecolor{hlColorRed}{HTML}{DB4437}
+\definecolor{hlColorGreen}{HTML}{0F9D58}
+\definecolor{hlColorBlue}{HTML}{4285F4}
+\newcommand{\textRed}[1]{\textcolor{hlColorRed}{#1}}
+\newcommand{\textGreen}[1]{\textcolor{hlColorGreen}{#1}}
+\newcommand{\textBlue}[1]{\textcolor{hlColorBlue}{#1}}
+\newcommand{\texthighlight}[1]{%
+    \begingroup%
+    \sethlcolor{plotColor3*}%
+    \hl{#1}%
+    \endgroup%
+}
+\newtcbox{\gpu}[1][]{
+    size=fbox,
+    boxsep=1.5pt,
+    on line,
+    colframe=plotColor1!50,
+    colback=plotColor1!50,
+    enhanced,
+    borderline={0.25pt}{0pt}{dashed},
+    #1
+}
+\newtcbox{\cpu}[1][]{
+    size=fbox,
+    boxsep=1.5pt,
+    on line,
+    colframe=plotColor3!50,
+    colback=plotColor3!50,
+    enhanced,
+    borderline={0.25pt}{0pt}{dotted},
+    #1
+}
+\newtcbox{\hldashed}[1][]{
+    size=fbox,
+    boxsep=2pt,
+    boxrule=0pt,
+    enhanced,
+    borderline={0.5pt}{0pt}{dashed},
+    on line,
+    #1
+}
+\newtcbox{\hldotted}[1][]{
+    size=fbox,
+    boxsep=2pt,
+    boxrule=0pt,
+    enhanced,
+    borderline={0.5pt}{0pt}{dotted},
+    on line,
+    #1
+}
+\newcommand{\midrulesep}{
+    \arrayrulecolor{gray}
+    \midrule[0.25pt]
+    \arrayrulecolor{black}
+}
+\newcommand{\tablearrow}{{} \rotatebox[origin=c]{180}{$\Lsh$} {}}
+\newcommand{\sigdef}[1]{{\footnotesize \texttt{[#1]}}}
+\newcommand{\sigimpr}[1]{\footnotesize \textsuperscript{\texttt{[#1]}}}
+
+% pgf, tikz
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{
+    statistics,
+    colorbrewer,
+    groupplots,
+}
+\usetikzlibrary{
+    patterns,
+    shapes.geometric,
+    decorations.text,
+    matrix,
+    fit,
+    backgrounds,
+    positioning,
+}
+
+% required for patterns in boxplots
+\makeatletter
+\tikzset{nomorepostaction/.code=\let\tikz@postactions\pgfutil@empty}
+\makeatother
+
+% tikz styles
+\tikzset{
+    fignode/.style={
+            outer sep=0.25em,
+        }
+}
+
+\tikzset{
+    framedfignode/.style={
+            outer sep=0.25em,
+            inner sep=0.5em,
+            rounded corners,
+            fill=white,
+            draw,
+        }
+}
+
+% LLM
+\newcommand{\bert}{\textsc{BERT}}
+\newcommand{\bertbase}{$\text{BERT}_\text{base}$}
+\newcommand{\wordpiece}{\textsc{WordPiece}}
+\newcommand{\adam}{\textsc{Adam}}
+\newcommand{\adamw}{\textsc{AdamW}}
+
+% embeddings
+\newcommand{\wordtovec}{\textsc{Word2Vec}}
+\newcommand{\glove}{\textsc{GloVe}}
+\newcommand{\sbert}{\textsc{Sentence-BERT}}
+
+% ranking
+\newcommand{\ql}{\textsc{QL}}
+\newcommand{\dssm}{\textsc{DSSM}}
+\newcommand{\desm}{\textsc{DESM}}
+\newcommand{\doctquery}{\textsc{docT5query}}
+\newcommand{\monobert}{\textsc{monoBERT}}
+\newcommand{\dpr}{\textsc{DPR}}
+\newcommand{\ance}{\textsc{ANCE}}
+\newcommand{\colbert}{\textsc{ColBERT}}
+\newcommand{\aggr}{\textsc{Aggretriever}}
+\newcommand{\colberter}{\textsc{ColBERTer}}
+\newcommand{\tct}{\textsc{TCT-ColBERT}}
+\newcommand{\tildemodel}{\textsc{TILDE}}
+\newcommand{\tildeone}{\textsc{TILDEv1}}
+\newcommand{\tildetwo}{\textsc{TILDEv2}}
+\newcommand{\splade}{\textsc{SPLADE}}
+\newcommand{\spade}{\textsc{SpaDE}}
+\newcommand{\led}{\textsc{LED}}
+\newcommand{\deepimpact}{\textsc{DeepImpact}}
+\newcommand{\clear}{\textsc{CLEAR}}
+\newcommand{\coil}{\textsc{COIL}}
+\newcommand{\unicoil}{\textsc{uniCOIL}}
+\newcommand{\coilcr}{\textsc{COILcr}}
+\newcommand{\bm}{\textsc{BM25}}
+\newcommand{\bmp}{\textsc{BM25P}}
+\newcommand{\rmprf}{\textsc{RM3}}
+\newcommand{\deepct}{\textsc{DEEP-CT}}
+\newcommand{\bertcls}{\textsc{BERT-CLS}}
+\newcommand{\berts}{\textsc{BERT-3S}}
+\newcommand{\doclabeled}{\textsc{Doc-Labeled}}
+\newcommand{\matchpyramid}{\textsc{MatchPyramid}}
+\newcommand{\pacrr}{\textsc{PACRR}}
+\newcommand{\copacrr}{\textsc{Co-PACRR}}
+\newcommand{\convknrm}{\textsc{Conv-KNRM}}
+\newcommand{\duet}{\textsc{DUET}}
+\newcommand{\tkl}{\textsc{TKL}}
+\newcommand{\tklsmall}{\textsc{TKL-2k}}
+\newcommand{\ranknet}{\textsc{RankNet}}
+\newcommand{\knrm}{\textsc{K-NRM}}
+\newcommand{\dmn}{\textsc{DMN}}
+\newcommand{\qalstm}{\textsc{QA-LSTM}}
+
+% metrics
+\newcommand{\ap}{AP}
+\newcommand{\rr}{RR}
+\newcommand{\recall}{R}
+\newcommand{\precision}{P}
+\newcommand{\dcg}{DCG}
+\newcommand{\idcg}{IDCG}
+\newcommand{\ndcg}{nDCG}
+
+% efficient BERT
+\newcommand{\powerbert}{\textsc{PoWER-BERT}}
+\newcommand{\skipbert}{\textsc{SkipBERT}}
+\newcommand{\deebert}{\textsc{DeeBERT}}
+
+% datasets
+\newcommand{\msmarco}{\textsc{MS MARCO}}
+\newcommand{\msmpsgdev}{\textsc{MSM-Psg-Dev}}
+\newcommand{\trecdlpsgn}{\textsc{TREC-DL-Psg'19}}
+\newcommand{\trecdlpsgt}{\textsc{TREC-DL-Psg'20}}
+\newcommand{\msmdocdev}{\textsc{MSM-Doc-Dev}}
+\newcommand{\trecdldocn}{\textsc{TREC-DL-Doc'19}}
+\newcommand{\trecdldoct}{\textsc{TREC-DL-Doc'20}}
+\newcommand{\beir}{\textsc{BEIR}}
+\newcommand{\beirmsm}{\textsc{MS MARCO}}
+\newcommand{\beirfever}{\textsc{Fever}}
+\newcommand{\beircfever}{\textsc{Climate-Fever}}
+\newcommand{\beirfiqa}{\textsc{FiQA}}
+\newcommand{\beirquora}{\textsc{Quora}}
+\newcommand{\beirnq}{\textsc{NQ}}
+\newcommand{\beirhpqa}{\textsc{HotpotQA}}
+\newcommand{\beirdbp}{\textsc{DBpedia-Entity}}
+\newcommand{\beirscifact}{\textsc{SciFact}}
+\newcommand{\beirscidocs}{\textsc{SciDocs}}
+\newcommand{\beirtc}{\textsc{TREC-Covid}}
+\newcommand{\beirtouche}{\textsc{Webis-Touché-2020}}
+\newcommand{\beirnfc}{\textsc{NFCorpus}}
+\newcommand{\core}{\textsc{Core17}}
+\newcommand{\clueweb}{\textsc{ClueWeb09}}
+\newcommand{\antique}{\textsc{ANTIQUE}}
+\newcommand{\insrqa}{\textsc{InsuranceQA}}
+
+% Fast-Forward
+\newcommand{\fastforward}{\textsc{Fast-Forward}}
+\newcommand{\sparseretrieval}{\textsc{Sparse Retrieval}}
+\newcommand{\denseretrieval}{\textsc{Dense Retrieval}}
+\newcommand{\hybrid}{\textsc{Hybrid Retrieval}}
+\newcommand{\reranking}{\textsc{Re-Ranking}}
+\newcommand{\interpolatedreranking}{\textsc{Interpolation}}
+\newcommand{\pyserini}{\textsc{Pyserini}}
+\newcommand{\faiss}{\textsc{FAISS}}
+\newcommand{\selbert}{\textsc{Selective-BERT}}
+
+% BERT-DMN
+\newcommand{\blite}{$\text{BERT}_\text{lite}$}
+\newcommand{\bdmn}{$\text{BERT-DMN}$}
+\newcommand{\bdlite}{$\text{BERT-DMN}_\text{lite}$}
+
+% S&R
+\newcommand{\sr}{\textsc{Select-And-Rank}}
+\newcommand{\sratt}{\textsc{S\&R-ATT}}
+\newcommand{\srlin}{\textsc{S\&R-LIN}}
+\newcommand{\plrnd}{\textsc{PL-RND}}
+\newcommand{\plbert}{\textsc{PL-BERT}}
+\newcommand{\pllstm}{\textsc{PL-LSTM}}
+\newcommand{\plbm}{\textsc{PL-BM25}}
+\newcommand{\plsem}{\textsc{PL-SEM}}
+
+\newcommand{\otree}{\textsc{oTree}}
+
+% BoilerNet
+\newcommand{\boilernet}{\textsc{BoilerNet}}
+\newcommand{\wtt}{\textsc{Web2Text}}
+\newcommand{\bp}{\textsc{BoilerPipe}}
+\newcommand{\moz}{\textsc{Readability.js}}
+\newcommand{\bte}{\textsc{BTE}}
+\newcommand{\cetd}{\textsc{CETD}}
+
+\newcommand{\cleaneval}{\textsc{CleanEval}}
+\newcommand{\gtrends}{\textsc{GoogleTrends-2017}}

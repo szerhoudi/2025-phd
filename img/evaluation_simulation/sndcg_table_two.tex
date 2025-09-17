@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tabular}{l|c|c}
+    \toprule
+     & \multicolumn{2}{c}{\bfseries Sowiport Dataset Evaluation} \\
+    \cmidrule(lr){2-3}
+    \textbf{Simulation Model} & \textbf{s-nDCG@10} & \textbf{$\Delta$ from GT} \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries Ground Truth (from Real Logs)} \\
+    \rowcolor{plotColor3!20} \textsc{Real User Sessions} & \num{0.465} & \textemdash \\
+    \midrule
+    \multicolumn{3}{l}{\bfseries Simulated Sessions} \\
+    Basic Markov (Baseline) & \num{0.380} & \num{0.085} \\
+    % Time-aware & \num{0.382} & \num{0.083} \\
+    \midrulesep
+    Conditional & \num{0.435} & \num{0.030} \\
+    Query-change & \num{0.441} & \num{0.024} \\
+    \midrulesep
+    % \rowcolor{lightgray} Contextual (\textsc{Exploratory}) & \num{0.438} & \num{0.027} \\
+    Contextual (\textsc{Exploratory}) & \num{0.438} & \num{0.027} \\
+    Contextual (\textsc{Known-Item}) & \num{0.443} & \num{0.022} \\
+    \midrulesep
+    \rowcolor{plotColor2!20} TextPrompt & \num{0.440} & \num{0.025} \\
+    \rowcolor{plotColor2!20} CACSM_{\texttt{LLM}} & \bfseries\num{0.453} & \bfseries\num{0.012} \\
+    \bottomrule
+\end{tabular}
+\end{document}

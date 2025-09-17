@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm, auto, >=stealth,
+    state/.style={
+        framedfignode,
+        minimum width=7em,
+        minimum height=2.5em,
+        text centered
+    }]
+
+    \node[state, fill=plotColor1!20] (start) {Start};
+    \node[state, right=of start, fill=plotColor2!20] (query) {Formulate Query};
+    \node[state, right=of query, fill=plotColor3!20] (view) {View Results};
+    \node[state, below=of view, yshift=0.5cm, fill=plotColor4!20] (stop) {Stop Session};
+
+    \draw[->, very thick] (start) -- (query);
+    \draw[->, very thick, bend left=25] (query) to node[midway, above] {} (view);
+    \draw[->, very thick, bend left=25] (view) to node[midway, below] {Reformulate} (query);
+    \draw[->, very thick] (view) -- (stop);
+    \draw[->, very thick] (query.south) .. controls +(south:0.8) and +(west:0.8) .. (stop.west);
+\end{tikzpicture}
+\end{document}

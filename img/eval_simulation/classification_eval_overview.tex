@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=2cm, 
+    auto, 
+    >=stealth,
+    block/.style={
+        rectangle, 
+        draw, 
+        thick, 
+        text width=8em, 
+        text centered, 
+        rounded corners, 
+        minimum height=3em
+    },
+    line/.style={draw, -{Stealth[length=3mm]}, thick}
+]
+    \node [cloud] (real) {Real Sessions};
+    \node [cloud, right=of real, xshift=2cm] (sim) {Simulated Sessions};
+    \node [block, below=1.5cm of real, xshift=4cm] (classifier) {ML Classifier};
+    \node [pred, below=of classifier] (pred) {Prediction (Real/Sim)};
+
+    \path [line] (real) -- (classifier);
+    \path [line] (sim) -- (classifier);
+    \path [line] (classifier) -- node[midway, above] {Accuracy} (pred);
+\end{tikzpicture}
+\end{document}

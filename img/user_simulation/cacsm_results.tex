@@ -1,0 +1,47 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            width=12cm,
+            height=7cm,
+            bar width=1cm,
+            enlarge x limits=0.25,
+            grid=major,
+            ylabel={Accuracy@5 (higher is better)},
+            xtick=data,
+            xticklabels={Traditional (CSM), Cognitive (RNN), Cognitive (LLM)},
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,
+            ymax=0.7,
+            y tick label style={/pgf/number format/fixed},
+            legend style={at={(0.5,1.05)}, anchor=south, legend columns=-1},
+            legend cell align={left},
+        ]
+        \addplot[
+            fill=plotColor1!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (1, 0.250)
+            };
+        \addplot[
+            fill=plotColor2!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (2, 0.572)
+            };
+        \addplot[
+            fill=plotColor3!60,
+            draw=black,
+            thick
+        ] coordinates {
+                (3, 0.576)
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

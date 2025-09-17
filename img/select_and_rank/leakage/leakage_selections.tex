@@ -1,0 +1,35 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \pgfplotstableread[col sep=comma]{leakage_selections.csv}\data
+    \begin{axis}[
+            ybar stacked,
+            width=10cm,
+            bar width=0.6,
+            xlabel={Query ID},
+            ylabel={Number of documents},
+            grid=major,
+            area legend,
+            legend entries={Leakage sentence selected, Leakage sentence not selected},
+            legend cell align={left},
+            legend pos=north west,
+        ]
+        \addplot+[
+            plotColor2*,
+            draw=black,
+            postaction={
+                    pattern=north east lines
+                },
+        ] table[x=x, y=selected] {\data};
+        \addplot+[
+            plotColor1*,
+            draw=black,
+            postaction={
+                    pattern=north west lines
+                },
+        ] table[x=x, y=not selected] {\data};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

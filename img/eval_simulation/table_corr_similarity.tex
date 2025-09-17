@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \node {
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Metric} & \textbf{Pearson} & \textbf{Spearman} \\
+    \midrule
+    sDCG    & -0.823 & -0.841 \\
+    EGU     & -0.791 & -0.805 \\
+    PSE     & \textbf{-0.836} & \textbf{-0.852} \\
+    IIR-PRP & -0.779 & -0.795 \\
+    \bottomrule
+    \end{tabular}
+    };
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,23 @@
+\documentclass{standalone}
+\input{../../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            width=7cm,
+            xlabel={Number of sentences $k$},
+            ylabel={\ndcg{}@\num{10}},
+            grid=major,
+        ]
+        \addplot[
+            const plot mark mid,
+            very thick,
+            mark=none,
+            plotColor3,
+        ] table[
+                col sep=comma,
+                y index=2,
+            ] {beir_k.csv};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

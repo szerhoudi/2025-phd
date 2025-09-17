@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            width=14cm,
+            height=7cm,
+            bar width=0.5cm,
+            enlarge x limits={0.1},
+            grid=major,
+            ylabel={Fréchet Distance @ 10 (lower is better)},
+            xtick=data,
+            xticklabels={PBM, UBM, DCM, DBN, NCM, SimIIR 2.0},
+            nodes near coords,
+            nodes near coords style={font=\small, rotate=90, anchor=west},
+            ymin=0,
+            ymax=5,
+            y tick label style={/pgf/number format/fixed},
+            legend style={at={(0.5,1.05)}, anchor=south, legend columns=-1},
+            legend cell align={left},
+        ]
+        \addplot[
+            fill=plotColor2!60,
+            draw=black,
+            thick,
+        ] coordinates {
+                (1, 4.156) % PBM
+                (2, 3.845) % UBM
+                (3, 3.621) % DCM
+                (4, 3.302) % DBN
+                (5, 2.687) % NCM
+                (6, 2.103) % SimIIR 2.0
+            };
+    \end{axis}
+\end{tikzpicture}
+\end{document}

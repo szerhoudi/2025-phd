@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\input{../_common.tex}
+\usetikzlibrary{arrows.meta}
+
+\begin{document}
+\begin{tikzpicture}[node distance=1cm and 2.5cm, >=Stealth,
+    block/.style={draw, rectangle, rounded corners, text width=3.5cm, minimum height=1.5cm, text centered},
+    arrow/.style={->, thick}]
+
+    \node[text width=3.5cm, text centered] (q_in) {Unseen Query $q_{new}$};
+
+    \node[block, fill=plotColor2!20, below=of q_in] (vocab_map) {\textbf{1. Vocabulary Expansion} \\ Map to known embedding space $v = W_{exp} \cdot v_{s2v}$};
+
+    \node[block, fill=plotColor3!20, right=of vocab_map] (reform_map) {\textbf{2. Reformulation} \\ Apply session transition $v'_{next} = W_{align} \cdot v$};
+
+    \node[block, fill=plotColor5!20, right=of reform_map] (nn_search) {\textbf{3. Generation} \\ Find nearest neighbor to $v'_{next}$ in vocabulary};
+
+    \node[text width=3.5cm, text centered, below=of nn_search] (q_out) {Simulated Next Query $q_{next}$};
+
+    \draw[arrow] (q_in) -- (vocab_map);
+    \draw[arrow] (vocab_map) -- (reform_map);
+    \draw[arrow] (reform_map) -- (nn_search);
+    \draw[arrow] (nn_search) -- (q_out);
+\end{tikzpicture}
+\end{document}

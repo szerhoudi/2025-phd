@@ -1,0 +1,32 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    width=14cm,
+    height=7cm,
+    bar width=25pt,
+    ylabel={nDCG@3},
+    xtick=data,
+    xticklabels={RoBERTa (SUSS), RoBERTa (EconBiz), \textbf{RoBERTa (Agent4DL)}},
+    xticklabel style={align=center},
+    enlarge x limits=0.2,
+    ymin=0,
+    ymax=40,
+    grid=major,
+    nodes near coords,
+    nodes near coords align={above},
+    point meta=explicit symbolic,
+]
+\addplot[fill=plotColor2*, draw=black, thick] coordinates {
+    (0, 26.45) [26.45]
+    (1, 28.57) [28.57]
+};
+\addplot[fill=plotColor3*, draw=black, thick] coordinates {
+    (2, 35.19) [\textbf{35.19}]
+};
+\end{axis}
+\end{tikzpicture}
+\end{document}

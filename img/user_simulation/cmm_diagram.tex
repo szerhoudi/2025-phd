@@ -1,0 +1,38 @@
+\documentclass{standalone}
+\input{../_common.tex}
+
+\begin{document}
+\begin{tikzpicture}[
+    state/.style={
+        circle,
+        draw,
+        thick,
+        fill=white,
+        minimum size=1.5cm,
+        align=center
+    },
+    arr/.style={-latex, thick}
+]
+
+% Nodes
+\node[state] (q1) at (0,3) {Query 1 \\ ($X=1$)};
+\node[state] (a11) at (3,4) {Action 1 \\ ($Y=1$)};
+\node[state] (a12) at (3,2) {Action 2 \\ ($Y=2$)};
+
+\node[state] (q2) at (6,3) {Query 2 \\ ($X=2$)};
+\node[state] (a21) at (9,4) {Action 1 \\ ($Y=1$)};
+\node[state] (end) at (9,2) {END};
+
+% Transitions
+\draw[arr, plotColor2] (q1) to[bend left] node[midway, above, sloped] {\tiny $P(Y|X=1)$} (a11);
+\draw[arr, plotColor2] (q1) to[bend right] node[midway, below, sloped] {\tiny $P(Y|X=1)$} (a12);
+\draw[arr, plotColor2] (a11) -- (a12);
+
+\draw[arr, plotColor3] (a11) to[bend left] node[midway, above, sloped] {\tiny $P(X|Y=1)$} (q2);
+\draw[arr, plotColor3] (a12) to[bend right] node[midway, below, sloped] {\tiny $P(X|Y=2)$} (q2);
+
+\draw[arr, plotColor2] (q2) to[bend left] node[midway, above, sloped] {\tiny $P(Y|X=2)$} (a21);
+\draw[arr, plotColor2] (a21) -- (end);
+
+\end{tikzpicture}
+\end{document}
