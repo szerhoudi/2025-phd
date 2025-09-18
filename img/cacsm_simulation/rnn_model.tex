@@ -3,36 +3,51 @@
 
 \begin{document}
 \begin{tikzpicture}[
-    node distance=0.8cm and 1.5cm,
+    node distance=1cm and 1.8cm,
     fignode/.style={
         draw,
         rounded corners,
         minimum height=1cm,
         minimum width=2cm,
-        align=center
+        align=center,
+        font=\small
+    },
+    innode/.style={
+        fignode,
+        fill=plotColor3!10,
+    },
+    block/.style={
+        fignode,
+        minimum height=1.6cm,
+        minimum width=9cm,
     },
     arr/.style={-latex, thick}
 ]
 
-% Nodes
-\node[fignode] (i1) {$i_1$};
-\node[fignode, right=of i1] (i2) {$i_2$};
+% Inputs (sequence)
+\node[innode] (i1) {$i_1$};
+\node[innode, right=of i1] (i2) {$i_2$};
 \node (dots) at ($(i2.east) + (0.75, 0)$) {\dots};
-\node[fignode, right=of dots] (it) {$i_{t-1}$};
+\node[innode, right=of dots] (it) {$i_{t-1}$};
 
-\node[fignode, fill=plotColor2!20, minimum height=1.5cm, minimum width=8cm, below=of dots] (gru) {GRU};
-\node[fignode, below=of gru, minimum width=3cm] (ffn) {Feed-Forward \\ Network};
-\node[below=of ffn] (pred) {Predicted Action $p_a$};
+% GRU block
+\node[block, fill=plotColor2!20, below=of dots] (gru) {\textbf{GRU}};
 
-% Arrows
+% FFN block and output
+\node[block, fill=white, minimum width=3.2cm, below=of gru] (ffn) {Feed-Forward \\ Network};
+\node[below=of ffn, text=plotColor1] (pred) {\textbf{Predicted Action} $p_a$};
+
+% Flow arrows
 \draw[arr] (i1) -- (i1 |- gru.north);
 \draw[arr] (i2) -- (i2 |- gru.north);
 \draw[arr] (it) -- (it |- gru.north);
-\draw[arr, dashed] (gru.190) to[bend right=60] (gru.170);
-\draw[arr, dashed] ($(gru.north west) + (1, -0.3)$) to[bend left=20] ($(gru.north west) + (1.5, -0.3)$);
 
+% Recurrent connection (clear single loop)
+\draw[arr, dashed, draw=plotColor2] (gru.west) to[bend right=45] node[midway, left, xshift=-2pt] {\footnotesize recurrent} (gru.north west);
+
+% State to FFN and to output
 \draw[arr] (gru) -- node[midway, right] {State $s_t$} (ffn);
-\draw[arr] (ffn) -- (pred);
+\draw[arr] (ffn) -- node[midway, right, yshift=2pt] {\footnotesize softmax} (pred);
 
 \end{tikzpicture}
 \end{document}

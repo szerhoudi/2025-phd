@@ -6,6 +6,7 @@
     node distance=1cm and 1.5cm,
     fignode/.style={draw, rounded corners, minimum height=1cm, minimum width=2.5cm, align=center},
     layer/.style={fignode, fill=plotColor2!20, minimum height=0.7cm, minimum width=5cm},
+    ca/.style={draw, circle, fill=plotColor5!30, inner sep=1.5pt, minimum size=0.6cm},
     arr/.style={-latex, thick},
 ]
 
@@ -27,14 +28,20 @@
 \draw[arr] (llm2) -- (dots_llm);
 \draw[arr] (dots_llm) -- (llm_n);
 
-% Cross-attention arrows
-\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca1) at (4.5, 2) {CA};
-\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca2) at (4.5, 0) {CA};
-\node[fignode, fill=plotColor5!30, circle, inner sep=1pt] (ca_n) at (4.5, -2.5) {CA};
+% Cross-attention nodes
+\node[ca] (ca1) at (4.5, 2) {CA};
+\node[ca] (ca2) at (4.5, 0) {CA};
+\node[ca] (ca_n) at (4.5, -2.5) {CA};
 
-\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca1);
-\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca2);
-\draw[arr, plotColor5, thick] (state_emb -| user_encoder.east) -| (ca_n);
+% Cross-attention arrows: from state embed to CA, then into LLM layers
+\draw[arr, draw=plotColor5] (state_emb.east) -| (ca1);
+\draw[arr, draw=plotColor5] (ca1) -- (llm1.west);
+
+\draw[arr, draw=plotColor5] (state_emb.east) -| (ca2);
+\draw[arr, draw=plotColor5] (ca2) -- (llm2.west);
+
+\draw[arr, draw=plotColor5] (state_emb.east) -| (ca_n);
+\draw[arr, draw=plotColor5] (ca_n) -- (llm_n.west);
 
 \end{tikzpicture}
 \end{document}

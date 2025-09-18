@@ -1,5 +1,7 @@
 \documentclass{standalone}
 \input{../_common.tex}
+\usetikzlibrary{patterns}
+\usepackage{textcomp}
 
 \begin{document}
 \begin{tikzpicture}
@@ -9,87 +11,36 @@
     \begin{groupplot}[
         group style={
             group size=1 by 2,
-            vertical sep=1.5cm
+            vertical sep=0.4cm
         },
         legend style={/tikz/every even column/.append style={column sep=0.6cm}}
     ]
 
-    %─── TOP: F-Measure ─────────────────────────────────
+    %─── TOP: KS-2 ──────────────────────────────────────
     \nextgroupplot[
-        ybar,
-        width=16cm,
-        height=8cm,
-        bar width=15pt,
-        enlarge x limits=0.15,
-        ylabel={F-Measure},
-        ymin=0, ymax=0.8,
-        xtick=data,
-        xticklabels from table={\data}{abbr},
-        xticklabel style={rotate=15, anchor=east},
-        nodes near coords,
-        nodes near coords align={above},
-        nodes near coords style={/pgf/number format/fixed, /pgf/number format/precision=3},
-        grid=major,
-        area legend
-    ]
-        % Baseline ───────────────────────────────────────────────────────
-        \addplot[
-            ybar,
-            bar width=15pt,
-            fill=plotColor1*,
-            draw=black,
-            thick
-        ] coordinates {(0,0.750)};
-
-        % Contextual Markov Model – group 1 (Exploratory, Lookup) ────────
-        \addplot[
-            ybar,
-            bar width=15pt,
-            fill=plotColor2*,
-            pattern=north east lines,
-            pattern color=black,
-            draw=black,
-            thick
-        ] coordinates {(1,0.568) (2,0.509)};
-
-        % Contextual Markov Model – group 2 (Specification, Generalisation,
-        % Substitution, New Topic) ───────────────────────────────────────
-        \addplot[
-            ybar,
-            bar width=15pt,
-            fill=plotColor3*,
-            pattern=crosshatch,
-            pattern color=black,
-            draw=black,
-            thick
-        ] coordinates {(3,0.453) (4,0.562) (5,0.502) (6,0.475)};
-
-        % Single legend entry for all F-Measure bars
-        \addlegendimage{ybar,fill=plotColor1*,draw=black,thick}
-        \addlegendentry{F-Measure}
-
-    %─── BOTTOM: KS-2 D-statistic ───────────────────────
-    \nextgroupplot[
-        width=16cm,
+        width=22cm,
         height=4cm,
-        ylabel={KS-2 D-statistic},
+        ylabel={KS-2},
         ymin=0.0025, ymax=0.0045,
-        xtick=data,
-        xticklabels from table={\data}{abbr},
-        xticklabel style={rotate=15, anchor=east},
+        xmin=-1, xmax=7,
+        xtick=\empty,
+        xmajorticks=false,
+        xminorgrids=false,
+        axis x line=none,
+        axis y line=left,
         grid=major,
-        every axis plot/.append style={thick}
+        every axis plot/.append style={thick},
+        legend pos=north east,
+        legend style={draw=none, fill=none, font=\footnotesize}
     ]
-        % KS-2 D-statistic ───────────────────────────────────────────────
         \addplot[
             plotColor1,
             mark=square*,
             mark size=2.5pt,
             thick
         ] table[x=id, y=ks_d_statistic] {\data};
-        \addlegendentry{KS-2 D-statistic}
+        \addlegendentry{D-statistic}
 
-        % KS-2 D-critical ────────────────────────────────────────────────
         \addplot[
             dashed,
             plotColor3,
@@ -98,20 +49,98 @@
             mark options={fill=background, draw=plotColor3},
             thick
         ] table[x=id, y=ks_d_critical] {\data};
-        \addlegendentry{KS-2 D-critical}
+        \addlegendentry{D-critical}
+
+    %─── BOTTOM: F-Measure ──────────────────────────────
+    \nextgroupplot[
+        ybar,
+        width=22cm,
+        height=8cm,
+        bar width=20pt,
+        ylabel={Metrics},
+        ymin=0, ymax=0.8,
+        xmin=-1, xmax=7,
+        xtick={0,1,2,3,4,5,6},
+        xticklabels={ Baseline, Conditional, Query-Change, Exploratory, Known-Item, TextPrompt, {CACSM\textsubscript{\texttt{LLM}}}},
+        xticklabel style={rotate=20, anchor=east, xshift=20pt, yshift=-8pt},
+        axis x line=bottom,
+        tick align=outside,
+        clip=false,
+        nodes near coords,
+        nodes near coords align={above},
+        nodes near coords style={font=\tiny, /pgf/number format/fixed, /pgf/number format/precision=3},
+        legend image code/.code={
+                \draw[#1,/pgfplots/ybar legend] (0cm,-0.2cm) rectangle (0.8em,0.6em);
+            },
+        grid=major
+    ]
+        % Baseline (flat/light)
+        \addplot[bar shift=-10pt, fill=plotColor1*, draw=black, thick] coordinates {(0,0.750)};
+        \addplot[
+  ybar, bar shift=10pt, bar width=20pt,
+  fill=plotColor1*,                 % same base color
+  pattern=crosshatch,               % SVG-safe
+  pattern color=plotColor1*!60!black,
+  draw=black, thick
+] coordinates {(0,0.700)};
+
+        % conditional (flat/light)
+        \addplot[bar shift=-10pt, fill=plotColor3*, draw=black, thick] coordinates {(1,0.568)};
+        \addplot[
+  ybar, bar shift=10pt, bar width=20pt,
+  fill=plotColor3*,
+  pattern=crosshatch,
+  pattern color=plotColor3*!60!black,
+  draw=black, thick
+] coordinates {(1,0.650)};
+
+        % query-change (flat/light)
+        \addplot[bar shift=-10pt, fill=plotColor4*, draw=black, thick] coordinates {(2,0.502)};
+        \addplot[
+            ybar, bar shift=10pt, bar width=20pt,
+            fill=plotColor4*,
+            pattern=crosshatch,
+            pattern color=plotColor4*!60!black,
+            draw=black, thick
+          ] coordinates {(2,0.517)};
+
+        % contextual: exploratory, known-item (flat/light blue)
+        \addplot[bar shift=-10pt, fill=plotColor2*, draw=black, thick] coordinates {(3,0.562) (4,0.475)};
+        \addplot[
+  ybar, bar shift=10pt, bar width=20pt,
+  fill=plotColor2*,
+  pattern=crosshatch,
+  pattern color=plotColor2*!60!black,
+  draw=black, thick
+] coordinates {(3,0.600) (4,0.450)};
+
+        % textprompt (flat/light)
+        \addplot[bar shift=-10pt, fill=plotColor5!60, draw=black, thick] coordinates {(5,0.509)};
+        \addplot[
+  ybar, bar shift=10pt, bar width=20pt,
+  fill=plotColor5!60,
+  pattern=crosshatch,
+  pattern color={(plotColor5!60)!60!black},
+  draw=black, thick
+] coordinates {(5,0.550)};
+
+        % cacsm_llm (flat/light neutral)
+        \addplot[bar shift=-10pt, fill=plotColorNeutral*, draw=black, thick] coordinates {(6,0.453)};
+        \addplot[
+  ybar, bar shift=10pt, bar width=20pt,
+  fill=plotColorNeutral*,
+  pattern=crosshatch,
+  pattern color=plotColorNeutral*!60!black,
+  draw=black, thick
+] coordinates {(6,0.367)};
+
+        % Legend: keep only Contextual (blue)
+        \addlegendimage{ybar,fill=plotColor2*,draw=black,thick}
+        \addlegendentry{F-Measure}
+        \addlegendimage{ybar,pattern=crosshatch,fill=gray,draw=black,thick}
+        \addlegendentry{n-Fréchet Distance}
 
     \end{groupplot}
 
-    % --- Abbreviation key -------------------------------------------------
-    \node[
-        anchor=north,
-        font=\footnotesize,
-        text width=16cm,
-        align=center
-    ] at (current bounding box.south)
-    {\textbf{Abbreviations:}
-     BL = Baseline,\; EXP = Exploratory,\; LKP = Lookup,\;
-     SPEC = Specification,\; GEN = Generalisation,\;
-     SUB = Substitution,\; NEW = New Topic};
 \end{tikzpicture}
 \end{document}

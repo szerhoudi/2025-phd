@@ -1,0 +1,88 @@
+# -----------------------------
+# Node / npm / yarn / pnpm
+# -----------------------------
+node_modules/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# -----------------------------
+# Build artifacts (generic)
+# -----------------------------
+dist/
+slides/
+build/
+public/build/
+.tmp/
+.temp/
+tmp/
+.sourcemaps/
+coverage/
+.nyc_output/
+
+# Only ignore source maps in built folders
+dist/**/*.map
+build/**/*.map
+public/build/**/*.map
+
+# -----------------------------
+# Gulp
+# -----------------------------
+.gulp-cache/
+.sass-cache/
+.rev-cache/
+.cache/          # generic task caches
+rev-manifest.json
+
+# -----------------------------
+# Reveal.js (project-level)
+# -----------------------------
+# If you vendor reveal.js in your repo, uncomment the next line:
+# reveal.js/
+slides*.pdf           # exports via ?print-pdf
+print/                # optional export dir
+export/               # optional export dir
+*.speaker-notes
+
+# -----------------------------
+# Tooling caches
+# -----------------------------
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.rpt2_cache/
+.rts2_cache_*/
+.tsbuildinfo
+.cache-loader/
+vite.cache/
+webpack-stats.json
+
+# -----------------------------
+# Env files (do not commit secrets)
+# -----------------------------
+.env
+.env.local
+.env.*.local
+
+# -----------------------------
+# OS / Editor junk
+# -----------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+._*
+.idea/
+.vscode/
+*.code-workspace

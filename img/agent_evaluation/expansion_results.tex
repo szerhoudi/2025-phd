@@ -8,7 +8,7 @@
     width=14cm,
     height=8cm,
     bar width=30pt,
-    xlabel={Training Data Composition},
+    title={Training Data Composition},
     ylabel={MRR},
     xtick=data,
     xticklabels={Baseline (500), Baseline + Interests, Baseline + Traits, Baseline + Both},
@@ -19,6 +19,7 @@
     grid=major,
     nodes near coords,
     nodes near coords align={above},
+    nodes near coords style={yshift=3pt},
 ]
 \addplot[fill=plotColorNeutral*, draw=black, thick] coordinates {
     (0, 59.12)

@@ -622,7 +622,13 @@
                 <img class="fig" src="img/evaluation_simulation/sndcg_table_out.svg" style="max-width: 90%;" />
                 <p class="caption" style="margin-top: -15px;">Results on Sowiport (academic search logs).
                     $\Delta$ = absolute gap vs. Ground Truth.</p>
-                <p class="fragment"><b>Takeaway.</b> Adding context (<b class="r-green">contextual</b>, <b
+                <div class="fragment" data-fragment-index="0">
+                   <div class="fragment fade-out" data-fragment-index="1"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(245, 246, 242, 0.1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 10;">
+                        <img src="img/sowiport.png" style="max-height: 70%; max-width: 70%; border-radius: 8px;">
+                    </div> 
+                </div>
+                <p class="fragment" data-fragment-index="1"><b>Takeaway.</b> Adding context (<b class="r-green">contextual</b>, <b
                         class="r-green">query-change</b>) creates
                     <i>more realistic</i> simulations.
                 </p>
@@ -673,7 +679,7 @@
                 <div class="fragment" data-fragment-index="0" style="float: right; width: 40%; margin-left: 20px;margin-top: -30px;">
                     <img class="fig" src="img/user_simulation/cacsm_focus.png" style="max-width: 100%;" />
                 </div>
-                <p class="fragment" data-fragment-index="0" style="text-align: left; padding-top: 10px;"><b>Update.</b>
+                <p class="fragment" data-fragment-index="0" style="text-align: left; padding-top: 10px;"><b>Example.</b>
                     Examining snippets updates short-term knowledge:</p>
                 <div class="r-stack fragment" data-fragment-index="0">
                     <p class="eq fragment fade-out" data-fragment-index="1">
@@ -726,7 +732,7 @@
                 <img class="fig" src="img/evaluation_simulation/sndcg_table_two_out.svg" style="max-width: 90%;" />
                 <p class="caption" style="margin-top: -15px;">Results on Sowiport (academic search logs).
                     $\Delta$ = absolute gap vs. Ground Truth.</p>
-                <p class="fragment"><b>Takeaway.</b> Adding cognition (<b class="r-green">CACSM</b>) creates
+                <p><b>Takeaway.</b> Adding cognition (<b class="r-green">CACSM</b>) creates
                     <b>even</b> <i>more realistic</i> simulations.
                 </p>
             </section>
@@ -769,7 +775,7 @@
                     Similarity scores on <i>Sowiport</i> search logs. Higher means closer match.
                 </p>
                 <hr class="divider" />
-                <p class="fragment"><b>Takeaway.</b> <b>Agent4DL</b> shows strong <b class="r-green">semantic</b> and <b
+                <p><b>Takeaway.</b> <b>Agent4DL</b> shows strong <b class="r-green">semantic</b> and <b
                     class="r-green">lexical overlap</b> with human queries.
                 </p>
             </section>
@@ -796,22 +802,22 @@
                     <!-- Image 1: Visible on load, fades out on step 1 -->
                     <div class="fragment fade-in-then-out" data-fragment-index="0">
                         <img class="fig" src="img/agent4dl/persona_rag_example.png" style="max-width: 100%; margin-top: -5px;" />
-                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>6</sup> context.</p>
                     </div>
                     <!-- Image 2: Fades in on step 1, out on step 2 -->
                     <div class="fragment fade-in-then-out" data-fragment-index="1">
                         <img class="fig" src="img/agent4dl/persona_rag_example_2.png" style="max-width: 100%; margin-top: -5px;" />
-                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>6</sup> context.</p>
                     </div>
                     <!-- Image 3: Fades in on step 2, out on step 3 -->
                     <div class="fragment fade-in-then-out" data-fragment-index="2">
                         <img class="fig" src="img/agent4dl/persona_rag_example_3.png" style="max-width: 100%; margin-top: -5px;" />
-                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>6</sup> context.</p>
                     </div>
                     <!-- Image 4: Fades in on step 3, out on step 4 -->
                     <div class="fragment fade-in-then-out" data-fragment-index="3">
                         <img class="fig" src="img/agent4dl/persona_rag_example_4.png" style="max-width: 100%; margin-top: -5px;" />
-                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>5</sup> context.</p>
+                        <p class="caption" style="margin-top: -20px;"> Enhancing <i>RAG search system</i> with <b>PersonaRAG</b><sup>6</sup> context.</p>
                     </div>
                     <!-- Image 5: Fades in on step 4 and stays -->
                     <div class="fragment" data-fragment-index="4">
@@ -854,7 +860,7 @@
 
             <section id="eval-problem" data-auto-animate data-auto-animate-id="rq2-evaluating">
                 <h2>Evaluating <i>Realism</i></h2>
-                <p><b class="r-red">Problem.</b> <span class="r-red">Traditional metrics track <b>effectiveness</b>—not behavioral <b>realism</b>.</span> <br>
+                <p><b class="r-red">Problem.</b> <span class="r-red">Traditional metrics <span style="font-size: small">(often)</span> track <b>effectiveness</b>—not behavioral <b>realism</b>.</span> <br>
                     A simulator may <i>score high</i>... while acting in a completely <i>unrealistic way</i>.</p>
                 <img style="margin-bottom: 0" src="img/eval_simulation/metrics_out.svg" />
                 <p class="fragment" data-fragment-index="1" ><b>Shift in focus.</b> Not <i>"Was the session productive?"</i>—but <b>"Was the search pattern realistic?"</b></p>
@@ -863,12 +869,15 @@
             <section id="eval-solution-turing" data-auto-animate data-auto-animate-id="rq2-evaluating">
                 <h2>Can a <i>classifier</i> tell the difference?</h2>
                 <h4 style="margin-top: -10px;"><span class="model-badge">Approach 1</span> <i>The Turing Test</i></h4>
-                <hr class="divider" />
-                <p><b>Idea:</b> Train a classifier to distinguish <b>real</b> user sessions from <b>simulated</b> ones.</p>
+                <p><b>Idea:</b> Train a classifier to distinguish <b>real</b> user sessions from <b>simulated</b> ones.<sup>7</sup></p>
                 <img class="fig" src="img/eval_simulation/classification_eval_overview_out.svg"
                     style="max-width: 90%; margin: -10px 0;" />
                 <p><b>Hypothesis.</b> A <i>realistic</i> <b>simulation</b> should <b class="r-green">confuse the classifier</b>, leading to <b>low accuracy</b>.</p>
                 <p class="fragment"><b>Verification.</b> We apply the <b>KS-2 test</b>: checks whether distributions of key features <i>(session length, click positions)</i> are statistically <i>indistinguishable</i>.</p>
+                <p class="footnote">
+                    <sup>7</sup><b>Saber Zerhoudi</b> et al. <b>"Evaluating Simulated User Interaction and Search Behaviour"</b>.
+                    ECIR 2022.
+                </p>
             </section>
 
             <section id="eval-solution-frechet" data-auto-animate data-auto-animate-id="rq2-evaluating">
@@ -877,16 +886,20 @@
                 <p><b>Fréchet Distance<sup>8</sup></b> quantifies how similar two <b>curves</b> are.</p>
                 <div class="r-stack">
                     <div class="fragment fade-out" data-fragment-index="1">
-                        <img class="fig" src="img/eval_simulation/frechet_distance_analogy_out.svg" style="max-width: 60%; margin-top: -5px;" />
+                        <img class="fig" src="img/eval_simulation/frechet_illustraction.png" style="max-width: 60%; margin-top: -5px;" />
                         <p class="caption">Fréchet Distance measures the similarity between two curves.</p>
                     </div>
                     <div class="fragment fade-in-then-out" data-fragment-index="1">
-                        <img class="fig" src="img/eval_simulation/image_fd.png" style="max-width: 60%; margin-top: -5px;" />
+                        <img class="fig" src="img/eval_simulation/image_fd.png" style="max-width: 80%; margin-top: -5px;" />
                         <p class="caption">Evaluation of Text-to-Image (TTI) generative models with Fréchet distance.</p>
                     </div>
-                    <div class="fragment" data-fragment-index="2">
-                        <img class="fig" src="img/eval_simulation/relevance_fd.png" style="max-width: 60%; margin-top: -5px;" />
-                        <p class="caption">Evaluation of IR systems with Fréchet distance.</p>
+                    <div class="fragment fade-in-then-out" data-fragment-index="2">
+                        <img class="fig" src="img/eval_simulation/relevance_fd.png" style="max-width: 80%; margin-top: -5px;" />
+                        <p class="caption">Evaluation of IR systems with Fréchet distance. Arabzadeh et al. (2024)</p>
+                    </div>
+                    <div class="fragment" data-fragment-index="3">
+                        <img class="fig" src="img/eval_simulation/simulation_fd.png" style="max-width: 80%; margin-top: -5px;" />
+                        <p class="caption">Evaluation of IR systems with Fréchet distance. Arabzadeh et al. (2024)</p>
                     </div>
                 </div>
                 
@@ -904,9 +917,9 @@
             <section id="eval-results" data-auto-animate data-auto-animate-id="rq2-evaluating">
                 <h2>Ranking <i>simulators</i></h2>
                 <p><b>New metrics.</b> They rank simulators by <i>realism</i>—consistently and reliably.</p>
-                <img class="fig" src="img/eval_simulation/results_dual_axis_out.svg" style="max-width: 40%;" />
-                <p class="caption">Lower bars (F-Measure) and lower red squares (KS-2 D-statistic) &rarr; <i>better realism</i>.</p>
-                <p class="fragment"><b>Takeaway.</b> Advanced models—<b class="r-green">contextual</b>, <b
+                <img class="fig" src="img/eval_simulation/results_dual_axis_out.svg" style="max-width: 70%;" />
+                <p class="caption">Lower bars (n-Fréchet Distance) and lower red squares (KS-2 D-statistic) &rarr; <i>better realism</i>.</p>
+                <p><b>Takeaway.</b> Advanced models—<b class="r-green">contextual</b>, <b
                         class="r-green">query-change</b>, <b class="r-green">CACSM</b>—are <i>demonstrably</i> more realistic.
                 </p>
             </section>
@@ -1081,18 +1094,418 @@
                 <h2>Backup <i>slides</i></h2>
             </section>
 
+            <!-- CACSM -->
+            <section id="backup-cacsm-architectures" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>CACSM <i>implementation</i></h2>
+                <p><b>CACSM</b> comes in <i>two flavors</i>—each with a distinct deep learning architecture.</p>
+                <div class="column-layout">
+                    <div class="column-item">
+                        <div class="model-badge">CACSM<sub>UM</sub> (RNN-based)</div>
+                        <img class="fig" src="img/cacsm_simulation/cogum.png" style="max-width: 60%;" />
+                        <p>A <b>GRU</b> tracks the sequence of user interactions. The <b>final hidden state</b> ≈ <i>current cognitive state</i>.</p>
+                    </div>
+                    <div class="column-item">
+                        <div class="model-badge">CACSM<sub>LLM</sub> (LLM-based)</div>
+                        <img class="fig" src="img/cacsm_simulation/cacsm_llm.png" style="max-width: 85%;" />
+                        <p>A <b>T5 model</b>, with the <b>cognitive state</b> <i>injected via cross-attention</i> at every layer &rarr; <i>state-aware predictions</i>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="backup-cacsm-cross-attention" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Injecting state via <i>cross-attention</i></h2>
+                <div class="column-layout">
+                    <div class="column-item c-wide">
+                    <p><b>Baseline.</b> In vanilla <b>T5</b>, the decoder cross-attends only to the <b>text encoder output</b>.</p>
+                    <p><b>Modification.</b> <b>CACSM<sub>LLM</sub></b> extends this: the decoder also attends to the <b>user state embedding</b>—an <i>extra memory bank</i>.</p>
+                    <p class="eq">
+                        Attention(Q, K, V) = softmax$(\frac{\text{Q} \cdot \text{K}_{\text{user}}^\top}{\sqrt{d_k}})$ V$_{\text{user}}$
+                    </p>
+                    </div>
+                    <div class="column-item">
+                    <img class="fig" src="img/cacsm_simulation/cacsm_llm.png" />
+                    </div>
+                </div>
+                <p><b>Intuition.</b> As T5 generates, it keeps "looking up" the <b>user's cognitive state</b>—biasing outputs toward <i>relevant concepts</i>.</p>
+            </section>
+
+            <section id="backup-t5-backbone-role" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Why <b>T5</b> anchors <i>CACSM<sub>LLM</sub></i></h2>
+                <hr class="divider" />
+                <p><i>CACSM<sub>LLM</sub></i> centers on a pretrained <b>T5-base</b>—its core language engine.</p>
+                <hr class="divider" />
+                <div class="column-layout">
+                  <div class="column-item">
+                    <div class="model-badge">Full Fine-tuning</div>
+                    <p>Update all weights &rarr; the model <b>fully adapts</b> to the user's cognitive state.<br>&nbsp;</p>
+                  </div>
+                  <div class="column-item">
+                    <div class="model-badge">LoRA Fine-tuning</div>
+                    <p>Train only lightweight adapters &rarr; <b>lower cost</b>, yet still leverage T5's <i>pretrained strengths</i>.</p>
+                  </div>
+                </div>
+            </section>
+
+            <section id="backup-perceiver" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Extensive user <i>histories</i></h2>
+                <p class="r-red"><b >Problem.</b> A user log with <i>hundreds of actions</i> exceeds T5's fixed context window.</p>
+                <p><b>Solution: Perceiver Compression.</b></p>
+                <div class="column-layout">
+                  <div class="column-item">
+                    <img class="fig" src="img/cacsm_simulation/perceiver.png" style="max-width: 80%;" />
+                  </div>
+                  <div class="column-item c-wide">
+                    <p>We insert a <b>Perceiver module</b> to condense the long sequence of user-state embeddings into a <i>compact set of latent vectors</i>.</p>
+                    <p>This retains the <b>salient signals</b> from history while filtering out noise.</p>
+                  </div>
+                </div>
+                <p><b>Result.</b> T5 receives a <i>compressed yet informative</i> representation of the user's state—driving <b>efficient</b> and <b>personalized</b> predictions.</p>
+            </section>
+
+            <section id="backup-cacsm-update-example" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Example: <i>cognitive state update</i></h2>
+                <p>
+                    Query: <i>"graph neural networks for drug discovery"</i>.<br />
+                    Clicks at <b>rank 1</b> and <b>rank 4</b>.
+                </p>
+                
+                  <div>
+                    <p><b>Step 1. Interaction Impact.</b> A lower rank &rarr; stronger signal.</p>
+                    <p class="eq" style="transform: scale(0.8); margin-top: -20px;">
+                      Impact(doc) = $w_{\text{click}} \times \tfrac{1}{\text{rank}}$
+                    </p>
+                    <ul style="display: flex; justify-content: center; align-items: baseline; gap: 3rem; list-style: none; padding: 0; margin: 0;">
+                      <li>Rank 1 &rarr; $2.0 \times \tfrac{1}{1} = 2.0$</li>
+                      <li>Rank 4 &rarr; $2.0 \times \tfrac{1}{4} = 0.5$</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <p>
+                      <b>Step 2. Update $K_2$.</b> Interaction shifts the state; set $\beta_{K_2}=0.6$.
+                    </p>
+                    <p style="transform: scale(0.8); margin-top: -20px;">
+                        Knowledge vector for 
+                        (<b style="color:#3498db;">Graphs</b>, 
+                         <b style="color:#2ecc71;">Drug Discovery</b>, 
+                         <b style="color:#95a5a6;">Misc.</b>)
+                      </p>
+                      <p class="eq" style="text-align: center; transform: scale(0.8); margin-top: -20px;">
+                        $P_{\text{new}}(K_2) = P_{\text{old}}(K_2) + \beta \cdot P_{\text{interaction}}(K_2)$
+                      </p>
+                    <p style="margin: 0.3em 0 0; text-align: center;">
+                      If <i>rank-1</i> doc is (<b style="color:#3498db;">1</b>,<b style="color:#2ecc71;">0</b>,<b style="color:#95a5a6;">0</b>) and <i>rank-4</i> is (<b style="color:#3498db;">0.5</b>,<b style="color:#2ecc71;">0.5</b>,<b style="color:#95a5a6;">0</b>), then
+                      <span class="eq">$P_{\text{interaction}}(K_2)=0.8\cdot[1,0,0]+0.2\cdot[0.5,0.5,0]=[0.9,0.1,0]$</span>
+                    </p>
+                    <p class="eq" style="text-align: center; margin-top: 0.2em;">
+                        $[0.84, 0.46, 0.3] = [0.3, 0.4, 0.3] + 0.6 \times [0.9, 0.1, 0]$
+                    </p>
+                  </div>
+                
+                  <p>
+                    <b>Interpretation.</b> State now emphasizes <b>Graphs</b>—a signal ready for T5.
+                  </p>
+            </section>
+              
+            <section id="backup-cacsm-results-main" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Predicting the next <i>user action</i></h2>
+                <img class="fig" src="img/cacsm_simulation/main_results_table_out.svg" style="max-width: 100%; height: auto;" />
+                <p class="caption">
+                    Higher is better. Best score per dataset/metric in <b>bold</b>.
+                </p>
+                <hr class="divider" />
+                <p>
+                  <b>Takeaway:</b> CACSM—<i>both UM and LLM</i>—
+                  <b>outperforms</b> all baselines, across both datasets.
+                </p>
+            </section>
+
+            <section id="backup-cacsm-results-by-type" data-auto-animate data-auto-animate-id="backup-slides">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">CACSM</span>Performance by <i>action type</i></h2>
+                <p> Which <b>models</b> excel at different <b>user action types</b>? </p>
+                <img class="fig" src="img/cacsm_simulation/action_type_barchart_out.svg" />
+                <p class="caption">
+                    Accuracy@5 on <b>SUSS</b> for <b>Query</b>, <b>Click</b>, and <b>Stop</b>.
+                </p>
+                <p>
+                    <b>Takeaway:</b> The <b>LLM</b> dominates on <i>semantic</i> actions 
+                    (<b class="r-green">query, click</b>), while the lightweight <b>RNN</b> excels at the
+                    <i>structural</i> <b class="r-blue">stop</b>.
+                </p>
+            </section>
+
+            <!-- Agent4DL -->
+            <section id="backup-slides-agent4dl" data-auto-animate data-auto-animate-id="backup-slides-agent4dl">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Agent4DL</span>Framework <i>evaluation</i></h2>
+                <p>
+                    <b>Hypothesis.</b> <b>Agent4DL</b> can <i>expand sparse datasets</i>—improving downstream models.
+                  </p>
+                <hr class="divider" />
+                <div>
+                  <p><b>Experiment.</b></p>
+                  <ol>
+                    <li><b>500</b> real sessions (baseline).</li>
+                    <li><b>+500</b> synthetic sessions from <b>Agent4DL</b> (diverse profiles).</li>
+                    <li>Train & compare: baseline vs. augmented (<b>1000</b> total).</li>
+                  </ol>
+                </div>
+            </section>
+              
+            <section id="backup-agent-eval3-results" data-auto-animate data-auto-animate-id="backup-slides-agent4dl">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Agent4DL</span>Framework <i>evaluation</i></h2>
+                <img class="fig" src="img/agent_evaluation/expansion_results_out.svg" />
+                <p class="caption">
+                  MRR scores on the <b>SUSS Session</b> dataset.
+                </p>
+                <hr class="divider" />
+                <p>
+                  With <b>Agent4DL</b>, MRR rises <b>+8.9%</b>—tackling data scarcity.
+                </p>
+            </section>
+
+            <section id="backup-agent4dl-behavior" data-auto-animate data-auto-animate-id="backup-slides-agent4dl">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Agent4DL</span>Framework <i>evaluation</i></h2>
+                <p><b>Hypothesis.</b> <code>Agent4DL</code> sustains <b>coherent preferences</b> and <b>human-like search patterns</b>.</p>
+                <hr class="divider">
+                <div class="column-layout">
+                  <div class="column-item">
+                    <div class="model-badge">Click Behavior</div>
+                    <p>
+                      <b>Competitive</b> with <code>SimIIR&nbsp;2.0</code>—yet <i>no dataset-specific training required</i>.
+                    </p>
+                    <p class="eq">
+                      Recall@10: <b><code>Agent4DL</code> 65.59%</b> vs. 59.14% <br> &nbsp;
+                    </p>
+                  </div>
+              
+                  <div class="column-item">
+                    <div class="model-badge">Stopping Behavior</div>
+                    <p>
+                      <b>Stronger session control:</b><br> knows when to stop.
+                    </p>
+                    <p class="eq">
+                      Accuracy: <b><code>Agent4DL</code> 84.14%</b> vs. 81.39% <br>
+                      Precision@10: <b><code>Agent4DL</code> 82.90%</b> vs. 70.14%
+                    </p>
+                  </div>
+                </div>
+            </section>
+              
+            <!-- Evaluation -->
+            <section id="backup-slides-evaluation" data-auto-animate data-auto-animate-id="backup-slides-evaluation">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Evaluation</span>The <i>Turing</i> test</h2>
+                <div class="column-layout" style="margin-top: 0.5em;">
+                  <div class="column-item" style="justify-content: flex-start;">
+                    <h4 style="text-align: center">
+                      Kolmogorov-Smirnov (KS-2) Test
+                    </h4>
+                    <p style="margin-top: -0.5em; font-size: large;">
+                      <b>Non-parametric test.</b> Checks if <b>two samples</b> share the <i>same distribution</i>.
+                    </p>
+                    <div class="column-layout">
+                      <p class="column-item" style="justify-content: flex-start;">
+                        <span style="font-size: large;"><b>D-statistic:</b> Maximum gap between empirical cumulative distribution functions:</span>
+              
+              
+                        $$D = \sup_x \left| \underbrace{F_1(x)}_{\text{real sessions}} - \underbrace{F_2(x)}_{\text{simulated sessions}}
+                        \right|$$
+                      </p>
+                      <p class="column-item" style="justify-content: flex-start;">
+                        <span style="font-size: large;"><b>D-critical:</b> Significance cutoff: <br>&nbsp;</span>
+                        $$D_{\text{crit}} = \underbrace{c(\alpha)}_{\text{significance factor}} \cdot \underbrace{\sqrt{\frac{n_1 +
+                        n_2}{n_1 n_2}}}_{\text{sample size correction}}$$
+                      </p>
+                    </div>
+                    <p style="margin-top: -0.5em; font-size: large;">
+                      <b>Decision rule:</b> If $D > D_{\text{crit}}$ &rarr; <b>distributions differ</b>.<br>
+                      <b>Goal:</b> a<span class="r-green">low D-statistic</span> &rarr; samples <i>are close</i>.
+                    </p>
+                  </div>
+                </div>
+            </section>
+
+            <section id="backup-frechet-application" data-auto-animate data-auto-animate-id="backup-slides-evaluation">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Evaluation</span>Fréchet <i>distance</i></h2>
+                <p><b>Question.</b> How do we map sessions into geometry? </p>
+                <ol>
+                    <li style="margin-bottom: 0.5em;">
+                    A search session is a <b>sequence</b> of <i>user actions</i>—queries and clicks.
+                    </li>
+                    <li style="margin-bottom: 0.5em;">
+                    We <b>embed each action</b> into a <i>vector space</i> (e.g., via BERT), turning actions into <b>points</b>.
+                    </li>
+                    <li>
+                    The whole session unfolds as a <b>trajectory</b> we can compare.
+                    </li>
+                </ol>
+                <hr class="divider" />
+                <p>
+                    <b>Sequential Fréchet Distance</b> measures <i>average similarity</i> across sessions:
+                </p>
+                <p class="eq">
+                    $FD_{S_{\text{seq}}}^M = \frac{1}{|S|} \sum_{s_i \in S}
+                    FD(
+                    \underbrace{\mathbb{V}(R_{s_i})}_{\text{real}},
+                    \underbrace{\mathbb{V}(M(s_i))}_{\text{simulated}}
+                    )$
+                </p>
+                <hr class="divider" />
+                <p>
+                    A <b class="r-green">lower score</b> &rarr; simulated sessions are <b class="r-green">closer</b> to reality.
+                </p>
+            </section>
+
+            <section id="backup-eval-approach2-results" data-auto-animate data-auto-animate-id="backup-slides-evaluation">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Evaluation</span>Fréchet <i>distance</i></h2>
+                <p><b>Question.</b> How realistic is a simulator? <br><b>Fréchet Distance (FD)</b> lets us <i>rank</i> models by realism—lower is better.</p>
+                <img class="fig" src="img/eval_simulation/frechet_distance_results_out.svg" />
+                <p class="caption">FD@10 across click models on the <i>TREC 2014 Session Track</i> dataset. <b>Lower is better.</b></p>
+                <hr class="divider" />
+                <p><b>Result.</b> More capable simulators like <b>SimIIR 2.0</b> achieve <i>lower</i> FD scores, indicating <b>more realistic</b> user behavior.</p>
+            </section>
+
+            <section id="backup-eval-fd-validation" data-auto-animate data-auto-animate-id="backup-slides-evaluation">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Evaluation</span>Fréchet <i>distance</i></h2>
+              
+                <p><b>Validation.</b> We compared FD against other <i>state-of-the-art</i> session similarity metrics.</p>
+              
+                <img class="fig" src="img/eval_simulation/table_corr_similarity_out.svg" style="width: 35% !important;" />
+                <p class="caption" style="margin-top: -10px;">FD vs. alternative similarity measures (e.g., sDCG, PSE).</p>
+              
+                <hr class="divider" />
+              
+                <p><b>Finding.</b> FD exhibits <i>strong, negative correlations</i> with established metrics such as <b>Session nDCG (sDCG)</b> and <b>Path-based Session Evaluation (PSE)</b>.</p>
+            </section>
+
+            <!-- SimIIR -->
+            <section id="backup-framework" data-auto-animate data-auto-animate-id="backup-framework">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">SimIIR</span> SimIIR <i>framework</i></h2>
+                <div style="width: 95%; margin: 0 auto;" data-id="simiir-img-full">
+                  <img class="fig" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em" />
+                  <p class="caption">
+                    Overview of the SimIIR framework components.
+                  </p>
+                </div>
+            </section>
+              
+            <section id="backup-simiir-components" data-auto-animate data-auto-animate-id="backup-framework">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">SimIIR</span> SimIIR <i>framework</i></h2>
+              
+                <div style="width: 95%; margin: 0 auto; position: relative;" data-id="simiir-img-container">
+                  <img class="fig" data-id="simiir-img-base" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em; filter: blur(5px);" />
+                  <img class="fig" data-id="simiir-img-overlay" src="img/simiir/simiir_v1_5.png" style="width: auto; margin-top: 0em; position: absolute; top: 0; left: 0; transform: translateX(35%);" />
+                  <p class="caption" data-id="simiir-img-caption" style="position: absolute; bottom: -4em; width: 100%; text-align: center;">
+                    Overview of the SimIIR framework components.
+                  </p>
+                </div>
+            </section>
+              
+            <section id="backup-simiir-user-config" data-auto-animate data-auto-animate-id="backup-framework">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">SimIIR</span> SimIIR <i>framework</i></h2>
+              
+                <div class="custom-two-column" data-id="simiir-code-img-grid">
+                  <div class="custom-col-60">
+                    <pre class="yaml" style="font-size: large; line-height: 1.5em">
+                      <code data-trim data-noescape
+                        data-line-numbers="1-7|8-12|13-20|21-26|27-30"
+                        data-fragment-index="1">
+                                  query_generator:
+                                    - BaseGenerator
+                                    - BiTermGenerator
+                                    - PredeterminedQueryGenerator
+                                    - SingleReversedTriInterleavedGenerator
+                                    - TriTermGenerator
+                                    - [...]
+                                  serp_impression:
+                                    - BaseSerpImpression
+                                    - PerfectSerpImpression
+                                    - SimpleSerpImpression
+                                    - StochasticSerpImpression
+                                  decision_maker:
+                                    - BaseDecisionMaker
+                                    - DifferenceDecisionMaker
+                                    - FixedDepthDecisionMaker
+                                    - IftBasedDecisionMaker
+                                    - LimitedSatisfactionDecisionMaker
+                                    - RandomDecisionMaker
+                                    - [...]
+                                  classifiers:
+                                    - BaseClassifier
+                                    - BaseInformedTrecClassifier
+                                    - PerfectClassifier
+                                    - StochasticInformedTrecClassifier
+                                    - [...]
+                                  search_context:
+                                    - NoRelevanceRevision
+                                    - RelevanceRevision
+                                    - SearchContext
+                      </code>
+                    </pre>
+                  </div>
+              
+                  <div class="custom-col-40" style="float: left; position: absolute; width: 95% !important; top: 25%;">
+                    <img class="fig" src="img/simiir/simiir_v1_1.png"
+                      style="width: 100%; margin-top: 0em; clip-path: inset(0 0 0 66.67%); max-height: none;"
+                      data-id="simiir-img-full" />
+                  </div>
+                </div>
+              
+            </section>
+              
+            <section id="backup-simiir-logs" data-auto-animate data-auto-animate-id="backup-framework">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">SimIIR</span> SimIIR <i>framework</i></h2>
+              
+                <div style="width: 95%; margin: 0 auto; position: relative;" data-id="simiir-img-container">
+                  <img class="fig" data-id="simiir-img-base" src="img/simiir/simiir_v1_1.png" style="width: 100%; margin-top: 0em; filter: blur(5px);" />
+                  <img class="fig" data-id="simiir-img-overlay" src="img/simiir/simiir_v1_6.png" style="width: auto; margin-top: 0em; position: absolute; top: 0; left: 0; transform: translateX(75%);" />
+                  <p class="caption" data-id="simiir-img-caption" style="position: absolute; bottom: -4em; width: 100%; text-align: center;">
+                    Overview of the SimIIR framework components.
+                  </p>
+                </div>
+            </section>
+              
+            <!-- Alignement embed. -->
+            <section id="backup-sim-queries-alignment" data-auto-animate data-auto-animate-id="backup-alignment">
+                <h2><span class="model-badge" style="transform: scale(0.7); position: relative; top: -15px;">Modeling</span> Embedding <i>alignment</i></h2>
+                <hr class="divider" />
+              
+                <p><b>Idea.</b> Rather than discrete clicks or actions, <br>simulate the <b>semantic evolution of queries</b> directly.</p>
+              
+                <p>
+                  <b>Approach.</b> Learn a linear map <b class="r-green">$W$</b>  
+                  that projects a query vector into the embedding of the <b class="r-green">next query</b> in the session.<sup>§</sup>
+                </p>
+              
+                <img class="fig"  src="img/user_simulation/embedding_alignment_out.svg" style="margin-top: -5px;" />
+                <p style="margin-top: -20px;">
+                  <b>Result.</b> From a <i>single starting query</i>, we can generate entire sessions of <b>semantically coherent queries</b>.
+                </p>
+              
+                <p class="footnote" data-fragment-index="1">
+                  <sup>§</sup><b>Saber Zerhoudi</b> et al. <b>"Simulating User Querying Behavior using Embedding Space Alignment"</b>, TPDL 2022.
+                </p>
+              </section>
+              
+        
+
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/math/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/zoom/zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
+    
+
     <!-- Custom Presentation Logic -->
     <script src="./js/presentation.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
             slideNumber: 'c/t',
-            plugins: [RevealMath.MathJax3] // Add any plugins you need here
+            plugins: [RevealMarkdown, RevealHighlight, RevealMath.MathJax3, RevealZoom, RevealNotes] // Add any plugins you need here
         });
 
         const sections = [
